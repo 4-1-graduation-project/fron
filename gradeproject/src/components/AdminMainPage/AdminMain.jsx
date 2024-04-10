@@ -1,7 +1,7 @@
 import React from 'react'
 import * as R from "./AdminMainCss";
-import SideMenu from './SideMenu';
-
+import SideMenu from "./SideMenu";
+import UserReport from "./adminhomeItems/UserReport";
 
 export default function AdminMain() {
   return (
@@ -16,7 +16,7 @@ export default function AdminMain() {
           </R.LogoutButton>
         </R.Header>
         <R.MainContainer>
-          <R.GridItem color="#CBCDFF"></R.GridItem>
+        <UserReport />
           <R.GridItem color="#FFC3C3"></R.GridItem>
           <R.GridItem color="#746F00"></R.GridItem>
           <R.GridItem color="#D6FFCF"></R.GridItem>
@@ -24,4 +24,5 @@ export default function AdminMain() {
       </R.RightSection>
     </div>
   )
-}
+} 
+
