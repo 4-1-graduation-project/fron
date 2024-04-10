@@ -126,5 +126,6 @@ export const LoginButtonBox = styled.div`
     color: black;
     font-weight: bold;
     background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    cursor: pointer;
 `;
 
