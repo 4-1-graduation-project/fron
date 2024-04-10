@@ -89,7 +89,6 @@ export const ReportBoxSubTitle = styled.div`
     justify-content: center;
     font-size: 12px;
     margin-top: auto;
-
 `;
 
 export const ReportList = styled.div`
@@ -135,8 +134,59 @@ export const ReportDate = styled.div`
 `;
 
 
+//================================AiSettings=================================
+
+export const AiSettingContainer = styled.div`
+    background-color: #FFC3C3;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
+`;
+
+export const SettingBoxHeader = styled.div`
+    width: 90%;
+    height: 10%;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    margin: 25px;
+`;
+
+export const SettingBoxTitle = styled.div`
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+`;
+
+export const SettingBoxSubTitle = styled.div`
+    width: 8%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    margin-top: auto;
+`;
+
+//================================ UserRate =================================
+
+export const UserRateContainer = styled.div`
+    background-color: #edebb7;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
+`;
 
 
+//================================ DataManagement =================================
+
+export const DataManagementContainer = styled.div`
+    background-color: #a5c79f;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
+`;
 
 //======================================SideMenu=============================
 

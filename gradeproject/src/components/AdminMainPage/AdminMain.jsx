@@ -2,6 +2,9 @@ import React from 'react'
 import * as R from "./AdminMainCss";
 import SideMenu from "./SideMenu";
 import UserReport from "./adminhomeItems/UserReport";
+import AiSettings from './adminhomeItems/AiSettings';
+import UserRate from './adminhomeItems/UserRate';
+import DataManagement from './adminhomeItems/DataManagement';
 
 export default function AdminMain() {
   return (
@@ -16,13 +19,13 @@ export default function AdminMain() {
           </R.LogoutButton>
         </R.Header>
         <R.MainContainer>
-        <UserReport />
-          <R.GridItem color="#FFC3C3"></R.GridItem>
-          <R.GridItem color="#746F00"></R.GridItem>
-          <R.GridItem color="#D6FFCF"></R.GridItem>
+          <UserReport />
+          <AiSettings />
+          <UserRate />
+          <DataManagement />
         </R.MainContainer>
       </R.RightSection>
     </div>
   )
-} 
+}
 

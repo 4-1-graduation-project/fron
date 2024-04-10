@@ -4,7 +4,7 @@ import AdminMainPage from "./pages/AdminMainPage";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{overflow:'hidden'}}>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/adminMain" element={<AdminMainPage />} />
