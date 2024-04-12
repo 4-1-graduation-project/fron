@@ -8,7 +8,6 @@ export const LeftSection = styled.div`
 export const RightSection = styled.div`
     width: 100%;
     height: 100%;
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
 `;
@@ -16,7 +15,6 @@ export const RightSection = styled.div`
 export const Header = styled.div`
     width: 100%;
     height: 10%;
-    border: 1px solid blue;
 `;
 
 export const LogoutButton = styled.div`
@@ -169,6 +167,57 @@ export const SettingBoxSubTitle = styled.div`
     margin-top: auto;
 `;
 
+export const TextContainer = styled.div`
+    width: 87%;
+    height: 200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+     
+`;
+
+
+export const SelectedTitle = styled.div`
+    width: 80%;
+    height: 10%;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+`;
+export const UsedDateSetTitle = styled.div`
+    width: 80%;
+    height: 20%;
+    font-size: 18px;
+    font-weight: bold;
+
+`;
+export const UpdatedDateTitle = styled.div`
+    width: 80%;
+    height: 20%;
+    font-size: 18px;
+    font-weight: bold;
+`;
+
+export const AiSettingsList = styled.ul`
+  line-height: 0.5;
+  margin: 0;
+  padding-inline-start: 1.5em;
+  list-style-position: inside;
+  list-style-type: square;
+
+
+`;
+export const AiSettingsItems = styled.li`
+  line-height: 1.8;
+  margin: 0;
+  padding-inline-start: 1.5em;
+  list-style-position: inside;
+  list-style-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'><polyline points='20 6 9 17 4 12'></polyline></svg>");
+  height: 30%;
+`;
+
+
 //================================ UserRate =================================
 
 export const UserRateContainer = styled.div`
@@ -193,7 +242,6 @@ export const DataManagementContainer = styled.div`
 export const Title = styled.div`
     width: 100%;
     height: 10%;
-    border: 1px solid blue;
     text-align: center;
     line-height: 60px;
     font-size: 32px;
