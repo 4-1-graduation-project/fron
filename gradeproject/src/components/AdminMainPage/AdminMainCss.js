@@ -81,7 +81,7 @@ export const ReportBoxTitle = styled.div`
 `;
 
 export const ReportBoxSubTitle = styled.div`
-    width: 8%;
+    width: 10%;
     height: 50%;
     display: flex;
     justify-content: center;
@@ -124,7 +124,7 @@ export const ReportAuthor = styled.div`
 `;
 
 export const ReportDate = styled.div`
-    width: 15%;
+    width: 20%;
     height: 30%;
     font-size: 12px;
     margin: auto;
@@ -226,6 +226,37 @@ export const UserRateContainer = styled.div`
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
 `;
+
+
+export const ReportStars = styled.div`
+  color: gold; /* Filled star color */
+  font-size: 24px; /* Adjust star size as needed */
+  border: 1px solid red;
+  width: 30%;
+`;
+
+export const FilledStar = styled.span`
+  margin-right: 5px; /* Adjust spacing between stars as needed */
+`;
+
+export const EmptyStar = styled.span`
+  margin-right: 5px; /* Adjust spacing between stars as needed */
+  color: #ccc; /* Empty star color */
+`;
+
+
+export const RateTitle = styled.div`
+    width: 90%;
+    height: 100%;
+    font-size: 18px;
+
+`;
+
+export const RateAuthor = styled.div`
+    width: 20%;
+    height: 100%;
+`;
+
 
 
 //================================ DataManagement =================================
