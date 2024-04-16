@@ -143,6 +143,15 @@ export const FirstRow = styled.div`
     
 `;
 
+export const SecondRow = styled.div`
+    width: 100%;
+    height: 70%;
+    border: 1px solid black;
+    display: flex;  
+    flex-direction: row;
+    
+`;
+
 export const NoBox = styled.div`
     width: 20%;
     height: 100%;

@@ -316,9 +316,11 @@ export const Menu = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     margin-top: 10px;
     font-weight: bold;
+    cursor: pointer;
 `;
 
 export const SelectedMenu = styled(Menu)`
     color : white;
     background-color: black;
+    
 `;

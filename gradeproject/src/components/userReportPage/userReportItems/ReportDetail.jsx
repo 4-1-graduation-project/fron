@@ -3,27 +3,28 @@ import { useParams } from 'react-router-dom';
 import * as Z from "../../../components/adminMainPage/AdminMainCss";
 import SideMenu from '../../../components/adminMainPage/SideMenu';
 import backbutton from "../../../assets/backbutton.png";
-import * as S from "./MemberListCss";
+import * as S from "../../userManagementPage/userManagementItems/MemberListCss";
+import * as R from "./ReportListCss";
 
-export default function MemberDetail() {
+export default function ReportDetail() {
+
   const { id } = useParams();
-  const [member, setMember] = useState(null);
+  const [report, setReport] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/memberList/Data.json/${id}`)
+    fetch(`http://localhost:3000/userReport/Data.json/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => setMember(data))
+      .then(data => setReport(data))
       .catch(error => {
         console.error('Error fetching member data:', error);//API없어서 에러나는듯 함
-        setMember(null); // Reset member state to null
+        setReport(null); // Reset member state to null
       });
   }, [id]);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <Z.LeftSection>
@@ -41,31 +42,25 @@ export default function MemberDetail() {
         <Z.MainContainer>
           <S.Container>
             <S.Box>
-              <S.Title>회원 상세 관리</S.Title>
+              <S.Title>신고 상세 관리</S.Title>
               <S.MemberListContainer>
                 <S.FirstRow>
-                  <S.NoBox>No</S.NoBox>
-                  <S.No>{member ? member.id : ""}</S.No>
-                  <S.AddressBox>집주소</S.AddressBox>
-                  <S.Address>{member ? member.address : ""}</S.Address>
+                  <R.DateBox>문의 날짜</R.DateBox>
+                  <R.Date>{report ? report.id : ""}</R.Date>
+                  <R.NameBox>이름</R.NameBox>
+                  <R.Name>{report ? report.address : ""}</R.Name>
                 </S.FirstRow>
-                <S.FirstRow>
-                  <S.NameBox>회원이름</S.NameBox>
-                  <S.Name>{member ? member.name : ""}</S.Name>
-                  <S.GenderBox>성별</S.GenderBox>
-                  <S.Gender>{member ? member.gender : ""}</S.Gender>
-                </S.FirstRow>
-                <S.FirstRow>
-                  <S.IdBox>아이디</S.IdBox>
-                  <S.Id>{member ? member.Id : ""}</S.Id>
-                  <S.BirthBox>생년월일</S.BirthBox>
-                  <S.Id>{member ? member.Id : ""}</S.Id>
-                </S.FirstRow>
+                <S.SecondRow>
+                  <R.TitleBox>문의제목</R.TitleBox>
+                  <R.Title>{report ? report.name : ""}</R.Title>
+                  <R.ContentBox>문의내용</R.ContentBox>
+                  <R.Content>{report ? report.gender : ""}</R.Content>
+                </S.SecondRow>
               </S.MemberListContainer>
             </S.Box>
           </S.Container>
         </Z.MainContainer>
       </Z.RightSection>
     </div>
-  );
+  )
 }

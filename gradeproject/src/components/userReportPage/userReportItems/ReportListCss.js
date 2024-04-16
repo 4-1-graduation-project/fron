@@ -59,3 +59,97 @@ export const ReportTitle = styled(TitleField)`
 export const ReportContent = styled(ContentField)`
     width: 48%;
 `;
+
+
+export const DateBox = styled.div`
+    width: 20%;
+    height: 100%;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const Date = styled.div`
+    width: 30%;
+    height: 100%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const NameBox = styled.div`
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid black;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const Name = styled.div`
+    width: 30%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const TitleBox = styled.div`
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid black;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const Title = styled.div`
+    width: 30%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const ContentBox = styled.div`
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+
+export const Content = styled.div`
+    width: 30%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+`;
+

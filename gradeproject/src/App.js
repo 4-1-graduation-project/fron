@@ -5,7 +5,7 @@ import UserManagementPage from "./pages/UserManagementPage";
 import MemberDetailPage from "./pages/MemberDetailPage";
 import AdminUserPage from "./pages/AdminUserPage";
 import UserReportPage from "./pages/UserReportPage";
-
+import ReportDetailPage from "./pages/ReportDetailPage";
 function App() {
   return (
     <div className="App" style={{ overflow: 'hidden' }}>
@@ -17,6 +17,7 @@ function App() {
           <Route path=":id" element={<MemberDetailPage />} />
         </Route>
         <Route path="/adminReport" element={<UserReportPage />} />
+        <Route path="/adminReport/:id" element={<ReportDetailPage />} />
       </Routes>
     </div>
   );

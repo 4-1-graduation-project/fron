@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as A from "../../userManagementPage/userManagementItems/MemberListCss";
 import * as S from "./ReportListCss";
+
 export default function MemberList() {
-  const [reports, setreports] = useState([]);
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/userReport/Data.json')
       .then(response => response.json())
-      .then(data => setreports(data))
+      .then(data => setReports(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
@@ -19,13 +20,13 @@ export default function MemberList() {
         <A.FieldContainer>
           <S.DateField>문의날짜</S.DateField>
           <S.UserNameField>회원 이름</S.UserNameField>
-          <S.TitleField>문의제목 </S.TitleField>
+          <S.TitleField>문의제목</S.TitleField>
           <S.ContentField>문의 내용</S.ContentField>
         </A.FieldContainer>
         <A.MemberContainer>
           {reports.map((report, index) => (
             <Link
-              to={`/adminUser/${report.id}`} // Pass only the member id
+              to={`/adminReport/${index + 1}`} // Pass the report index
               key={index}
               style={{ textDecoration: "none" }}
             >
