@@ -9,14 +9,13 @@ export default function SideMenu() {
 
     useEffect(() => {
         // 현재 URL을 기반으로 선택된 메뉴를 설정합니다.
-        switch (location.pathname) {
-            case '/adminUser':
-                setSelectedMenu('adminUser');
-                break;
-            // 다른 메뉴들도 동일하게 처리합니다.
-            default:
-                setSelectedMenu('');
-                break;
+        const { pathname } = location;
+        if (pathname === '/adminUser' || pathname.includes('/adminUser/')) {
+            setSelectedMenu('adminUser');
+        } else if (pathname === '/adminReport' || pathname.includes('/adminReport/')) {
+            setSelectedMenu('adminReport');
+        } else {
+            setSelectedMenu('');
         }
     }, [location.pathname]);
 
@@ -35,7 +34,12 @@ export default function SideMenu() {
                 >
                     회원 관리
                 </T.Menu>
-                <T.Menu>신고 관리</T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'adminReport' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/adminReport', 'adminReport')}
+                >
+                    신고 관리
+                </T.Menu>
                 <T.Menu>제도 데이터 관리</T.Menu>
                 <T.Menu>유동인구 데이터 관리</T.Menu>
                 <T.Menu>강수량 데이터 관리</T.Menu>
