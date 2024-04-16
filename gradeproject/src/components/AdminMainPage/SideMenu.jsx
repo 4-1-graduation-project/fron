@@ -14,8 +14,8 @@ export default function SideMenu() {
             setSelectedMenu('adminUser');
         } else if (pathname === '/adminReport' || pathname.includes('/adminReport/')) {
             setSelectedMenu('adminReport');
-        } else {
-            setSelectedMenu('');
+        } else if (pathname === '/mapDataManagement' || pathname.includes('/mapDataManagement/')) {
+            setSelectedMenu('mapDataManagement');
         }
     }, [location.pathname]);
 
@@ -40,7 +40,12 @@ export default function SideMenu() {
                 >
                     신고 관리
                 </T.Menu>
-                <T.Menu>제도 데이터 관리</T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'mapDataManagement' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/mapDataManagement', 'mapDataManagement')}
+                >
+                    지도 데이터 관리
+                </T.Menu>
                 <T.Menu>유동인구 데이터 관리</T.Menu>
                 <T.Menu>강수량 데이터 관리</T.Menu>
                 <T.Menu>AI 관리</T.Menu>
