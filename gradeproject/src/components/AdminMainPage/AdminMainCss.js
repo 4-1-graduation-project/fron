@@ -15,6 +15,18 @@ export const RightSection = styled.div`
 export const Header = styled.div`
     width: 100%;
     height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+`;
+
+export const AmdinHeader = styled.div`
+    width: 100%;
+    height: 10%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
 `;
 
 export const LogoutButton = styled.div`
@@ -32,6 +44,13 @@ export const LogoutButton = styled.div`
     font-size: 16px;
     font-weight: bold;
 `;
+export const BackButton = styled.div`
+    width: 80%;
+    height: 40%;
+    margin-top: 20px;
+    font-size: 16px;
+`;
+
 
 //===================================Grid배열========================
 
@@ -282,7 +301,6 @@ export const Title = styled.div`
 export const MenuBox = styled.div`
     width: 100%;
     height: 100%;
-    border: 1px solid green;
 `;
 
 export const Menu = styled.div`
@@ -300,3 +318,7 @@ export const Menu = styled.div`
     font-weight: bold;
 `;
 
+export const SelectedMenu = styled(Menu)`
+    color : white;
+    background-color: black;
+`;

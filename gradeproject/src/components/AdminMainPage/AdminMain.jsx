@@ -13,11 +13,11 @@ export default function AdminMain() {
         <SideMenu />
       </R.LeftSection>
       <R.RightSection>
-        <R.Header>
+        <R.AmdinHeader>
           <R.LogoutButton>
             로그아웃
           </R.LogoutButton>
-        </R.Header>
+        </R.AmdinHeader>
         <R.MainContainer>
           <UserReport />
           <AiSettings />
