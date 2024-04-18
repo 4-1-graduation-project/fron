@@ -14,7 +14,7 @@ export default function MapDataManagement() {
 
     };
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
             <Z.LeftSection>
                 <SideMenu />
             </Z.LeftSection>

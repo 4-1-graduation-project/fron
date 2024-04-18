@@ -6,6 +6,8 @@ export const Container = styled.div`
     border-radius: 15px;
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
     border: 1px solid black;
+    overflow: hidden;
+
 `;
 
 export const Box = styled.div`

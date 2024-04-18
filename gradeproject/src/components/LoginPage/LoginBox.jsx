@@ -9,22 +9,25 @@ export default function LoginBox() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    
     const validUsername = 'qwe';
     const validPassword = 'qwe';
 
     if (username === validUsername && password === validPassword) {
-      // 로그인 성공 시 navigate를 사용하여 adminMain 페이지로 이동
       navigate('/adminMain');
       setLoggedIn(true);
     } else {
-      // 로그인 실패 처리
       alert('아이디 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
-    <div style={{display:'flex', flexDirection: 'column', gap: '30px'}}>
+    <form style={{display:'flex', flexDirection: 'column', gap: '30px'}} onKeyPress={handleKeyPress}>
         <K.IDInputBox>
             <K.IdTitle>ID</K.IdTitle>
             <K.IdInput 
@@ -49,6 +52,6 @@ export default function LoginBox() {
         <K.LoginButtonBox onClick={handleLogin}>
             로그인
         </K.LoginButtonBox>
-    </div>
+    </form>
   )
 }
