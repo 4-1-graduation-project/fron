@@ -7,6 +7,7 @@ import AdminUserPage from "./pages/AdminUserPage";
 import UserReportPage from "./pages/UserReportPage";
 import ReportDetailPage from "./pages/ReportDetailPage";
 import MapDataManagementPage from "./pages/MapDataManagementPage";
+import FloatingPopulationPage from "./pages/FloatingPopulationPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/adminReport" element={<UserReportPage />} />
         <Route path="/adminReport/:id" element={<ReportDetailPage />} />
         <Route path="/mapDataManagement" element={<MapDataManagementPage />} />
+        <Route path="/floatingPopulationManagement" element={<FloatingPopulationPage />} />
       </Routes>
     </div>
   );

@@ -16,7 +16,10 @@ export default function SideMenu() {
             setSelectedMenu('adminReport');
         } else if (pathname === '/mapDataManagement' || pathname.includes('/mapDataManagement/')) {
             setSelectedMenu('mapDataManagement');
+        } else if (pathname === '/floatingPopulationManagement' || pathname.includes('/floatingPopulationManagement/')) {
+            setSelectedMenu('floatingPopulationManagement');
         }
+
     }, [location.pathname]);
 
     const handleMenuClick = (url, menuName) => {
@@ -46,7 +49,12 @@ export default function SideMenu() {
                 >
                     지도 데이터 관리
                 </T.Menu>
-                <T.Menu>유동인구 데이터 관리</T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'floatingPopulationManagement' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/floatingPopulationManagement', 'floatingPopulationManagement')}
+                >
+                    유동인구 데이터 관리
+                </T.Menu>
                 <T.Menu>강수량 데이터 관리</T.Menu>
                 <T.Menu>AI 관리</T.Menu>
                 <T.Menu>AI 평가 지표 관리</T.Menu>

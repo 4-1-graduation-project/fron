@@ -98,6 +98,7 @@ export const TabBox = styled.div`
     flex-direction: row;
     gap: 10px;
     text-align: right;
+    cursor: pointer;
     .activeTab {
     color: blue; /* Set the color to blue for the active tab */
 }
