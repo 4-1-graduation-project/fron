@@ -38,10 +38,11 @@ export const Title = styled.div`
     background-color: black;
     text-align: center;
     display : flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items : center;
     font-size: 20px;
     font-weight: bold;
+
 `;
 
 
@@ -89,6 +90,31 @@ export const Button = styled.button`
     cursor: pointer;
 
 `;
+
+export const TabBox = styled.div`
+    width: 20%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    text-align: right;
+
+`;
+
+export const TitleBox = styled.div`
+    width: 100%;
+    height: 5%;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+
+
 
 
 
