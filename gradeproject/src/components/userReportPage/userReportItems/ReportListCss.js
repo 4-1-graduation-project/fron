@@ -56,6 +56,28 @@ export const ReportTitle = styled(TitleField)`
     width: 20%;
 `;
 
+export const PoliceTitle = styled(TitleField)`
+    width: 67%;
+`;
+
+
+export const LocationField = styled.div`
+    margin-left: 5px;
+    width: 20%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+`;
+
+export const emergencyBellLocation = styled(LocationField)`
+    width: 20%;
+`;
+
+export const emergencyBelladdress = styled(TitleField)`
+    width: 75%;
+`;
+
 export const ReportContent = styled(ContentField)`
     width: 48%;
 `;

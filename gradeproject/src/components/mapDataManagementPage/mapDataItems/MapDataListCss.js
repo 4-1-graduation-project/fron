@@ -98,7 +98,9 @@ export const TabBox = styled.div`
     flex-direction: row;
     gap: 10px;
     text-align: right;
-
+    .activeTab {
+    color: blue; /* Set the color to blue for the active tab */
+}
 `;
 
 export const TitleBox = styled.div`
