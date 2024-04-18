@@ -18,6 +18,8 @@ export default function SideMenu() {
             setSelectedMenu('mapDataManagement');
         } else if (pathname === '/floatingPopulationManagement' || pathname.includes('/floatingPopulationManagement/')) {
             setSelectedMenu('floatingPopulationManagement');
+        } else if (pathname === '/precipitationManagement' || pathname.includes('/precipitationManagement/')) {
+            setSelectedMenu('precipitationManagement');
         }
 
     }, [location.pathname]);
@@ -55,7 +57,12 @@ export default function SideMenu() {
                 >
                     유동인구 데이터 관리
                 </T.Menu>
-                <T.Menu>강수량 데이터 관리</T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'precipitationManagement' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/precipitationManagement', 'precipitationManagement')}
+                >
+                    강수량 데이터 관리
+                </T.Menu>
                 <T.Menu>AI 관리</T.Menu>
                 <T.Menu>AI 평가 지표 관리</T.Menu>
             </T.MenuBox>
