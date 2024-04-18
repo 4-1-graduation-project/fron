@@ -21,6 +21,11 @@ export default function PrecipitationList() {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => document.body.style = `overflow: auto`
+    }, [])
+    
     //강수량 데이터 삭제하는 로직
     const handleDelete = (index) => {
         const updatedPrecipitations = [...precipitations];

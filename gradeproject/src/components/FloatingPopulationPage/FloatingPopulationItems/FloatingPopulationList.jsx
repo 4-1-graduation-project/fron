@@ -23,6 +23,11 @@ export default function FloatingPopulationList() {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => document.body.style = `overflow: auto`
+    }, [])
+
     //유동인구 데이터 삭제하는 로직
     const handleDelete = (index) => {
         const updatedFloatingPopulations = [...floatingPopulations];
