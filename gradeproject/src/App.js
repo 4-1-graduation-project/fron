@@ -9,6 +9,7 @@ import ReportDetailPage from "./pages/ReportDetailPage";
 import MapDataManagementPage from "./pages/MapDataManagementPage";
 import FloatingPopulationPage from "./pages/FloatingPopulationPage";
 import PrecipitationPage from './pages/PrecipitationPage';
+import AiSettingPage from "./pages/AiSettingPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/mapDataManagement" element={<MapDataManagementPage />} />
         <Route path="/floatingPopulationManagement" element={<FloatingPopulationPage />} />
         <Route path="/precipitationManagement" element={<PrecipitationPage />} />
+        <Route path="/aiSetting" element={<AiSettingPage />} />
       </Routes>
     </div>
   );
