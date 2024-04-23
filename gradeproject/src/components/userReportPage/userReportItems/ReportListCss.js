@@ -36,7 +36,6 @@ export const ContentField = styled.div`
 
 export const MemberItem = styled.div`
     width: 100%;
-    height: 5%;
     border-bottom: 1px solid black;
     margin-top: 20px;
     padding-bottom: 20px;
