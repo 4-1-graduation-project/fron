@@ -106,6 +106,7 @@ export const ReportBoxSubTitle = styled.div`
     justify-content: center;
     font-size: 12px;
     margin-top: auto;
+    cursor: pointer;
 `;
 
 export const ReportList = styled.div`
@@ -184,6 +185,7 @@ export const SettingBoxSubTitle = styled.div`
     justify-content: center;
     font-size: 12px;
     margin-top: auto;
+    cursor: pointer;
 `;
 
 export const TextContainer = styled.div`

@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import * as G from "../AdminMainCss";
+import { useNavigate } from 'react-router-dom';
 
 export default function UserReport() {
   const [reportData, setReportData] = useState([]);
+  const navigate = useNavigate();
+
+  const handleMenuClick = (url, menuName) => {
+    navigate(url);
+
+  };
 
   useEffect(() => {
     fetch('http://localhost:3000/userReport/Data.json')
@@ -15,7 +22,7 @@ export default function UserReport() {
     <G.Container>
       <G.ReportBoxHeader>
         <G.ReportBoxTitle>사용자 신고</G.ReportBoxTitle>
-        <G.ReportBoxSubTitle>더보기</G.ReportBoxSubTitle>
+        <G.ReportBoxSubTitle onClick={() => handleMenuClick('/adminReport')}>더보기</G.ReportBoxSubTitle>
       </G.ReportBoxHeader>
       <G.ReportList>
         {reportData.map((report, index) => (

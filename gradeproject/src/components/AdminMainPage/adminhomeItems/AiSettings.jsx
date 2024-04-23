@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import * as J from "../AdminMainCss";
+import { useNavigate } from 'react-router-dom';
 
 export default function AiSettings() {
     const [selectedModel, setSelectedModel] = useState("");
     const [usedDataset, setUsedDataset] = useState([]);
     const [lastUpdatedDate, setLastUpdatedDate] = useState("");
+    const navigate = useNavigate();
 
+    const handleMenuClick = (url, menuName) => {
+        navigate(url);
+
+    };
     useEffect(() => {
         fetch('http://localhost:3000/aiSettings/Data.json')
             .then(response => response.json())
@@ -21,7 +27,7 @@ export default function AiSettings() {
         <J.AiSettingContainer>
             <J.SettingBoxHeader>
                 <J.SettingBoxTitle>AI 관리</J.SettingBoxTitle>
-                <J.SettingBoxSubTitle>더보기</J.SettingBoxSubTitle>
+                <J.SettingBoxSubTitle onClick={() => handleMenuClick('/aiSetting')}>더보기</J.SettingBoxSubTitle>
             </J.SettingBoxHeader>
             <J.TextContainer>
                 <J.SelectedTitle>현재 선택된 모델: {selectedModel}</J.SelectedTitle>

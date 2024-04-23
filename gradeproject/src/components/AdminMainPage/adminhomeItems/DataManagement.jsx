@@ -1,13 +1,19 @@
 import React from 'react'
 import * as M from "../AdminMainCss";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function DataManagement() {
+    const navigate = useNavigate();
+
+    const handleMenuClick = (url, menuName) => {
+        navigate(url);
+
+    };
     return (
         <M.DataManagementContainer>
             <M.SettingBoxHeader>
                 <M.SettingBoxTitle>데이터 관리</M.SettingBoxTitle>
-                <M.SettingBoxSubTitle>더보기</M.SettingBoxSubTitle>
+                <M.SettingBoxSubTitle onClick={() => handleMenuClick('/floatingPopulationManagement')}>더보기</M.SettingBoxSubTitle>
             </M.SettingBoxHeader>
             <M.TextContainer>
                 <M.SelectedTitle>강수량 데이터 : 2건</M.SelectedTitle>
