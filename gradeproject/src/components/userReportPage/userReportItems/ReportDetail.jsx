@@ -12,19 +12,29 @@ export default function ReportDetail() {
   const [report, setReport] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/userReport/Data.json/${id}`)
-      .then(response => {
+    const fetchReports = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const response = await fetch(`http://ceprj.gachon.ac.kr:60004/src/admins/reports/${id}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Failed to fetch reports');
         }
-        return response.json();
-      })
-      .then(data => setReport(data))
-      .catch(error => {
-        console.error('Error fetching member data:', error);//API없어서 에러나는듯 함
-        setReport(null); // Reset member state to null
-      });
-  }, [id]);
+        const data = await response.json();
+        setReport(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchReports();
+  }, []);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <Z.LeftSection>
@@ -46,15 +56,15 @@ export default function ReportDetail() {
               <S.MemberListContainer>
                 <S.FirstRow>
                   <R.DateBox>문의 날짜</R.DateBox>
-                  <R.Date>{report ? report.id : ""}</R.Date>
+                  <R.Date>{report ? report.reportTime : ""}</R.Date>
                   <R.NameBox>이름</R.NameBox>
-                  <R.Name>{report ? report.address : ""}</R.Name>
+                  <R.Name>{report ? report.userName : ""}</R.Name>
                 </S.FirstRow>
                 <S.SecondRow>
-                  <R.TitleBox>문의제목</R.TitleBox>
-                  <R.Title>{report ? report.name : ""}</R.Title>
+                  <R.TitleBox>장소</R.TitleBox>
+                  <R.Title>{report ? report.placed : ""}</R.Title>
                   <R.ContentBox>문의내용</R.ContentBox>
-                  <R.Content>{report ? report.gender : ""}</R.Content>
+                  <R.Content>{report ? report.details : ""}</R.Content>
                 </S.SecondRow>
               </S.MemberListContainer>
             </S.Box>

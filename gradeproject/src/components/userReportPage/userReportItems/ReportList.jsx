@@ -7,10 +7,27 @@ export default function MemberList() {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/userReport/Data.json')
-      .then(response => response.json())
-      .then(data => setReports(data))
-      .catch(error => console.error('Error fetching data:', error));
+    const fetchReports = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/reports', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reports');
+        }
+        const data = await response.json();
+        setReports(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchReports();
   }, []);
 
   return (
@@ -20,7 +37,7 @@ export default function MemberList() {
         <A.FieldContainer>
           <S.DateField>문의날짜</S.DateField>
           <S.UserNameField>회원 이름</S.UserNameField>
-          <S.TitleField>문의제목</S.TitleField>
+          <S.TitleField>장소</S.TitleField>
           <S.ContentField>문의 내용</S.ContentField>
         </A.FieldContainer>
         <A.MemberContainer>
@@ -31,10 +48,10 @@ export default function MemberList() {
               style={{ textDecoration: "none" }}
             >
               <A.MemberItem>
-                <S.ReportDate>{report.date}</S.ReportDate>
-                <S.ReportName>{report.author}</S.ReportName>
-                <S.ReportTitle>{report.title}</S.ReportTitle>
-                <S.ReportContent>{report.content}</S.ReportContent>
+                <S.ReportDate>{report.reportTime}</S.ReportDate>
+                <S.ReportName>{report.userName}</S.ReportName>
+                <S.ReportTitle>{report.placed}</S.ReportTitle>
+                <S.ReportContent>{report.details}</S.ReportContent>
               </A.MemberItem>
             </Link>
           ))}
