@@ -29,6 +29,12 @@ export default function MemberList() {
 
     fetchReports();
   }, []);
+  
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => document.body.style = `overflow: auto`
+  }, [])
+
 
   return (
     <A.Container>
@@ -45,7 +51,7 @@ export default function MemberList() {
             <Link
               to={`/adminReport/${index + 1}`} // Pass the report index
               key={index}
-              style={{ textDecoration: "none", height:'50px' }}
+              style={{ textDecoration: "none", height: '50px' }}
             >
               <A.MemberItem>
                 <S.ReportDate>{report.reportTime}</S.ReportDate>

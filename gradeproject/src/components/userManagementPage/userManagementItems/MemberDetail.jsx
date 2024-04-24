@@ -10,7 +10,7 @@ export default function MemberDetail() {
   const [member, setMember] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/memberList/Data.json/${id}`)
+    fetch(`http://localhost:60004/memberList/Data.json/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

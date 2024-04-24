@@ -31,7 +31,7 @@ export const AmdinHeader = styled.div`
 
 export const LogoutButton = styled.div`
     width: 10%;
-    height: 40%;
+    height: 30px;
     border: 2px solid black;
     border-radius: 20px;
     text-align: center;
@@ -43,6 +43,7 @@ export const LogoutButton = styled.div`
     margin-right: 10px;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
 `;
 export const BackButton = styled.div`
     width: 80%;
@@ -307,7 +308,7 @@ export const MenuBox = styled.div`
 
 export const Menu = styled.div`
     width: 80%;
-    height: 7%;
+    height: 50px;
     border: 1px solid black;
     margin: 0 auto;
     border-radius: 20px;

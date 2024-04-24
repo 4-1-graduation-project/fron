@@ -15,7 +15,7 @@ export default function PrecipitationList() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:3000/precipitation/Data.json')
+        fetch('http://localhost:60004/precipitation/Data.json')
             .then(response => response.json())
             .then(data => serPrecipitations(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -72,7 +72,7 @@ export default function PrecipitationList() {
         const jsonData = JSON.stringify(data);
 
         //어디로 추가할것인지 적는 로직
-        fetch('http://localhost:3000/MapData/precipitation/Data.json', {
+        fetch('http://localhost:60004/MapData/precipitation/Data.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

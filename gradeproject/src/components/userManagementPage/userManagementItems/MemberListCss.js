@@ -32,6 +32,9 @@ export const Title = styled.div`
     font-weight: bold;
     color: black;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 `;
 
 //===================Field=======================
@@ -300,7 +303,41 @@ export const Birth = styled.div`
     align-items : center;
 `;
 
+export const PaginationBox = styled.div`
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+export const PageNumber = styled.li`
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 5px;
+  width: 25px;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #263a6c;
+  }
+  &:focus::after {
+    color: white;
+    background-color: #263a6c;
+  }
+`;
+
+export const SearchBox = styled.div`
+    width: 20%;
+    height: 100%;
+    color: black;
+    margin-bottom: 20px;
+    border: 1px solid blue;
+`;
 
 
 

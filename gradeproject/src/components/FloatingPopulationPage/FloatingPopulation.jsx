@@ -21,7 +21,7 @@ export default function FloatingPopulation() {
             <Z.RightSection>
                 <Z.Header>
                     <Z.BackButton onClick={() => handleMenuClick('/adminMain')}>
-                        <img src={backbutton} alt='뒤로가기' />
+                        <img src={backbutton} alt='뒤로가기' style={{width: '50px', height:'50px'}}/>
                     </Z.BackButton>
                     <Z.LogoutButton>
                         로그아웃

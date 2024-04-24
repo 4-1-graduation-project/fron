@@ -49,7 +49,7 @@ export default function MapDataList() {
 
     //CCTV 데이터 받아오고 업데이트하는 로직
     const fetchCctvData = () => {
-        fetch('http://localhost:3000/MapData/cctv/Data.json')
+        fetch('http://localhost:60004/MapData/cctv/Data.json')
             .then(response => response.json())
             .then(data => setCctvs(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -58,7 +58,7 @@ export default function MapDataList() {
 
     //경찰서 데이터 받아오고 업데이트하는 로직
     const fetchPoliceOfficeData = () => {
-        fetch('http://localhost:3000/MapData/policeoffice/Data.json')
+        fetch('http://localhost:60004/MapData/policeoffice/Data.json')
             .then(response => response.json())
             .then(data => setPoliceOffices(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -66,7 +66,7 @@ export default function MapDataList() {
 
     //비상벨 데이터 받아오고 업데이트하는 로직
     const fetchEmergencyBellData = () => {
-        fetch('http://localhost:3000/MapData/emergencybell/Data.json')
+        fetch('http://localhost:60004/MapData/emergencybell/Data.json')
             .then(response => response.json())
             .then(data => setEmergencyBells(data))
             .catch(error => console.error('Error fetching emergency bell data:', error));
@@ -200,7 +200,7 @@ export default function MapDataList() {
         const jsonData = JSON.stringify(data);
 
         //어디로 추가할것인지 적는 로직
-        fetch('http://localhost:3000/MapData/cctv/Data.json', {
+        fetch('http://localhost:60004/MapData/cctv/Data.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -227,7 +227,7 @@ export default function MapDataList() {
         const jsonData = JSON.stringify(data);
 
         //어디로 추가할것인지 적는 로직
-        fetch('http://localhost:3000/MapData/policeoffice/Data.json', {
+        fetch('http://localhost:60004/MapData/policeoffice/Data.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -251,7 +251,7 @@ export default function MapDataList() {
     // 비상벨 데이터 저장하는 로직
     const saveEmergencyBellData = (data) => {
         const jsonData = JSON.stringify(data);
-        fetch('http://localhost:3000/MapData/emergencybell/Data.json', {
+        fetch('http://localhost:60004/MapData/emergencybell/Data.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

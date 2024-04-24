@@ -17,7 +17,7 @@ export default function FloatingPopulationList() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:3000/floatingPopulation/Data.json')
+        fetch('http://localhost:60004/floatingPopulation/Data.json')
             .then(response => response.json())
             .then(data => setFloatingPopulations(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -76,7 +76,7 @@ export default function FloatingPopulationList() {
         const jsonData = JSON.stringify(data);
 
         //어디로 추가할것인지 적는 로직
-        fetch('http://localhost:3000/MapData/floatingPopulation/Data.json', {
+        fetch('http://localhost:60004/MapData/floatingPopulation/Data.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

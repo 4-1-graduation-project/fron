@@ -13,7 +13,7 @@ export default function AiSettings() {
 
     };
     useEffect(() => {
-        fetch('http://localhost:3000/aiSettings/Data.json')
+        fetch('http://localhost:60004/aiSettings/Data.json')
             .then(response => response.json())
             .then(data => {
                 setSelectedModel(data.selectedModel);
