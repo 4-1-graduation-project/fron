@@ -30,6 +30,102 @@ export default function MapDataList() {
     });
     const [selectedTab, setSelectedTab] = useState('CCTV'); // 기본값은 CCTV로 설정
 
+    //====================CCTV 검색 로직 =================================
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 10; // 페이지당 나타낼 게시물 수
+
+    // 현재 페이지의 첫 번째 회원의 인덱스
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchOption, setSearchOption] = useState('borough'); // 기본적으로 이름으로 검색
+    // 검색 함수
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
+    };
+
+
+    // 옵션 변경 함수
+    const handleOptionChange = (event) => {
+        setSearchOption(event.target.value);
+    };
+
+    // 검색된 회원 필터링
+    const filteredCctvs = cctvs.filter(cctv => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchOption) {
+            case 'borough':
+                return cctv.borough.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'latitude':
+                // 숫자형 속성이므로 그대로 비교
+                return cctv.latitude.includes(searchTerm);
+            case 'longitude':
+                // 숫자형 속성이므로 그대로 비교
+                return cctv.longitude.includes(searchTerm);
+            case 'address':
+                return cctv.address.toLowerCase().includes(searchTerm.toLowerCase());
+            default:
+                return true;
+        }
+    });
+
+    // 페이지 변경
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        setSearchTerm(''); // 페이지 변경 시 검색어 초기화
+    };
+
+
+    //===============================================================================
+
+    //====================경찰서 검색 로직 ============================================
+    const [currentTwoPage, setCurrentTwoPage] = useState(1);
+    const postsPerTwoPage = 10; // 페이지당 나타낼 게시물 수
+
+    // 현재 페이지의 첫 번째 회원의 인덱스
+    const indexOfLastTwoPost = currentTwoPage * postsPerTwoPage;
+    const indexOfFirstTwoPost = indexOfLastTwoPost - postsPerTwoPage;
+
+
+    const [searchTwoTerm, setSearchTwoTerm] = useState('');
+    const [searchTwoOption, setSearchTwoOption] = useState('policeOffice'); // 기본적으로 이름으로 검색
+    // 검색 함수
+    const handleTwoSearch = (event) => {
+        setSearchTwoTerm(event.target.value);
+        setCurrentTwoPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
+    };
+
+
+    // 옵션 변경 함수
+    const handleTwoOptionChange = (event) => {
+        setSearchTwoOption(event.target.value);
+    };
+
+    // 검색된 회원 필터링
+    const filteredPoliceOffices = policeOffices.filter(policeOffice => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchTwoOption) {
+            case 'policeOffice':
+                return policeOffice.policeOffice.toLowerCase().includes(searchTwoTerm.toLowerCase());
+            case 'OfficialSignature':
+                return policeOffice.OfficialSignature.toLowerCase().includes(searchTwoTerm.toLowerCase());
+            case 'policeaddress':
+                return policeOffice.policeaddress.toLowerCase().includes(searchTwoTerm.toLowerCase());
+            default:
+                return true;
+        }
+    });
+
+    // 페이지 변경
+    const TwoPaginate = (TwoPageNumber) => {
+        setCurrentTwoPage(TwoPageNumber);
+        setSearchTwoTerm(''); // 페이지 변경 시 검색어 초기화
+    };
+
+
+    //===============================================================================
     // 탭을 변경하는 함수
     const changeTab = (tab) => {
         setSelectedTab(tab);
@@ -72,20 +168,24 @@ export default function MapDataList() {
             .catch(error => console.error('Error fetching emergency bell data:', error));
     };
 
-    //CCTV데이터 삭제하는 로직
+    // CCTV데이터 삭제하는 로직
     const handleDelete = (index) => {
         const updatedCctvs = [...cctvs];
         updatedCctvs.splice(index, 1);
-        alert('데이터가 삭제되었습니다.')
+        alert('데이터가 삭제되었습니다.');
         setCctvs(updatedCctvs);
+        // 데이터 업데이트하기
+        saveCctvData(updatedCctvs);
+        // 수정된 데이터를 다시 가져오기
+        fetchCctvData();
     };
-
     //경찰서 데이터 삭제하는 로직
     const handlePoliceOfficeDelete = (index) => {
         const updatedpoliceOffices = [...policeOffices];
         updatedpoliceOffices.splice(index, 1);
         alert('데이터가 삭제되었습니다.')
         setPoliceOffices(updatedpoliceOffices);
+        fetchPoliceOfficeData();
     };
 
     //비상벨 데이터 삭제하는 로직
@@ -94,6 +194,7 @@ export default function MapDataList() {
         updatedEmergencyBells.splice(index, 1);
         alert('데이터가 삭제되었습니다.')
         setEmergencyBells(updatedEmergencyBells);
+        fetchEmergencyBellData();
     };
 
     //CCTV 추가 팝업 여는 로직
@@ -215,6 +316,7 @@ export default function MapDataList() {
             })
             .then(data => {
                 console.log('Data saved successfully:', data);
+                fetchCctvData();
             })
             .catch(error => {
                 console.error('Error saving data:', error);
@@ -242,6 +344,7 @@ export default function MapDataList() {
             })
             .then(data => {
                 console.log('Data saved successfully:', data);
+                fetchPoliceOfficeData();
             })
             .catch(error => {
                 console.error('Error saving data:', error);
@@ -266,6 +369,7 @@ export default function MapDataList() {
             })
             .then(data => {
                 console.log('Emergency bell data saved successfully:', data);
+                fetchEmergencyBellData();
             })
             .catch(error => {
                 console.error('Error saving emergency bell data:', error);
@@ -294,9 +398,22 @@ export default function MapDataList() {
                             <A.UserNameField>위도</A.UserNameField>
                             <A.TitleField>경도</A.TitleField>
                             <A.ContentField>안심 주소</A.ContentField>
+                            <S.SearchMapBox>
+                                <S.Input
+                                    type="text"
+                                    placeholder="검색어를 입력하세요"
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
+                                {/* 검색 옵션 드롭다운 */}
+                                <select value={searchOption} onChange={handleOptionChange}>
+                                    <option value="name">자치구</option>
+                                    <option value="gender">안심주소</option>
+                                </select>
+                            </S.SearchMapBox>
                         </S.FieldContainer>
                         <S.MemberContainer>
-                            {cctvs.map((cctv, index) => (
+                            {filteredCctvs.slice(indexOfFirstPost, indexOfLastPost).map((cctv, index) => (
                                 <A.MemberItem key={index}>
                                     <A.ReportDate>{cctv.borough}</A.ReportDate>
                                     <A.ReportName>{cctv.latitude}</A.ReportName>
@@ -306,7 +423,20 @@ export default function MapDataList() {
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
-                        <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox>
+                        {/* 페이지네이션 */}
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                            <S.PaginationBox>
+                                {[...Array(Math.ceil(filteredCctvs.length / postsPerPage)).keys()].map((pageNumber) => (
+                                    <S.PageNumber
+                                        key={pageNumber}
+                                        onClick={() => paginate(pageNumber + 1)}
+                                    >
+                                        {pageNumber + 1}
+                                    </S.PageNumber>
+                                ))}
+                            </S.PaginationBox>
+                            <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox>
+                        </div>
                     </>
                 )}
 
@@ -316,10 +446,24 @@ export default function MapDataList() {
                         <S.FieldContainer>
                             <A.DateField>경찰서</A.DateField>
                             <A.UserNameField>관서명</A.UserNameField>
-                            <A.TitleField>주소</A.TitleField>
+                            <A.TitleTwoField>주소</A.TitleTwoField>
+                            <S.SearchMapBox>
+                                <S.Input
+                                    type="text"
+                                    placeholder="검색어를 입력하세요"
+                                    value={searchTwoTerm}
+                                    onChange={handleTwoSearch}
+                                />
+                                {/* 검색 옵션 드롭다운 */}
+                                <select value={searchTwoOption} onChange={handleTwoOptionChange}>
+                                    <option value="policeOffice">경찰서</option>
+                                    <option value="OfficialSignature">관서명</option>
+                                    <option value="policeaddress">주소</option>
+                                </select>
+                            </S.SearchMapBox>
                         </S.FieldContainer>
                         <S.MemberContainer>
-                            {policeOffices.map((policeOffice, index) => (
+                            {filteredPoliceOffices.slice(indexOfFirstTwoPost, indexOfLastTwoPost).map((policeOffice, index) => (
                                 <A.MemberItem key={index}>
                                     <A.ReportDate>{policeOffice.policeOffice}</A.ReportDate>
                                     <A.ReportName>{policeOffice.OfficialSignature}</A.ReportName>
@@ -328,7 +472,19 @@ export default function MapDataList() {
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
-                        <K.AddBox onClick={togglepoliceOfficePopup}>비상벨 추가하기</K.AddBox>
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                            <S.PaginationBox>
+                                {[...Array(Math.ceil(filteredPoliceOffices.length / postsPerTwoPage)).keys()].map((TwoPageNumber) => (
+                                    <S.PageNumber
+                                        key={TwoPageNumber}
+                                        onClick={() => TwoPaginate(TwoPageNumber + 1)}
+                                    >
+                                        {TwoPageNumber + 1}
+                                    </S.PageNumber>
+                                ))}
+                            </S.PaginationBox>
+                            <K.AddBox onClick={togglepoliceOfficePopup}>비상벨 추가하기</K.AddBox>
+                        </div>
                     </>
                 )}
 

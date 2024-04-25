@@ -8,12 +8,51 @@ import * as Z from "../../mapDataManagementPage/mapDataItems/MapDataListCss";
 
 export default function FloatingPopulationList() {
     const [floatingPopulations, setFloatingPopulations] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchOption, setSearchOption] = useState('autonomousDistrict'); // 기본적으로 이름으로 검색
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [newFloatingPopulationData, setNewFloatingPopulationData] = useState({
         measurementTime: '',
         autonomousDistrict: '',
         administrativeDistrict: '',
         numberOfVisitors: ''
+    });
+
+    const postsPerPage = 10; // 페이지당 나타낼 게시물 수
+
+    // 현재 페이지의 첫 번째 회원의 인덱스
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+
+    // 페이지 변경
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // 옵션 변경 함수
+    const handleOptionChange = (event) => {
+        setSearchOption(event.target.value);
+    };
+
+    // 검색 함수
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
+    };
+
+    // 검색된 회원 필터링
+    const filteredfloatingPopulations = floatingPopulations.filter(floatingPopulation => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchOption) {
+            case 'measurementTime':
+                return floatingPopulation.measurementTime.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'autonomousDistrict':
+                return floatingPopulation.autonomousDistrict.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'administrativeDistrict':
+                return floatingPopulation.administrativeDistrict.toLowerCase().includes(searchTerm.toLowerCase());
+            default:
+                return true;
+        }
     });
 
     useEffect(() => {
@@ -100,7 +139,25 @@ export default function FloatingPopulationList() {
     return (
         <A.Container>
             <A.Box>
-                <A.Title>유동인구 데이터 관리</A.Title>
+                <A.Title>
+                    <div>유동인구 데이터 관리</div>
+                    {/* 검색 창 */}
+                    <A.SearchBox>
+                        <A.Input
+                            type="text"
+                            placeholder="검색어를 입력하세요"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                        {/* 검색 옵션 드롭다운 */}
+                        <select value={searchOption} onChange={handleOptionChange}>
+                            <option value="measurementTime">측정시간</option>
+                            <option value="autonomousDistrict">자치구</option>
+                            <option value="administrativeDistrict">행정동</option>
+
+                        </select>
+                    </A.SearchBox>
+                </A.Title>
                 <A.FieldContainer>
                     <K.DateField>측정시간</K.DateField>
                     <K.UserNameField>자치구</K.UserNameField>
@@ -108,7 +165,7 @@ export default function FloatingPopulationList() {
                     <S.ContentField>방문자수</S.ContentField>
                 </A.FieldContainer>
                 <A.MemberContainer>
-                    {floatingPopulations.map((floatingPopulation, index) => (
+                    {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
                         <A.MemberItem>
                             <K.ReportDate>{floatingPopulation.measurementTime}</K.ReportDate>
                             <K.ReportName>{floatingPopulation.autonomousDistrict}</K.ReportName>
@@ -118,7 +175,20 @@ export default function FloatingPopulationList() {
                         </A.MemberItem>
                     ))}
                 </A.MemberContainer>
-                <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
+                {/* 페이지네이션 */}
+                <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                    <A.PaginationBox>
+                        {[...Array(Math.ceil(filteredfloatingPopulations.length / postsPerPage)).keys()].map((pageNumber) => (
+                            <A.PageNumber
+                                key={pageNumber}
+                                onClick={() => paginate(pageNumber + 1)}
+                            >
+                                {pageNumber + 1}
+                            </A.PageNumber>
+                        ))}
+                    </A.PaginationBox>
+                    <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
+                </div>
 
                 {/* CCTV 데이터 추가 팝업 */}
                 {isPopupOpen && (
@@ -158,7 +228,7 @@ export default function FloatingPopulationList() {
                     </Modal>
                 )}
             </A.Box>
-        </A.Container>
+        </A.Container >
     );
 }
 

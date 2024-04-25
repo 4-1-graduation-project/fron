@@ -59,12 +59,13 @@ export const SubTitle = styled.div`
     height: 25%;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 5px;
 `;
 
 
 export const Input = styled.input`
     width: 70%;
-    height: 30%;
+    height: 50%;
     border-radius: 20px;
 `;
 

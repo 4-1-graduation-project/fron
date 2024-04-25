@@ -341,6 +341,16 @@ export const SearchBox = styled.div`
     flex-direction: row;
 `;
 
+export const SearchMapBox = styled.div`
+    width: 20%;
+    height: 80%;
+    color: black;
+    margin-bottom: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+`;
+
 export const Input = styled.input`
     width: 70%;
     height: 80%;

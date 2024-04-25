@@ -14,6 +14,45 @@ export default function PrecipitationList() {
         region: '',
     });
 
+    const postsPerPage = 10; // 페이지당 나타낼 게시물 수
+    const [currentPage, setCurrentPage] = useState(1);
+    // 현재 페이지의 첫 번째 회원의 인덱스
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchOption, setSearchOption] = useState('autonomousDistrict'); // 기본적으로 이름으로 검색
+
+    // 페이지 변경
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // 옵션 변경 함수
+    const handleOptionChange = (event) => {
+        setSearchOption(event.target.value);
+    };
+
+    // 검색 함수
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
+    };
+
+    // 검색된 회원 필터링
+    const filteredPrecipitations = precipitations.filter(precipitation => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchOption) {
+            case 'date':
+                return precipitation.date.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'rainfallAmount':
+                return precipitation.rainfallAmount.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'region':
+                return precipitation.region.toLowerCase().includes(searchTerm.toLowerCase());
+            default:
+                return true;
+        }
+    });
+
     useEffect(() => {
         fetch('http://localhost:60004/precipitation/Data.json')
             .then(response => response.json())
@@ -25,7 +64,7 @@ export default function PrecipitationList() {
         document.body.style = `overflow: hidden`;
         return () => document.body.style = `overflow: auto`
     }, [])
-    
+
     //강수량 데이터 삭제하는 로직
     const handleDelete = (index) => {
         const updatedPrecipitations = [...precipitations];
@@ -96,14 +135,32 @@ export default function PrecipitationList() {
     return (
         <A.Container>
             <A.Box>
-                <A.Title>강수량 데이터 관리</A.Title>
+                <A.Title>
+                    <div>강수량 데이터 관리</div>
+                    {/* 검색 창 */}
+                    <A.SearchBox>
+                        <A.Input
+                            type="text"
+                            placeholder="검색어를 입력하세요"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                        {/* 검색 옵션 드롭다운 */}
+                        <select value={searchOption} onChange={handleOptionChange}>
+                            <option value="date">날짜</option>
+                            <option value="rainfallAmount">강수량</option>
+                            <option value="region">지역</option>
+
+                        </select>
+                    </A.SearchBox>
+                </A.Title>
                 <A.FieldContainer>
                     <D.DateField>날짜</D.DateField>
                     <K.UserNameField>강수량(mm)</K.UserNameField>
                     <K.TitleField>지역</K.TitleField>
                 </A.FieldContainer>
                 <A.MemberContainer>
-                    {precipitations.map((precipitation, index) => (
+                    {filteredPrecipitations.slice(indexOfFirstPost, indexOfLastPost).map((precipitation, index) => (
                         <A.MemberItem>
                             <K.ReportDate>{precipitation.date}</K.ReportDate>
                             <K.ReportName>{precipitation.rainfallAmount}</K.ReportName>
@@ -112,7 +169,19 @@ export default function PrecipitationList() {
                         </A.MemberItem>
                     ))}
                 </A.MemberContainer>
-                <Z.AddBox onClick={togglePopup}>강수량 추가하기</Z.AddBox>
+                <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                    <A.PaginationBox>
+                        {[...Array(Math.ceil(filteredPrecipitations.length / postsPerPage)).keys()].map((pageNumber) => (
+                            <A.PageNumber
+                                key={pageNumber}
+                                onClick={() => paginate(pageNumber + 1)}
+                            >
+                                {pageNumber + 1}
+                            </A.PageNumber>
+                        ))}
+                    </A.PaginationBox>
+                    <Z.AddBox onClick={togglePopup}>강수량 추가하기</Z.AddBox>
+                </div>
 
                 {/* CCTV 데이터 추가 팝업 */}
                 {isPopupOpen && (
@@ -128,17 +197,17 @@ export default function PrecipitationList() {
                                     <Z.SubTitle>
                                         날짜
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="date" placeholder="측정시간" value={newPrecipitationsData.date} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="date" placeholder="날짜" value={newPrecipitationsData.date} onChange={handleInputChange} />
                                     <Z.SubTitle>
                                         지역
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="rainfallAmount" placeholder="행정동" value={newPrecipitationsData.rainfallAmount} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="rainfallAmount" placeholder="지역" value={newPrecipitationsData.rainfallAmount} onChange={handleInputChange} />
                                 </Z.InputBox>
                                 <Z.InputBox>
                                     <Z.SubTitle>
                                         강수량
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="region" placeholder="자치구" value={newPrecipitationsData.region} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="region" placeholder="강수량" value={newPrecipitationsData.region} onChange={handleInputChange} />
                                 </Z.InputBox>
                             </div>
                             <Z.ButtonBox>
