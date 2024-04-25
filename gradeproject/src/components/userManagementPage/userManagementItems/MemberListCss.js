@@ -333,12 +333,19 @@ export const PageNumber = styled.li`
 
 export const SearchBox = styled.div`
     width: 20%;
-    height: 100%;
+    height: 80%;
     color: black;
     margin-bottom: 20px;
-    border: 1px solid blue;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
 `;
 
+export const Input = styled.input`
+    width: 70%;
+    height: 80%;
+    border: 1px solid grey;
+`;
 
 
 

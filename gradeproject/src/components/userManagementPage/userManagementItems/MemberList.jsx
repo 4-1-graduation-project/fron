@@ -6,6 +6,7 @@ export default function MemberList() {
   const [members, setMembers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchOption, setSearchOption] = useState('name'); // 기본적으로 이름으로 검색
 
   const postsPerPage = 10; // 페이지당 나타낼 게시물 수
 
@@ -28,29 +29,53 @@ export default function MemberList() {
     setSearchTerm(event.target.value);
   };
 
+  // 옵션 변경 함수
+  const handleOptionChange = (event) => {
+    setSearchOption(event.target.value);
+  };
+
   // 검색된 회원 필터링
-  const filteredMembers = members.filter(member =>
-    member.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredMembers = members.filter(member => {
+    // 선택된 옵션에 따라 검색 조건 변경
+    switch(searchOption) {
+      case 'name':
+        return member.name.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'id':
+        return member.Id.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'address':
+        return member.address.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'gender':
+        return member.gender.toLowerCase().includes(searchTerm.toLowerCase());
+      default:
+        return true;
+    }
+  });
 
   useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => document.body.style = `overflow: auto`
   }, [])
 
-
   return (
     <S.Container>
       <S.Box>
         <S.Title>
           <div>회원 관리</div>
+          {/* 검색 창 */}
           <S.SearchBox>
-            <input
+            <S.Input
               type="text"
-              placeholder="이름으로 검색"
+              placeholder="검색어를 입력하세요"
               value={searchTerm}
               onChange={handleSearch}
             />
+            {/* 검색 옵션 드롭다운 */}
+            <select value={searchOption} onChange={handleOptionChange}>
+              <option value="name">이름</option>
+              <option value="id">아이디</option>
+              <option value="address">주소</option>
+              <option value="gender">성별</option>
+            </select>
           </S.SearchBox>
         </S.Title>
         <S.FieldContainer>
@@ -79,7 +104,7 @@ export default function MemberList() {
         </S.MemberContainer>
         {/* 페이지네이션 */}
         <S.PaginationBox>
-          {[...Array(Math.ceil(members.length / postsPerPage)).keys()].map((pageNumber) => (
+          {[...Array(Math.ceil(filteredMembers.length / postsPerPage)).keys()].map((pageNumber) => (
             <S.PageNumber
               key={pageNumber}
               onClick={() => paginate(pageNumber + 1)}

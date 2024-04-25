@@ -63,6 +63,7 @@ export const MainContainer = styled.div`
     grid-template-rows: 1fr 1fr;
     gap: 10px;
     margin: 10px;
+    overflow-y: hidden;
 `;
 
 export const GridItem = styled.div`
@@ -81,6 +82,7 @@ export const Container = styled.div`
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
+    overflow: hidden;
 `;
 
 export const ReportBoxHeader = styled.div`
@@ -227,6 +229,7 @@ export const AiSettingsList = styled.ul`
   padding-inline-start: 1.5em;
   list-style-position: inside;
   list-style-type: square;
+  overflow: hidden;
 
 
 `;

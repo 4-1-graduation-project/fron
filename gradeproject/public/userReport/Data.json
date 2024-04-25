@@ -3,48 +3,96 @@
     "title": "문의제목",
     "author": "Author 1",
     "date": "2024-04-10",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "길찾기에러",
     "author": "Author 2",
     "date": "2024-04-09",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "경찰신고",
     "author": "Author 3",
     "date": "2024-04-08",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "사용평가신고",
     "author": "Author 4",
     "date": "2024-04-10",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "버벅거림",
     "author": "Author 5",
     "date": "2024-04-09",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "오류",
     "author": "Author 6",
     "date": "2024-04-08",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "길찾기가잘안돼요",
     "author": "Author 7",
     "date": "2024-04-09",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
   },
   {
     "title": "Ai길찾기",
     "author": "Author 8",
     "date": "2024-04-08",
-    "content" : "문의하는내용입니다."
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "문의제목",
+    "author": "Author 1",
+    "date": "2024-04-10",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "길찾기에러",
+    "author": "Author 2",
+    "date": "2024-04-09",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "경찰신고",
+    "author": "Author 3",
+    "date": "2024-04-08",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "사용평가신고",
+    "author": "Author 4",
+    "date": "2024-04-10",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "버벅거림",
+    "author": "Author 5",
+    "date": "2024-04-09",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "오류",
+    "author": "Author 6",
+    "date": "2024-04-08",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "길찾기가잘안돼요",
+    "author": "Author 7",
+    "date": "2024-04-09",
+    "content": "문의하는내용입니다."
+  },
+  {
+    "title": "Ai길찾기",
+    "author": "Author 8",
+    "date": "2024-04-08",
+    "content": "문의하는내용입니다."
   }
 ]

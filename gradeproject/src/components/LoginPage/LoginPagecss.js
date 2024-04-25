@@ -15,7 +15,8 @@ export const Container = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;    
+    margin: 0 auto; 
+    margin-top: 50px;   
 `;
 
 export const FirstTitle = styled.div`
@@ -35,6 +36,7 @@ export const SecondTitle = styled.div`
     font-size: 32px;
     font-weight: bold;
     margin: 0 auto;
+    margin-top: 50px;
 `;
 
 
@@ -53,7 +55,6 @@ export const DownloadBox = styled.div`
     line-height: 35px;
     margin: 0 auto;
     margin-top: 5vh;
-    border: 1px solid black;
 `;
 
 
