@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 1250px;
+    width: 200%;
     height: 600px;
     border-radius: 15px;
     border: 1px solid black;
@@ -24,28 +24,55 @@ export const Title = styled.div`
     font-weight: bold;
     color: black;
     border-bottom: 2px solid black;
-    margin: 20px;
     padding-bottom: 10px;
+    margin: 20px;
 `;
 
 export const SeletedAiBox = styled.div`
-    width: 1200px;
+    width: 95%;
     height: 20%;
     margin: 20px;
-    border: 1px solid red;
+
     display : flex;
     flex-direction: row;
     justify-content: center;
     align-items : center;
     text-align: center;
-
 `;
 
-export const SelectedAi = styled.div`
-    width: 300px;
+export const InputBox = styled.div`
+    width: 95%;
     height: 50%;
     margin: 20px;
-    border: 1px solid blue;
+
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items : center;
+    text-align: center;
+`;
+
+
+export const ButtonBox = styled.div`
+    width: 50%;
+    height: 20%;
+    margin: 20px;
+
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items : center;
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+    gap: 100px;
+`;
+
+
+
+export const SelectedAi = styled.div`
+    width: 90%;
+    height: 50%;
     font-size: 24px;
     font-weight:bold;
     text-align: left;
@@ -53,7 +80,7 @@ export const SelectedAi = styled.div`
 
 export const Button = styled.div`
     width: 80px;
-    height: 30px;
+    height: 25px;
     border: none;
     text-align: center;
     display : flex;
@@ -68,3 +95,30 @@ export const Button = styled.div`
     cursor: pointer;
 `;
 
+
+export const InputGrid = styled.div`
+    margin: 0 auto;
+    width: 80%;
+    height: 30%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-top: 20px;
+
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input { 
+        width: 70%;
+        border-radius: 20px;
+        border: 1px solid grey;
+    }
+`;
+
+export const InputLabel = styled.label`
+    font-weight: bold;
+    margin-bottom: 5px;
+`;
