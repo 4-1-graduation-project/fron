@@ -10,7 +10,7 @@ import MapDataManagementPage from "./pages/MapDataManagementPage";
 import FloatingPopulationPage from "./pages/FloatingPopulationPage";
 import PrecipitationPage from './pages/PrecipitationPage';
 import AiSettingPage from "./pages/AiSettingPage";
-
+import EvaluationIndicatorsPage from "./pages/EvaluationIndicatorsPage"; 
 function App() {
   return (
     <div className="App" style={{ overflow: 'hidden' }}>
@@ -27,6 +27,7 @@ function App() {
         <Route path="/floatingPopulationManagement" element={<FloatingPopulationPage />} />
         <Route path="/precipitationManagement" element={<PrecipitationPage />} />
         <Route path="/aiSetting" element={<AiSettingPage />} />
+        <Route path="/evaluationIndicators" element={<EvaluationIndicatorsPage />} />
       </Routes>
     </div>
   );

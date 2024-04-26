@@ -22,6 +22,8 @@ export default function SideMenu() {
             setSelectedMenu('precipitationManagement');
         } else if (pathname === '/aiSetting' || pathname.includes('/aiSetting/')) {
             setSelectedMenu('aiSetting');
+        } else if (pathname === '/evaluationIndicators' || pathname.includes('/evaluationIndicators/')) {
+            setSelectedMenu('evaluationIndicators');
         }
 
     }, [location.pathname]);
@@ -71,7 +73,12 @@ export default function SideMenu() {
                 >
                     AI 관리
                 </T.Menu>
-                <T.Menu>AI 평가 지표 관리</T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'evaluationIndicators' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/evaluationIndicators', 'evaluationIndicators')}
+                >
+                    AI 평가 지표 관리
+                </T.Menu>
             </T.MenuBox>
         </div>
     )
