@@ -126,6 +126,50 @@ export default function MapDataList() {
 
 
     //===============================================================================
+
+    //==================== 비상벨 검색 로직 ============================================
+
+    const [currentThreePage, setCurrentThreePage] = useState(1);
+    const postsPerThreePage = 10; // 페이지당 나타낼 게시물 수
+
+    // 현재 페이지의 첫 번째 회원의 인덱스
+    const indexOfLastThreePost = currentThreePage * postsPerThreePage;
+    const indexOfFirstThreePost = indexOfLastThreePost - postsPerThreePage;
+
+
+    const [searchThreeTerm, setSearchThreeTerm] = useState('');
+    const [searchThreeOption, setSearchThreeOption] = useState('installation_location'); // 기본적으로 이름으로 검색
+    // 검색 함수
+    const handleThreeSearch = (event) => {
+        setSearchThreeTerm(event.target.value);
+        setCurrentThreePage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
+    };
+
+
+    // 옵션 변경 함수
+    const handleThreeOptionChange = (event) => {
+        setSearchThreeOption(event.target.value);
+    };
+
+    // 검색된 회원 필터링
+    const filteredEmergencyBells = emergencyBells.filter(emergencyBell => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchThreeOption) {
+            case 'installation_location':
+                return emergencyBell.installation_location.toLowerCase().includes(searchThreeTerm.toLowerCase());
+            case 'location_address':
+                return emergencyBell.location_address.toLowerCase().includes(searchThreeTerm.toLowerCase());
+            default:
+                return true;
+        }
+    });
+
+    // 페이지 변경
+    const ThreePaginate = (ThreePageNumber) => {
+        setCurrentThreePage(ThreePageNumber);
+        setSearchThreeTerm(''); // 페이지 변경 시 검색어 초기화
+    };
+    //============================ ===================================================
     // 탭을 변경하는 함수
     const changeTab = (tab) => {
         setSelectedTab(tab);
@@ -483,7 +527,7 @@ export default function MapDataList() {
                                     </S.PageNumber>
                                 ))}
                             </S.PaginationBox>
-                            <K.AddBox onClick={togglepoliceOfficePopup}>비상벨 추가하기</K.AddBox>
+                            <K.AddBox onClick={togglepoliceOfficePopup}>경찰서 추가하기</K.AddBox>
                         </div>
                     </>
                 )}
@@ -493,10 +537,23 @@ export default function MapDataList() {
                     <>
                         <S.FieldContainer>
                             <A.LocationField>설치위치</A.LocationField>
-                            <A.TitleField>소재지지지번주소</A.TitleField>
+                            <A.sojeaField>소재지지지번주소</A.sojeaField>
+                            <S.SearchMapBox>
+                                <S.Input
+                                    type="text"
+                                    placeholder="검색어를 입력하세요"
+                                    value={searchThreeTerm}
+                                    onChange={handleThreeSearch}
+                                />
+                                {/* 검색 옵션 드롭다운 */}
+                                <select value={searchThreeOption} onChange={handleThreeOptionChange}>
+                                    <option value="installation_location">설치위치</option>
+                                    <option value="location_address">소재지지번주소</option>
+                                </select>
+                            </S.SearchMapBox>
                         </S.FieldContainer>
                         <S.MemberContainer>
-                            {emergencyBells.map((emergencyBell, index) => (
+                            {filteredEmergencyBells.slice(indexOfFirstThreePost, indexOfLastThreePost).map((emergencyBell, index) => (
                                 <A.MemberItem key={index}>
                                     <A.emergencyBellLocation>{emergencyBell.installation_location}</A.emergencyBellLocation>
                                     <A.emergencyBelladdress>{emergencyBell.location_address}</A.emergencyBelladdress>
@@ -504,7 +561,19 @@ export default function MapDataList() {
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
-                        <K.AddBox onClick={toggleEmergencyBellPopup}>비상벨 추가하기</K.AddBox>
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                            <S.PaginationBox>
+                                {[...Array(Math.ceil(filteredEmergencyBells.length / postsPerThreePage)).keys()].map((ThreePageNumber) => (
+                                    <S.PageNumber
+                                        key={ThreePageNumber}
+                                        onClick={() => ThreePaginate(ThreePageNumber + 1)}
+                                    >
+                                        {ThreePageNumber + 1}
+                                    </S.PageNumber>
+                                ))}
+                            </S.PaginationBox>
+                            <K.AddBox onClick={toggleEmergencyBellPopup}>비상벨 추가하기</K.AddBox>
+                        </div>
                     </>
                 )}
             </S.Box>
@@ -598,7 +667,7 @@ export default function MapDataList() {
                                 </K.SubTitle>
                                 <K.Input type="text" name="installation_location" placeholder="설치위치" value={newEmergencyBellData.installation_location} onChange={handleEmergencyBellInputChange} />
                                 <K.SubTitle>
-                                    소재지지번주소
+                                    소재지번주소
                                 </K.SubTitle>
                                 <K.Input type="text" name="location_address" placeholder="소재지지번주소" value={newEmergencyBellData.location_address} onChange={handleEmergencyBellInputChange} />
                             </K.InputBox>

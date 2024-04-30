@@ -1,152 +1,147 @@
 [
     {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
+        "policeOffice": "종로서",
+        "OfficialSignature": "광화문",
+        "policeaddress": "서울 종로구 세종대로 123"
+    },
+    {
+        "policeOffice": "강남서",
+        "OfficialSignature": "삼성",
+        "policeaddress": "서울 강남구 테헤란로 789"
+    },
+    {
+        "policeOffice": "강동서",
+        "OfficialSignature": "천호",
+        "policeaddress": "서울 강동구 천호대로 456"
     },
     {
         "policeOffice": "서대문서",
         "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
+        "policeaddress": "서울 서대문구 남가좌로 567"
     },
     {
         "policeOffice": "관악서",
         "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
+        "policeaddress": "서울 관악구 신림로 890"
     },
     {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
+        "policeOffice": "노원서",
+        "OfficialSignature": "상계",
+        "policeaddress": "서울 노원구 상계로 321"
     },
     {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
+        "policeOffice": "은평서",
+        "OfficialSignature": "역촌",
+        "policeaddress": "서울 은평구 역촌로 654"
+    },
+    {
+        "policeOffice": "서부서",
+        "OfficialSignature": "홍은",
+        "policeaddress": "서울 서대문구 홍은로 987"
+    },
+    {
+        "policeOffice": "양천서",
+        "OfficialSignature": "목동",
+        "policeaddress": "서울 양천구 목동로 147"
+    },
+    {
+        "policeOffice": "도봉서",
+        "OfficialSignature": "도봉",
+        "policeaddress": "서울 도봉구 도봉로 258"
+    },
+    {
+        "policeOffice": "금천서",
+        "OfficialSignature": "가산",
+        "policeaddress": "서울 금천구 가산로 369"
+    },
+    {
+        "policeOffice": "강북서",
+        "OfficialSignature": "미아",
+        "policeaddress": "서울 강북구 미아로 258"
+    },
+    {
+        "policeOffice": "강서서",
+        "OfficialSignature": "화곡",
+        "policeaddress": "서울 강서구 화곡로 741"
+    },
+    {
+        "policeOffice": "금천서",
+        "OfficialSignature": "독산",
+        "policeaddress": "서울 금천구 독산로 951"
+    },
+    {
+        "policeOffice": "강남서",
+        "OfficialSignature": "역삼",
+        "policeaddress": "서울 강남구 역삼로 753"
+    },
+    {
+        "policeOffice": "강동서",
+        "OfficialSignature": "둔촌",
+        "policeaddress": "서울 강동구 둔촌로 159"
     },
     {
         "policeOffice": "서대문서",
-        "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
+        "OfficialSignature": "북가좌",
+        "policeaddress": "서울 서대문구 북가좌로 369"
     },
     {
         "policeOffice": "관악서",
-        "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
+        "OfficialSignature": "낙성대",
+        "policeaddress": "서울 관악구 낙성대로 582"
     },
     {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
+        "policeOffice": "노원서",
+        "OfficialSignature": "중계",
+        "policeaddress": "서울 노원구 중계로 753"
     },
     {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
+        "policeOffice": "은평서",
+        "OfficialSignature": "진관",
+        "policeaddress": "서울 은평구 진관길 258"
+    },
+    {
+        "policeOffice": "서부서",
+        "OfficialSignature": "신촌",
+        "policeaddress": "서울 서대문구 신촌로 753"
+    },
+    {
+        "policeOffice": "양천서",
+        "OfficialSignature": "신정",
+        "policeaddress": "서울 양천구 신정로 159"
+    },
+    {
+        "policeOffice": "도봉서",
+        "OfficialSignature": "쌍문",
+        "policeaddress": "서울 도봉구 쌍문로 357"
+    },
+    {
+        "policeOffice": "강북서",
+        "OfficialSignature": "번동",
+        "policeaddress": "서울 강북구 번동로 753"
+    },
+    {
+        "policeOffice": "강서서",
+        "OfficialSignature": "등촌",
+        "policeaddress": "서울 강서구 등촌로 159"
+    },
+    {
+        "policeOffice": "금천서",
+        "OfficialSignature": "시흥",
+        "policeaddress": "서울 금천구 시흥대로 357"
+    },
+    {
+        "policeOffice": "강남서",
+        "OfficialSignature": "논현",
+        "policeaddress": "서울 강남구 논현로 753"
+    },
+    {
+        "policeOffice": "강동서",
+        "OfficialSignature": "성내",
+        "policeaddress": "서울 강동구 성내로 159"
     },
     {
         "policeOffice": "서대문서",
-        "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
-    },
-    {
-        "policeOffice": "관악서",
-        "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
-    },
-    {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
-    },
-    {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
-    },
-    {
-        "policeOffice": "서대문서",
-        "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
-    },
-    {
-        "policeOffice": "관악서",
-        "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
-    },
-    {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
-    },
-    {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
-    },
-    {
-        "policeOffice": "서대문서",
-        "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
-    },
-    {
-        "policeOffice": "관악서",
-        "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
-    },
-    {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
-    },
-    {
-        "policeOffice": "중부",
-        "OfficialSignature": "을지",
-        "policeaddress": "서울 중구 을지로 234"
-    },
-    {
-        "policeOffice": "서대문서",
-        "OfficialSignature": "남가좌",
-        "policeaddress": "서울 서대문구 통일로 113"
-    },
-    {
-        "policeOffice": "강북서",
-        "OfficialSignature": "미아",
-        "policeaddress": "서울 강북구 오패산로 406"
-    },
-    {
-        "policeOffice": "관악서",
-        "OfficialSignature": "신림",
-        "policeaddress": "서울 관악구 관악로5길 33"
-    },
-    {
-        "policeOffice": "송파서",
-        "OfficialSignature": "오금",
-        "policeaddress": "서울 송파구 오금로 11"
+        "OfficialSignature": "신촌",
+        "policeaddress": "서울 서대문구 신촌로 753"
     }
 ]

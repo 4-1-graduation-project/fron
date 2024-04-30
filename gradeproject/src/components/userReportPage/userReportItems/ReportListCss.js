@@ -25,6 +25,15 @@ export const TitleField = styled.div`
     color: black;
 `;
 
+export const sojeaField = styled.div`
+    width: 60%;
+    height: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+`;
+
+
 export const TitleTwoField = styled.div`
     width: 50%;
     height: 50%;
