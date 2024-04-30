@@ -10,19 +10,31 @@ export default function MemberDetail() {
   const [member, setMember] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:60004/memberList/Data.json/${id}`)
+    document.body.style = `overflow: hidden`;
+    return () => document.body.style = `overflow: auto`
+  }, [])
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+
+    fetch(`http://ceprj.gachon.ac.kr:60004/src/admins/users/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        console.log(response);
         return response.json();
       })
-      .then(data => setMember(data))
-      .catch(error => {
-        console.error('Error fetching member data:', error);//API없어서 에러나는듯 함
-        setMember(null); // Reset member state to null
-      });
+      .then(data => {
+        console.log(data);
+        setMember(data);
+      })
+      .catch(error => console.error('Error fetching data:', error));
   }, [id]);
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -32,7 +44,7 @@ export default function MemberDetail() {
       <Z.RightSection>
         <Z.Header>
           <Z.BackButton>
-            <img src={backbutton} alt='뒤로가기' />
+            <img src={backbutton} alt='뒤로가기' style={{width: '50px', height:'50px'}}/>
           </Z.BackButton>
           <Z.LogoutButton>
             로그아웃
@@ -45,21 +57,21 @@ export default function MemberDetail() {
               <S.MemberListContainer>
                 <S.FirstRow>
                   <S.NoBox>No</S.NoBox>
-                  <S.No>{member ? member.id : ""}</S.No>
+                  <S.No>{member ? member.userNum : ""}</S.No>
                   <S.AddressBox>집주소</S.AddressBox>
-                  <S.Address>{member ? member.address : ""}</S.Address>
+                  <S.Address>{member ? member.userAddress : ""}</S.Address>
                 </S.FirstRow>
                 <S.FirstRow>
                   <S.NameBox>회원이름</S.NameBox>
-                  <S.Name>{member ? member.name : ""}</S.Name>
+                  <S.Name>{member ? member.userName : ""}</S.Name>
                   <S.GenderBox>성별</S.GenderBox>
-                  <S.Gender>{member ? member.gender : ""}</S.Gender>
+                  <S.Gender>{member ? member.userSex : ""}</S.Gender>
                 </S.FirstRow>
                 <S.FirstRow>
                   <S.IdBox>아이디</S.IdBox>
-                  <S.Id>{member ? member.Id : ""}</S.Id>
+                  <S.Id>{member ? member.userId : ""}</S.Id>
                   <S.BirthBox>생년월일</S.BirthBox>
-                  <S.Id>{member ? member.Id : ""}</S.Id>
+                  <S.Id>{member ? member.userBirth : ""}</S.Id>
                 </S.FirstRow>
               </S.MemberListContainer>
             </S.Box>

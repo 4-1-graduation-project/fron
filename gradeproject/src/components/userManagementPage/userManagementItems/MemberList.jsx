@@ -11,9 +11,22 @@ export default function MemberList() {
   const postsPerPage = 10; // 페이지당 나타낼 게시물 수
 
   useEffect(() => {
-    fetch('http://localhost:3000/memberList/Data.json')
-      .then(response => response.json())
-      .then(data => setMembers(data))
+    const token = localStorage.getItem('accessToken'); 
+
+    fetch('http://ceprj.gachon.ac.kr:60004/src/admins/users', {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json' 
+      }
+    })
+      .then(response => {
+        console.log(response);
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        setMembers(data);
+      })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
@@ -37,15 +50,15 @@ export default function MemberList() {
   // 검색된 회원 필터링
   const filteredMembers = members.filter(member => {
     // 선택된 옵션에 따라 검색 조건 변경
-    switch(searchOption) {
-      case 'name':
-        return member.name.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'id':
-        return member.Id.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'address':
-        return member.address.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'gender':
-        return member.gender.toLowerCase().includes(searchTerm.toLowerCase());
+    switch (searchOption) {
+      case 'userName':
+        return member.userName.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'userId':
+        return member.userId.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'userAddress':
+        return member.userAddress.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'userSex':
+        return member.userSex.toLowerCase().includes(searchTerm.toLowerCase());
       default:
         return true;
     }
@@ -71,10 +84,10 @@ export default function MemberList() {
             />
             {/* 검색 옵션 드롭다운 */}
             <select value={searchOption} onChange={handleOptionChange}>
-              <option value="name">이름</option>
-              <option value="id">아이디</option>
-              <option value="address">주소</option>
-              <option value="gender">성별</option>
+              <option value="userName">이름</option>
+              <option value="userId">아이디</option>
+              <option value="userAddress">주소</option>
+              <option value="userSex">성별</option>
             </select>
           </S.SearchBox>
         </S.Title>
@@ -88,16 +101,16 @@ export default function MemberList() {
         <S.MemberContainer>
           {filteredMembers.slice(indexOfFirstPost, indexOfLastPost).map((member, index) => (
             <Link
-              to={`/adminUser/${member.id}`} // 회원 ID만 전달
+              to={`/adminUser/${member.userNum}`} // 회원 ID만 전달
               key={indexOfFirstPost + index + 1}
               style={{ textDecoration: "none" }}
             >
               <S.MemberItem>
                 <S.MemberNo>{indexOfFirstPost + index + 1}</S.MemberNo>
-                <S.MemberName>{member.name}</S.MemberName>
-                <S.MemberId>{member.Id}</S.MemberId>
-                <S.MemberAddress>{member.address}</S.MemberAddress>
-                <S.MemberGender>{member.gender}</S.MemberGender>
+                <S.MemberName>{member.userName}</S.MemberName>
+                <S.MemberId>{member.userId}</S.MemberId>
+                <S.MemberAddress>{member.userAddress}</S.MemberAddress>
+                <S.MemberGender>{member.userSex}</S.MemberGender>
               </S.MemberItem>
             </Link>
           ))}
