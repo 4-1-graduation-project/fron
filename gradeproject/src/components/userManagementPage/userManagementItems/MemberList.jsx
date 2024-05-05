@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from "./MemberListCss";
+import MemberDetail from "./MemberDetail"; // 회원 상세 정보 컴포넌트
+import { useParams } from "react-router";
 
 export default function MemberList() {
   const [members, setMembers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchOption, setSearchOption] = useState('name'); // 기본적으로 이름으로 검색
+  const [selectedMember, setSelectedMember] = useState(null); // 선택된 회원
 
   const postsPerPage = 10; // 페이지당 나타낼 게시물 수
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken'); 
-
-    fetch('http://ceprj.gachon.ac.kr:60004/src/admins/users', {
+    const token = localStorage.getItem('accessToken');
+    //http://ceprj.gachon.ac.kr:60004/src/admins/users
+    fetch('http://localhost:60004/memberList/Data.json', {
       headers: {
-        'Authorization': `Bearer ${token}`, 
-        'Content-Type': 'application/json' 
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
     })
       .then(response => {
@@ -47,6 +50,11 @@ export default function MemberList() {
     setSearchOption(event.target.value);
   };
 
+  // 회원 클릭 시 선택된 회원 설정
+  const handleMemberClick = (member) => {
+    setSelectedMember(selectedMember === member ? null : member);
+  };
+
   // 검색된 회원 필터링
   const filteredMembers = members.filter(member => {
     // 선택된 옵션에 따라 검색 조건 변경
@@ -73,59 +81,59 @@ export default function MemberList() {
     <S.Container>
       <S.Box>
         <S.Title>
-          <div>회원 관리</div>
           {/* 검색 창 */}
           <S.SearchBox>
-            <S.Input
+            <S.memberInput
               type="text"
               placeholder="검색어를 입력하세요"
               value={searchTerm}
               onChange={handleSearch}
             />
             {/* 검색 옵션 드롭다운 */}
-            <select value={searchOption} onChange={handleOptionChange}>
+            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
               <option value="userName">이름</option>
               <option value="userId">아이디</option>
               <option value="userAddress">주소</option>
               <option value="userSex">성별</option>
             </select>
+            {/* 페이지네이션 */}
+            <S.PaginationBox>
+              {[...Array(Math.ceil(filteredMembers.length / postsPerPage)).keys()].map((pageNumber) => (
+                <S.PageNumber
+                  key={pageNumber}
+                  onClick={() => paginate(pageNumber + 1)}
+                >
+                  {pageNumber + 1}
+                </S.PageNumber>
+              ))}
+            </S.PaginationBox>
           </S.SearchBox>
         </S.Title>
         <S.FieldContainer>
           <S.NoField>No</S.NoField>
           <S.UserNameField>이름</S.UserNameField>
           <S.IdField>아이디</S.IdField>
-          <S.AddressField>집주소</S.AddressField>
           <S.GenderField>성별</S.GenderField>
+          <S.AddressField>집주소</S.AddressField>
         </S.FieldContainer>
         <S.MemberContainer>
           {filteredMembers.slice(indexOfFirstPost, indexOfLastPost).map((member, index) => (
-            <Link
-              to={`/adminUser/${member.userNum}`} // 회원 ID만 전달
-              key={indexOfFirstPost + index + 1}
-              style={{ textDecoration: "none" }}
-            >
-              <S.MemberItem>
+            <div key={indexOfFirstPost + index + 1} style={{ textDecoration: "none" }}>
+              <S.MemberItem onClick={() => handleMemberClick(member)}>
                 <S.MemberNo>{indexOfFirstPost + index + 1}</S.MemberNo>
-                <S.MemberName>{member.userName}</S.MemberName>
-                <S.MemberId>{member.userId}</S.MemberId>
-                <S.MemberAddress>{member.userAddress}</S.MemberAddress>
-                <S.MemberGender>{member.userSex}</S.MemberGender>
+                <S.MemberName>{member.name}</S.MemberName>
+                <S.MemberId>{member.Id}</S.MemberId>
+                <S.MemberGender>{member.gender}</S.MemberGender>
+                <S.MemberAddress>{member.address}</S.MemberAddress>
               </S.MemberItem>
-            </Link>
+              {/* 드롭다운 메뉴 */}
+              {selectedMember === member && (
+                <MemberDetail member={selectedMember} onClose={() => setSelectedMember(null)} />
+              )}
+            </div>
           ))}
         </S.MemberContainer>
-        {/* 페이지네이션 */}
-        <S.PaginationBox>
-          {[...Array(Math.ceil(filteredMembers.length / postsPerPage)).keys()].map((pageNumber) => (
-            <S.PageNumber
-              key={pageNumber}
-              onClick={() => paginate(pageNumber + 1)}
-            >
-              {pageNumber + 1}
-            </S.PageNumber>
-          ))}
-        </S.PaginationBox>
+
       </S.Box>
     </S.Container>
   );

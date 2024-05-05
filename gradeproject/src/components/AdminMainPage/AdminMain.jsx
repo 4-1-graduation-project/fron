@@ -33,14 +33,14 @@ export default function AdminMain() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
       <R.LeftSection>
         <SideMenu />
       </R.LeftSection>
       <R.RightSection>
         <R.AmdinHeader>
-          <R.LogoutButton onClick={handleLogout}>
-            로그아웃
+          <R.LogoutButton>
+            관리자님 환영합니다.
           </R.LogoutButton>
         </R.AmdinHeader>
         <R.MainContainer>

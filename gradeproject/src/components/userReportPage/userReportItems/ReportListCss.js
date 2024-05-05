@@ -43,7 +43,16 @@ export const TitleTwoField = styled.div`
 `;
 
 export const ContentField = styled.div`
-    width: 30%;
+    width: 32%;
+    height: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+
+`;
+
+export const AreaField = styled.div`
+    width: 25%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;

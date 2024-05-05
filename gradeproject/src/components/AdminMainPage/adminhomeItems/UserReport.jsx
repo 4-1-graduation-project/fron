@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as G from "../AdminMainCss";
 import { useNavigate } from 'react-router-dom';
+import BarChart from "./BarChart";
 
 export default function UserReport() {
   const [reportData, setReportData] = useState([]);
@@ -11,13 +12,32 @@ export default function UserReport() {
 
   };
 
+  {/* 
   useEffect(() => {
-    fetch('http://localhost:3000/userReport/Data.json')
-      .then(response => response.json())
-      .then(data => setReportData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    const fetchReports = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        //http://ceprj.gachon.ac.kr:60004/src/admins/reports
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/reports', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reports');
+        }
+        const data = await response.json();
+        setReportData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
+    fetchReports();
+  }, []);
+*/}
   return (
     <G.Container>
       <G.ReportBoxHeader>
@@ -25,13 +45,7 @@ export default function UserReport() {
         <G.ReportBoxSubTitle onClick={() => handleMenuClick('/adminReport')}>더보기</G.ReportBoxSubTitle>
       </G.ReportBoxHeader>
       <G.ReportList>
-        {reportData.map((report, index) => (
-          <G.ReportListItem key={index}>
-            <G.ReportTitle>{report.title}</G.ReportTitle>
-            <G.ReportAuthor>{report.author}</G.ReportAuthor>
-            <G.ReportDate>{report.date}</G.ReportDate>
-          </G.ReportListItem>
-        ))}
+        <BarChart />
       </G.ReportList>
     </G.Container>
   );

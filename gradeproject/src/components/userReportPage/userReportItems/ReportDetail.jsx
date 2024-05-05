@@ -12,6 +12,11 @@ export default function ReportDetail() {
   const [report, setReport] = useState(null);
 
   useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => document.body.style = `overflow: auto`
+  }, [])
+
+  useEffect(() => {
     const fetchReports = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
@@ -33,7 +38,7 @@ export default function ReportDetail() {
     };
 
     fetchReports();
-  }, []);
+  }, [id]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -43,7 +48,7 @@ export default function ReportDetail() {
       <Z.RightSection>
         <Z.Header>
           <Z.BackButton>
-            <img src={backbutton} alt='뒤로가기' />
+            <img src={backbutton} alt='뒤로가기' style={{ width: '50px', height: '50px' }} />
           </Z.BackButton>
           <Z.LogoutButton>
             로그아웃

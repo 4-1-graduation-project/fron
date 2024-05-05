@@ -12,7 +12,7 @@ export default function Login() {
     return (
         <div style={{ display: 'flex', flexDirection: 'row' , overflow: 'hidden'}}>
             <S.LeftSection>
-                <img src={login} alt='로그인배경사진' style={{width: '100%', height: '40%'}}/>
+                <img src={login} alt='로그인배경사진' style={{width: '100%', height: '100%'}}/>
             </S.LeftSection>
             <S.RightSection>
                 <S.Container>

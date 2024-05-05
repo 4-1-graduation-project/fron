@@ -16,14 +16,14 @@ export default function Precipitation() {
                 <SideMenu />
             </Z.LeftSection>
             <Z.RightSection>
-                <Z.Header>
-                    <Z.BackButton onClick={() => handleMenuClick('/adminMain')}>
-                        <img src={backbutton} alt='뒤로가기' style={{width: '50px', height:'50px'}} />
-                    </Z.BackButton>
+                <Z.AmdinHeader>
+                    <Z.PageTitle>
+                        Review 3
+                    </Z.PageTitle>
                     <Z.LogoutButton>
-                        로그아웃
+                        관리자님 환영합니다.
                     </Z.LogoutButton>
-                </Z.Header>
+                </Z.AmdinHeader>
                 <Z.MainContainer>
                     <PrecipitationList />
                 </Z.MainContainer>

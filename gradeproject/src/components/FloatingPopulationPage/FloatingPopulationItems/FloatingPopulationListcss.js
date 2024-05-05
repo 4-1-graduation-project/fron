@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DateField = styled.div`
     margin-left: 5px;
-    width: 18%;
+    width: 22%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -11,6 +11,12 @@ export const DateField = styled.div`
 
 export const ReportDate = styled(DateField)`
     width: 20%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    font-size: 14px;
 `;
 
 export const UserNameField = styled.div`
@@ -22,11 +28,17 @@ export const UserNameField = styled.div`
 `;
 
 export const ReportName = styled(UserNameField)`
-    width: 15%;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    font-size: 14px;
 `;
 
 export const TitleField = styled.div`
-    width: 18%;
+    width: 23%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -34,5 +46,5 @@ export const TitleField = styled.div`
 `;
 
 export const ReportTitle = styled(TitleField)`
-    width: 25%;
+    width: 40%;
 `;

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import * as J from "../AdminMainCss";
 import { useNavigate } from 'react-router-dom';
+import Rate1 from "../../../assets/Rate1.png";
+import Rate2 from "../../../assets/Rate2.png";
+import Rate3 from "../../../assets/Rate3.png";
+import left from "../../../assets/left.png";
+import right from "../../../assets/right.png";
+
 
 export default function AiSettings() {
     const [selectedModel, setSelectedModel] = useState("");
@@ -12,6 +18,27 @@ export default function AiSettings() {
         navigate(url);
 
     };
+
+    const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 인덱스
+    const images = [Rate1, Rate2, Rate3]; // 이미지 배열
+
+    // 다음 슬라이드로 이동하는 함수
+    const nextSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    };
+
+    // 이전 슬라이드로 이동하는 함수
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    };
+
+    const imagesData = [
+        { image: Rate1, title: "ROC_AUC" },
+        { image: Rate2, title: "Loss" },
+        { image: Rate3, title: "Accuracy" },
+    ];
+
+    {/* 
     useEffect(() => {
         fetch('http://localhost:60004/aiSettings/Data.json')
             .then(response => response.json())
@@ -22,6 +49,7 @@ export default function AiSettings() {
             })
             .catch(error => console.error('Error fetching data:', error));
     }, []);
+    */}
 
     return (
         <J.AiSettingContainer>
@@ -29,16 +57,21 @@ export default function AiSettings() {
                 <J.SettingBoxTitle>AI 관리</J.SettingBoxTitle>
                 <J.SettingBoxSubTitle onClick={() => handleMenuClick('/aiSetting')}>더보기</J.SettingBoxSubTitle>
             </J.SettingBoxHeader>
-            <J.TextContainer>
-                <J.SelectedTitle>현재 선택된 모델: {selectedModel}</J.SelectedTitle>
-                <J.UsedDateSetTitle>사용된 데이터 세트:</J.UsedDateSetTitle>
-                <J.AiSettingsList>
-                    {usedDataset.map((data, index) => (
-                        <J.AiSettingsItems key={index}>{data}</J.AiSettingsItems>
-                    ))}
-                </J.AiSettingsList>
-                <J.UpdatedDateTitle>마지막 업데이트 날짜: {lastUpdatedDate}</J.UpdatedDateTitle>
-            </J.TextContainer>
+            <J.TextBox>
+                 Model1
+            </J.TextBox>
+            <J.SlideBox>
+                <J.SlideButton onClick={prevSlide}>
+                    <img src={left} alt='왼쪽' style={{ width: '10px', height: '18px' }} />
+                </J.SlideButton>
+                <div style={{display:'flex', flexDirection: 'column', width:  '100%'}}>
+                    <J.SlideImage src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
+                    <J.SlideTitle>{imagesData[currentIndex].title}</J.SlideTitle>
+                </div>
+                <J.SlideButton onClick={nextSlide}>
+                    <img src={right} alt='오른쪽' style={{ width: '10px', height: '18px' }} />
+                </J.SlideButton>
+            </J.SlideBox>
         </J.AiSettingContainer>
     );
 }

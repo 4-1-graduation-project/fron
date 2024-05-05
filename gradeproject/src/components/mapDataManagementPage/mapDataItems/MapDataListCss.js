@@ -2,20 +2,18 @@ import styled from "styled-components";
 
 export const AddBox = styled.div`
     width: 12%;
-    height: 7%;
+    height: 110%;
     border: none;
     text-align: center;
     display : flex;
     justify-content: center;
     align-items : center;
-    margin: 0 auto;
     border-radius: 10px;
     color: white;
-    background-color: #152DFF;
-    margin-top: 20px;
-    font-weight: bold;
-    background-color: rgba( 100, 128, 255, 0.6 );
+    background-color: #3CA0E1;  
     cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
 `;
 
 export const Popup = styled.div`
@@ -46,9 +44,23 @@ export const Title = styled.div`
 `;
 
 
+export const flowTitle = styled.div`
+    width: 100%;
+    height: 50%;
+    color: white;
+    background-color: black;
+    text-align: center;
+    display : flex;
+    justify-content: space-evenly;
+    align-items : center;
+    font-size: 20px;
+    font-weight: bold;
+
+`;
+
 export const InputBox = styled.div`
     width: 40%;
-    height: 30%;
+    height: 35%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -62,16 +74,24 @@ export const SubTitle = styled.div`
     margin-bottom: 5px;
 `;
 
+export const MiddleTitle = styled.div`
+    width: 50%;
+    height: 25%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+`;
+
 
 export const Input = styled.input`
     width: 70%;
-    height: 50%;
+    height: 55%;
     border-radius: 20px;
 `;
 
 export const ButtonBox = styled.div`
-    height: 15%;
-    padding-bottom: 10px;
+    margin-top: 30px;
+    height: 10%;
 `;
 
 export const Button = styled.button`

@@ -16,7 +16,7 @@ export default function MemberList() {
       try {
         const accessToken = localStorage.getItem('accessToken');
         //http://ceprj.gachon.ac.kr:60004/src/admins/reports
-        const response = await fetch('http://localhost:60004/userReport/Data.json', {
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/reports', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -63,15 +63,15 @@ export default function MemberList() {
   const filteredreports = reports.filter(report => {
     // 선택된 옵션에 따라 검색 조건 변경
     switch (searchOption) {
-      case 'title':
-        return report.title.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'author':
-        return report.author.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'date':
+      case 'placed':
+        return report.placed.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'userName':
+        return report.userName.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'reportTime':
         // 수정된 부분: member.date 대신 member.date.toLowerCase() 호출
-        return report.date.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'content':
-        return report.content.toLowerCase().includes(searchTerm.toLowerCase());
+        return report.reportTime.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'details':
+        return report.details.toLowerCase().includes(searchTerm.toLowerCase());
       default:
         return true;
     }
@@ -92,10 +92,10 @@ export default function MemberList() {
             />
             {/* 검색 옵션 드롭다운 */}
             <select value={searchOption} onChange={handleOptionChange}>
-              <option value="title">제목</option>
-              <option value="author">회원 이름</option>
-              <option value="date">날짜</option>
-              <option value="content">내용</option>
+              <option value="placed">장소</option>
+              <option value="userName">회원 이름</option>
+              <option value="reportTime">날짜</option>
+              <option value="details">내용</option>
             </select>
           </A.SearchBox>
         </A.Title>
@@ -114,16 +114,11 @@ export default function MemberList() {
               style={{ textDecoration: "none", height: '50px' }}
             >
               <A.MemberItem>
-                <S.ReportDate>{report.date}</S.ReportDate>
-                <S.ReportName>{report.author}</S.ReportName>
-                <S.ReportTitle>{report.title}</S.ReportTitle>
-                <S.ReportContent>{report.content}</S.ReportContent>
-                {/* 
                 <S.ReportDate>{report.reportTime}</S.ReportDate>
                 <S.ReportName>{report.userName}</S.ReportName>
                 <S.ReportTitle>{report.placed}</S.ReportTitle>
                 <S.ReportContent>{report.details}</S.ReportContent>
-                */}
+
               </A.MemberItem>
             </Link>
           ))}

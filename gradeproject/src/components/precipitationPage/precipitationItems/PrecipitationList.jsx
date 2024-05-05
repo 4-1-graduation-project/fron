@@ -60,10 +60,6 @@ export default function PrecipitationList() {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    useEffect(() => {
-        document.body.style = `overflow: hidden`;
-        return () => document.body.style = `overflow: auto`
-    }, [])
 
     //강수량 데이터 삭제하는 로직
     const handleDelete = (index) => {
@@ -133,57 +129,62 @@ export default function PrecipitationList() {
     };
 
     return (
-        <A.Container>
+        <D.Container>
             <A.Box>
                 <A.Title>
-                    <div>강수량 데이터 관리</div>
                     {/* 검색 창 */}
                     <A.SearchBox>
-                        <A.Input
-                            type="text"
-                            placeholder="검색어를 입력하세요"
-                            value={searchTerm}
-                            onChange={handleSearch}
-                        />
-                        {/* 검색 옵션 드롭다운 */}
-                        <select value={searchOption} onChange={handleOptionChange}>
-                            <option value="date">날짜</option>
-                            <option value="rainfallAmount">강수량</option>
-                            <option value="region">지역</option>
-
-                        </select>
+                        <div style={{ gap: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                            <div>
+                                <A.Input
+                                    type="text"
+                                    placeholder="검색어를 입력하세요"
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                            {/* 검색 옵션 드롭다운 */}
+                            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center', marginTop: '15px' }}>
+                                <option value="date">날짜</option>
+                                <option value="rainfallAmount">강수량</option>
+                                <option value="region">지역</option>
+                            </select>
+                        </div>
+                        <Z.AddBox onClick={togglePopup}>강수량 추가하기</Z.AddBox>
                     </A.SearchBox>
                 </A.Title>
                 <A.FieldContainer>
-                    <D.DateField>날짜</D.DateField>
-                    <K.UserNameField>강수량(mm)</K.UserNameField>
-                    <K.TitleField>지역</K.TitleField>
+                    <div  style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
+                        <D.DateField>날짜</D.DateField>
+                        <K.UserNameField>강수량(mm)</K.UserNameField>
+                        <K.TitleField>지역</K.TitleField>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                        <A.PaginationBox>
+                            {[...Array(Math.ceil(filteredPrecipitations.length / postsPerPage)).keys()].map((pageNumber) => (
+                                <A.PageNumber
+                                    key={pageNumber}
+                                    onClick={() => paginate(pageNumber + 1)}
+                                >
+                                    {pageNumber + 1}
+                                </A.PageNumber>
+                            ))}
+                        </A.PaginationBox>
+                    </div>
                 </A.FieldContainer>
                 <A.MemberContainer>
                     {filteredPrecipitations.slice(indexOfFirstPost, indexOfLastPost).map((precipitation, index) => (
-                        <A.MemberItem>
+                        <D.MemberItem>
                             <K.ReportDate>{precipitation.date}</K.ReportDate>
                             <K.ReportName>{precipitation.rainfallAmount}</K.ReportName>
                             <D.ReportTitle>{precipitation.region}</D.ReportTitle>
                             <button onClick={() => handleDelete(index)}>X</button>
-                        </A.MemberItem>
+                        </D.MemberItem>
                     ))}
                 </A.MemberContainer>
-                <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                    <A.PaginationBox>
-                        {[...Array(Math.ceil(filteredPrecipitations.length / postsPerPage)).keys()].map((pageNumber) => (
-                            <A.PageNumber
-                                key={pageNumber}
-                                onClick={() => paginate(pageNumber + 1)}
-                            >
-                                {pageNumber + 1}
-                            </A.PageNumber>
-                        ))}
-                    </A.PaginationBox>
-                    <Z.AddBox onClick={togglePopup}>강수량 추가하기</Z.AddBox>
-                </div>
 
-                {/* CCTV 데이터 추가 팝업 */}
+
+                {/* 강수량 데이터 추가 팝업 */}
                 {isPopupOpen && (
                     <Modal
                         isOpen={isPopupOpen}
@@ -210,14 +211,12 @@ export default function PrecipitationList() {
                                     <Z.Input type="text" name="region" placeholder="강수량" value={newPrecipitationsData.region} onChange={handleInputChange} />
                                 </Z.InputBox>
                             </div>
-                            <Z.ButtonBox>
-                                <Z.Button onClick={addPrecipitation}>추가</Z.Button>
-                            </Z.ButtonBox>
+
                         </Z.Popup>
                     </Modal>
                 )}
             </A.Box>
-        </A.Container>
+        </D.Container>
     );
 }
 

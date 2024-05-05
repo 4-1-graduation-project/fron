@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const LeftSection = styled.div`
     width: 20%;
@@ -23,28 +23,43 @@ export const Header = styled.div`
 
 export const AmdinHeader = styled.div`
     width: 100%;
-    height: 10%;
+    height: 7%;
+    display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     
 `;
 
 export const LogoutButton = styled.div`
-    width: 10%;
+    width: 95%;
     height: 30px;
-    border: 2px solid black;
-    border-radius: 20px;
+    text-align: center;
+    display : flex;
+    justify-content: right;
+    align-items : center;
+    float: right;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+`;
+
+
+export const PageTitle = styled.div`
+    width: 15%;
+    height: 30px;
     text-align: center;
     display : flex;
     justify-content: center;
     align-items : center;
     float: right;
-    margin-top: 20px;
-    margin-right: 10px;
-    font-size: 16px;
+    margin-top: 10px;
+    font-size: 24px;
     font-weight: bold;
-    cursor: pointer;
+    padding-left: 20px;
 `;
+
+
 export const BackButton = styled.div`
     width: 80%;
     height: 40%;
@@ -63,7 +78,6 @@ export const MainContainer = styled.div`
     grid-template-rows: 1fr 1fr;
     gap: 10px;
     margin: 10px;
-    overflow-y: hidden;
 `;
 
 export const GridItem = styled.div`
@@ -78,12 +92,13 @@ export const GridItem = styled.div`
 //================================UserReport=================================
 
 export const Container = styled.div`
-    background-color: #CBCDFF;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
     overflow: hidden;
 `;
+
+
 
 export const ReportBoxHeader = styled.div`
     width: 90%;
@@ -113,15 +128,64 @@ export const ReportBoxSubTitle = styled.div`
 `;
 
 export const ReportList = styled.div`
-    width: 90%;
+    width: 100%;
     height: 200px;
-    margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     overflow-y: auto;
+    justify-content: space-around;
+    text-align: center;
+    align-items : center;
+
     &::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+`;
+
+
+export const ReportItem = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    bottom: 10px;
+    border: 1px solid black;
+`;
+
+export const ReportItemSide = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    bottom: 10px;
+`;
+
+
+
+
+export const ReportNumber = styled.div`
+    width: 100%;
+    height: 50%;
+    position: relative;
+    top: 60px;
+    font-weight: bold;
+    font-size: 26px;
+`;
+
+export const ReportText = styled.div`
+    width: 100%;
+    height: 10%;
+`;
+
+
+export const StarBox = styled.div`
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
 `;
 
 export const ReportListItem = styled.div`
@@ -158,7 +222,6 @@ export const ReportDate = styled.div`
 //================================AiSettings=================================
 
 export const AiSettingContainer = styled.div`
-    background-color: #FFC3C3;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
@@ -170,7 +233,7 @@ export const SettingBoxHeader = styled.div`
     border-bottom: 2px solid black;
     display: flex;
     flex-direction: row;
-    margin: 25px;
+    margin: 25px 25px 10px 25px; 
 `;
 
 export const SettingBoxTitle = styled.div`
@@ -192,14 +255,33 @@ export const SettingBoxSubTitle = styled.div`
 `;
 
 export const TextContainer = styled.div`
-    width: 87%;
+    width: 90%;
     height: 200px;
-    margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
      
 `;
 
+export const TextBox = styled.div`
+    width: 90%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 25px;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    margin-bottom: 10px;
+`;
+
+export const SlideBox = styled.div`
+    width: 80%;
+    height: 180px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+`;
 
 export const SelectedTitle = styled.div`
     width: 80%;
@@ -246,7 +328,6 @@ export const AiSettingsItems = styled.li`
 //================================ UserRate =================================
 
 export const UserRateContainer = styled.div`
-    background-color: #edebb7;
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
@@ -287,7 +368,7 @@ export const RateAuthor = styled.div`
 //================================ DataManagement =================================
 
 export const DataManagementContainer = styled.div`
-    background-color: #a5c79f;
+    /* background-color: rgb(165, 199, 159, 0.7); */
     border: 1px solid black;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.15px 2.15px 2.8px;
@@ -302,6 +383,13 @@ export const Title = styled.div`
     line-height: 60px;
     font-size: 32px;
     font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    margin-left: 20px;
+    cursor: pointer;
 `;
 
 export const MenuBox = styled.div`
@@ -310,23 +398,83 @@ export const MenuBox = styled.div`
 `;
 
 export const Menu = styled.div`
-    width: 80%;
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    text-align: left;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(70, 70, 70, 0.8);
+    flex-direction: row;
+    gap: 5px;
+`;
+
+export const MenuTitle = styled.div`
+    width: 50%;
     height: 50px;
     border: 1px solid black;
-    margin: 0 auto;
-    border-radius: 20px;
+    display : flex;
+    align-items : center;
+    margin-top: 10px;
+    font-weight: bold;
+
+
+
+`;
+
+
+export const SelectedMenu = styled(Menu)`
+background-color: rgb(53, 126, 199, 0.2);
+    
+`;
+
+export const SlideButton = styled.button`
+    background-color: #fff;
+    border: none;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #f0f0f0;
+    }
+
+    &:first-child {
+        left: 0;
+    }
+
+    &:last-child {
+        right: 0;
+    }
+`;
+
+export const SlideImage = styled.img`
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.25);
+    }
+`;
+
+export const SlideTitle = styled.div`
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
     text-align: center;
     display : flex;
     justify-content: center;
     align-items : center;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    margin-top: 10px;
-    font-weight: bold;
-    cursor: pointer;
-`;
-
-export const SelectedMenu = styled(Menu)`
-    color : white;
-    background-color: black;
-    
+    margin-top: 5px;
 `;

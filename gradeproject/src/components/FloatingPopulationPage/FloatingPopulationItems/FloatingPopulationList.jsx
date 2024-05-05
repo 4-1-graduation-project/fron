@@ -6,17 +6,21 @@ import * as S from "../../userReportPage/userReportItems/ReportListCss";
 import * as K from "./FloatingPopulationListcss";
 import * as Z from "../../mapDataManagementPage/mapDataItems/MapDataListCss";
 
+// Set the app element for react-modal
+Modal.setAppElement('#root');
+
 export default function FloatingPopulationList() {
     const [floatingPopulations, setFloatingPopulations] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchOption, setSearchOption] = useState('autonomousDistrict'); // 기본적으로 이름으로 검색
+    const [searchOption, setSearchOption] = useState('dataGu'); // 기본적으로 자치구로 검색
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [newFloatingPopulationData, setNewFloatingPopulationData] = useState({
-        measurementTime: '',
-        autonomousDistrict: '',
-        administrativeDistrict: '',
-        numberOfVisitors: ''
+        dataDate: '',
+        dataGu: '',
+        dataDong: '',
+        dataPeople: '',
+        dataArea: ''
     });
 
     const postsPerPage = 10; // 페이지당 나타낼 게시물 수
@@ -24,7 +28,6 @@ export default function FloatingPopulationList() {
     // 현재 페이지의 첫 번째 회원의 인덱스
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
 
     // 페이지 변경
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -40,27 +43,36 @@ export default function FloatingPopulationList() {
         setCurrentPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/flowPop', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                setFloatingPopulations(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
     // 검색된 회원 필터링
     const filteredfloatingPopulations = floatingPopulations.filter(floatingPopulation => {
         // 선택된 옵션에 따라 검색 조건 변경
         switch (searchOption) {
-            case 'measurementTime':
-                return floatingPopulation.measurementTime.toLowerCase().includes(searchTerm.toLowerCase());
-            case 'autonomousDistrict':
-                return floatingPopulation.autonomousDistrict.toLowerCase().includes(searchTerm.toLowerCase());
-            case 'administrativeDistrict':
-                return floatingPopulation.administrativeDistrict.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'dataDate':
+                return floatingPopulation.dataDate.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'dataGu':
+                return floatingPopulation.dataGu.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'dataDong':
+                return floatingPopulation.dataDong.toLowerCase().includes(searchTerm.toLowerCase());
             default:
                 return true;
         }
     });
-
-    useEffect(() => {
-        fetch('http://localhost:60004/floatingPopulation/Data.json')
-            .then(response => response.json())
-            .then(data => setFloatingPopulations(data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
 
     useEffect(() => {
         document.body.style = `overflow: hidden`;
@@ -68,18 +80,40 @@ export default function FloatingPopulationList() {
     }, [])
 
     //유동인구 데이터 삭제하는 로직
-    const handleDelete = (index) => {
-        const updatedFloatingPopulations = [...floatingPopulations];
-        updatedFloatingPopulations.splice(index, 1);
-        alert('데이터가 삭제되었습니다.')
-        setFloatingPopulations(updatedFloatingPopulations);
+    const handleDelete = (dataNum) => {
+        // 헤더에 토큰 추가
+        const token = localStorage.getItem('accessToken');
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+
+        // API로 데이터 삭제 요청
+        fetch(`http://ceprj.gachon.ac.kr:60004/src/admins/flowPop/${dataNum}`, {
+            method: 'DELETE',
+            headers: headers,
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete population data');
+                }
+                // 삭제가 완료되면 alert로 알림
+                alert('데이터가 삭제되었습니다.');
+                // 삭제된 데이터를 제외한 목록으로 업데이트
+                const updatedFloatingPopulations = floatingPopulations.filter(population => population.dataNum !== dataNum);
+                setFloatingPopulations(updatedFloatingPopulations);
+            })
+            .catch(error => {
+                console.error('Error deleting population data:', error);
+                // 에러 메시지 표시
+                alert('데이터 삭제에 실패했습니다.');
+            });
     };
 
     //유동인구 추가 팝업 여는 로직
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
-
 
     //유동인구 데이터 input창 핸들러
     const handleInputChange = (e) => {
@@ -92,47 +126,47 @@ export default function FloatingPopulationList() {
 
     //유동인구 추가하는 로직
     const addFloatingPopulation = () => {
-        const updatedFloatingPopulations = [...floatingPopulations, newFloatingPopulationData];
-        setFloatingPopulations(updatedFloatingPopulations);
-        // 데이터 업데이트하기
-        saveFloatingPopulationData(updatedFloatingPopulations);
-        // 팝업 닫기
-        setIsPopupOpen(false);
-        // 인풋창 리셋
-        setNewFloatingPopulationData({
-            measurementTime: '',
-            autonomousDistrict: '',
-            administrativeDistrict: '',
-            numberOfVisitors: ''
-        });
-        // 결과보여주기
-        alert('데이터가 추가되었습니다.');
-    };
+        // 헤더에 토큰 추가
+        const token = localStorage.getItem('accessToken');
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
 
-    //유동인구 저장하는 로직
-    const saveFloatingPopulationData = (data) => {
-        // 데이터를 json꼴로 바꿔줌
-        const jsonData = JSON.stringify(data);
-
-        //어디로 추가할것인지 적는 로직
-        fetch('http://localhost:60004/MapData/floatingPopulation/Data.json', {
+        // API로 데이터 전송
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/flowPop', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: jsonData
+            headers: headers,
+            body: JSON.stringify(newFloatingPopulationData)
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Failed to save data');
+                    throw new Error('Failed to add new population data');
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('Data saved successfully:', data);
+                console.log('New population data added successfully:', data);
+                // 데이터 업데이트하기
+                const updatedFloatingPopulations = [...floatingPopulations, newFloatingPopulationData];
+                setFloatingPopulations(updatedFloatingPopulations);
+                // 팝업 닫기
+                setIsPopupOpen(false);
+                // 인풋창 리셋
+                setNewFloatingPopulationData({
+                    dataDate: '',
+                    dataGu: '',
+                    dataDong: '',
+                    dataPeople: '',
+                    dataArea: ''
+                });
+                // 결과보여주기
+                alert('데이터가 추가되었습니다.');
             })
             .catch(error => {
-                console.error('Error saving data:', error);
+                console.error('Error adding new population data:', error);
+                // 에러 메시지 표시
+                alert('데이터 추가에 실패했습니다.');
             });
     };
 
@@ -151,10 +185,9 @@ export default function FloatingPopulationList() {
                         />
                         {/* 검색 옵션 드롭다운 */}
                         <select value={searchOption} onChange={handleOptionChange}>
-                            <option value="measurementTime">측정시간</option>
-                            <option value="autonomousDistrict">자치구</option>
-                            <option value="administrativeDistrict">행정동</option>
-
+                            <option value="dataDate">측정시간</option>
+                            <option value="dataGu">자치구</option>
+                            <option value="dataDong">행정동</option>
                         </select>
                     </A.SearchBox>
                 </A.Title>
@@ -162,16 +195,18 @@ export default function FloatingPopulationList() {
                     <K.DateField>측정시간</K.DateField>
                     <K.UserNameField>자치구</K.UserNameField>
                     <K.TitleField>행정동</K.TitleField>
+                    <S.AreaField>지역</S.AreaField>
                     <S.ContentField>방문자수</S.ContentField>
                 </A.FieldContainer>
                 <A.MemberContainer>
                     {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
-                        <A.MemberItem>
-                            <K.ReportDate>{floatingPopulation.measurementTime}</K.ReportDate>
-                            <K.ReportName>{floatingPopulation.autonomousDistrict}</K.ReportName>
-                            <K.ReportTitle>{floatingPopulation.administrativeDistrict}</K.ReportTitle>
-                            <S.ReportContent>{floatingPopulation.numberOfVisitors}</S.ReportContent>
-                            <button onClick={() => handleDelete(index)}>X</button>
+                        <A.MemberItem key={index}>
+                            <K.ReportDate>{floatingPopulation.dataDate}</K.ReportDate>
+                            <K.ReportName>{floatingPopulation.dataGu}</K.ReportName>
+                            <K.ReportTitle>{floatingPopulation.dataDong}</K.ReportTitle>
+                            <S.ReportContent>{floatingPopulation.dataArea}</S.ReportContent>
+                            <S.ReportContent>{floatingPopulation.dataPeople}</S.ReportContent>
+                            <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
                         </A.MemberItem>
                     ))}
                 </A.MemberContainer>
@@ -199,27 +234,31 @@ export default function FloatingPopulationList() {
                     >
                         <Z.Popup>
                             <Z.Title>유동인구 추가하기</Z.Title>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '40px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px', marginLeft: '50px', gap:'10px' }}>
                                 <Z.InputBox>
                                     <Z.SubTitle>
                                         측정시간
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="measurementTime" placeholder="측정시간" value={newFloatingPopulationData.measurementTime} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="dataDate" placeholder="측정시간" value={newFloatingPopulationData.dataDate} onChange={handleInputChange} />
                                     <Z.SubTitle>
                                         행정동
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="autonomousDistrict" placeholder="행정동" value={newFloatingPopulationData.autonomousDistrict} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="dataDong" placeholder="행정동" value={newFloatingPopulationData.dataDong} onChange={handleInputChange} />
                                 </Z.InputBox>
                                 <Z.InputBox>
                                     <Z.SubTitle>
                                         자치구
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="administrativeDistrict" placeholder="자치구" value={newFloatingPopulationData.administrativeDistrict} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="dataGu" placeholder="자치구" value={newFloatingPopulationData.dataGu} onChange={handleInputChange} />
                                     <Z.SubTitle>
                                         방문자수
                                     </Z.SubTitle>
-                                    <Z.Input type="text" name="numberOfVisitors" placeholder="방문자수" value={newFloatingPopulationData.numberOfVisitors} onChange={handleInputChange} />
+                                    <Z.Input type="text" name="dataPeople" placeholder="숫자로 입력하세요" value={newFloatingPopulationData.dataPeople} onChange={handleInputChange} />
                                 </Z.InputBox>
+                                <Z.MiddleTitle>
+                                    <div>지역명</div>
+                                    <Z.Input type="text" name="dataArea" placeholder="지역" value={newFloatingPopulationData.dataArea} onChange={handleInputChange} />
+                                </Z.MiddleTitle>
                             </div>
                             <Z.ButtonBox>
                                 <Z.Button onClick={addFloatingPopulation}>추가</Z.Button>
