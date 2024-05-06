@@ -8,15 +8,14 @@ export default function MemberList() {
   const [members, setMembers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchOption, setSearchOption] = useState('name'); // 기본적으로 이름으로 검색
+  const [searchOption, setSearchOption] = useState('userName'); // 기본적으로 이름으로 검색
   const [selectedMember, setSelectedMember] = useState(null); // 선택된 회원
 
   const postsPerPage = 10; // 페이지당 나타낼 게시물 수
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
-    //http://ceprj.gachon.ac.kr:60004/src/admins/users
-    fetch('http://localhost:60004/memberList/Data.json', {
+    fetch('http://ceprj.gachon.ac.kr:60004/src/admins/users', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -48,6 +47,7 @@ export default function MemberList() {
   // 옵션 변경 함수
   const handleOptionChange = (event) => {
     setSearchOption(event.target.value);
+    setSearchTerm(''); // 검색 옵션 변경 시 검색어 초기화
   };
 
   // 회원 클릭 시 선택된 회원 설정
@@ -90,7 +90,7 @@ export default function MemberList() {
               onChange={handleSearch}
             />
             {/* 검색 옵션 드롭다운 */}
-            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
               <option value="userName">이름</option>
               <option value="userId">아이디</option>
               <option value="userAddress">주소</option>
@@ -121,10 +121,10 @@ export default function MemberList() {
             <div key={indexOfFirstPost + index + 1} style={{ textDecoration: "none" }}>
               <S.MemberItem onClick={() => handleMemberClick(member)}>
                 <S.MemberNo>{indexOfFirstPost + index + 1}</S.MemberNo>
-                <S.MemberName>{member.name}</S.MemberName>
-                <S.MemberId>{member.Id}</S.MemberId>
-                <S.MemberGender>{member.gender}</S.MemberGender>
-                <S.MemberAddress>{member.address}</S.MemberAddress>
+                <S.MemberName>{member.userName}</S.MemberName>
+                <S.MemberId>{member.userId}</S.MemberId>
+                <S.MemberGender>{member.userSex}</S.MemberGender>
+                <S.MemberAddress>{member.userAddress}</S.MemberAddress>
               </S.MemberItem>
               {/* 드롭다운 메뉴 */}
               {selectedMember === member && (

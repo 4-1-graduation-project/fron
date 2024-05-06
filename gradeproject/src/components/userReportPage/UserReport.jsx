@@ -18,11 +18,8 @@ export default function UserReport() {
             </A.LeftSection>
             <A.RightSection>
                 <A.Header>
-                    <A.BackButton onClick={() => handleMenuClick('/adminMain')}>
-                        <img src={backbutton} alt='뒤로가기' style={{width: '50px', height:'50px'}}/>
-                    </A.BackButton>
                     <A.LogoutButton>
-                        로그아웃
+                        관리자님 환영합니다.
                     </A.LogoutButton>
                 </A.Header>
                 <A.MainContainer>

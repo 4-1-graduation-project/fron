@@ -395,7 +395,7 @@ export const SearchMapBox = styled.div`
 `;
 
 export const Input = styled.input`
-    width: 100%;
+    width: 20%;
     height: 90%;
     border: 1px solid grey;
     border-radius: 5px;

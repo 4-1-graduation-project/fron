@@ -1,98 +1,98 @@
 [
   {
-    "title": "문의제목",
-    "author": "Author 1",
-    "date": "2024-04-10",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 1",
+    "reportTime": "2024-05-04 15:11:40",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "길찾기에러",
-    "author": "Author 2",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 2",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "경찰신고",
-    "author": "Author 3",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 3",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "사용평가신고",
-    "author": "Author 4",
-    "date": "2024-04-10",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 4",
+    "reportTime": "2024-05-04 15:11:40",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "버벅거림",
-    "author": "Author 5",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 5",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "오류",
-    "author": "Author 6",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 6",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "길찾기가잘안돼요",
-    "author": "Author 7",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 7",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "Ai길찾기",
-    "author": "Author 8",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 8",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "문의제목",
-    "author": "Author 1",
-    "date": "2024-04-10",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 1",
+    "reportTime": "2024-05-04 15:11:40",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "길찾기에러",
-    "author": "Author 2",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 2",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "경찰신고",
-    "author": "Author 3",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 3",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "사용평가신고",
-    "author": "Author 4",
-    "date": "2024-04-10",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 4",
+    "reportTime": "2024-05-04 15:11:40",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "버벅거림",
-    "author": "Author 5",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 5",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "오류",
-    "author": "Author 6",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 6",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "길찾기가잘안돼요",
-    "author": "Author 7",
-    "date": "2024-04-09",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 7",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   },
   {
-    "title": "Ai길찾기",
-    "author": "Author 8",
-    "date": "2024-04-08",
-    "content": "문의하는내용입니다."
+    "reportPlaced": "경상남도 거창시",
+    "userName": "userName 8",
+    "reportTime": "2024-05-04 15:09:59",
+    "reportDegree": "매우 긴급"
   }
 ]

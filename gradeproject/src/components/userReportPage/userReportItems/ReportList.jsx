@@ -16,7 +16,7 @@ export default function MemberList() {
       try {
         const accessToken = localStorage.getItem('accessToken');
         //http://ceprj.gachon.ac.kr:60004/src/admins/reports
-        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/reports', {
+        const response = await fetch('http://localhost:60004/userReport/Data.json', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -76,12 +76,12 @@ export default function MemberList() {
         return true;
     }
   });
+  
 
   return (
     <A.Container>
       <A.Box>
         <A.Title>
-          <div>신고 관리</div>
           {/* 검색 창 */}
           <A.SearchBox>
             <A.Input
@@ -91,12 +91,23 @@ export default function MemberList() {
               onChange={handleSearch}
             />
             {/* 검색 옵션 드롭다운 */}
-            <select value={searchOption} onChange={handleOptionChange}>
+            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
               <option value="placed">장소</option>
               <option value="userName">회원 이름</option>
               <option value="reportTime">날짜</option>
               <option value="details">내용</option>
             </select>
+            {/* 페이지네이션 */}
+            <A.PaginationBox>
+              {[...Array(Math.ceil(filteredreports.length / postsPerPage)).keys()].map((pageNumber) => (
+                <A.PageNumber
+                  key={pageNumber}
+                  onClick={() => paginate(pageNumber + 1)}
+                >
+                  {pageNumber + 1}
+                </A.PageNumber>
+              ))}
+            </A.PaginationBox>
           </A.SearchBox>
         </A.Title>
 
@@ -105,6 +116,7 @@ export default function MemberList() {
           <S.UserNameField>회원 이름</S.UserNameField>
           <S.TitleField>장소</S.TitleField>
           <S.ContentField>문의 내용</S.ContentField>
+
         </A.FieldContainer>
         <A.MemberContainer>
           {filteredreports.slice(indexOfFirstPost, indexOfLastPost).map((report, index) => (
@@ -114,26 +126,19 @@ export default function MemberList() {
               style={{ textDecoration: "none", height: '50px' }}
             >
               <A.MemberItem>
-                <S.ReportDate>{report.reportTime}</S.ReportDate>
+                {/* <S.ReportDate>{report.reportTime}</S.ReportDate>
                 <S.ReportName>{report.userName}</S.ReportName>
                 <S.ReportTitle>{report.placed}</S.ReportTitle>
-                <S.ReportContent>{report.details}</S.ReportContent>
-
+                <S.ReportContent>{report.details}</S.ReportContent> */}
+                <S.ReportDate>{report.reportTime}</S.ReportDate>
+                <S.ReportName>{report.userName}</S.ReportName>
+                <S.ReportTitle>{report.reportPlaced}</S.ReportTitle>
+                <S.ReportContent>{report.reportDegree}</S.ReportContent>
               </A.MemberItem>
             </Link>
           ))}
         </A.MemberContainer>
-        {/* 페이지네이션 */}
-        <A.PaginationBox>
-          {[...Array(Math.ceil(filteredreports.length / postsPerPage)).keys()].map((pageNumber) => (
-            <A.PageNumber
-              key={pageNumber}
-              onClick={() => paginate(pageNumber + 1)}
-            >
-              {pageNumber + 1}
-            </A.PageNumber>
-          ))}
-        </A.PaginationBox>
+
       </A.Box>
     </A.Container>
   );
