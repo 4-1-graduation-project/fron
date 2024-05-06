@@ -33,7 +33,7 @@ export default function AdminMain() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', height: '700px' }}>
       <R.LeftSection>
         <SideMenu />
       </R.LeftSection>

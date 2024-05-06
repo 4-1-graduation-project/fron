@@ -21,6 +21,16 @@ export const Header = styled.div`
 
 `;
 
+export const ReportDetailHeader = styled.div`
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 auto;
+`;
+
+
 export const AmdinHeader = styled.div`
     width: 100%;
     height: 7%;
@@ -458,6 +468,7 @@ export const SlideButton = styled.button`
 
 export const SlideImage = styled.img`
     width: 100%;
+    height: 100%;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DateField = styled.div`
     margin-left: 5px;
-    width: 12%;
+    width: 21%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -10,7 +10,7 @@ export const DateField = styled.div`
 `;
 
 export const UserNameField = styled.div`
-    width: 16%;
+    width: 23%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -18,7 +18,7 @@ export const UserNameField = styled.div`
 `;
 
 export const TitleField = styled.div`
-    width: 20%;
+    width: 36%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -43,7 +43,7 @@ export const TitleTwoField = styled.div`
 `;
 
 export const ContentField = styled.div`
-    width: 32%;
+    width: 10%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -70,15 +70,15 @@ export const MemberItem = styled.div`
 `;
 
 export const ReportDate = styled(DateField)`
-    width: 12%;
+    width: 20%;
 `;
 
 export const ReportName = styled(UserNameField)`
-    width: 15%;
+    width: 20%;
 `;
 
 export const ReportTitle = styled(TitleField)`
-    width: 20%;
+    width: 40%;
 `;
 
 export const PoliceTitle = styled(TitleField)`
@@ -104,7 +104,7 @@ export const emergencyBelladdress = styled(TitleField)`
 `;
 
 export const ReportContent = styled(ContentField)`
-    width: 48%;
+    width: 10%;
 `;
 
 

@@ -21,6 +21,14 @@ export const Container = styled.div`
 
 `;
 
+export const NoScrollContainer = styled.div`
+    width: 1250px;
+    height: 600px;
+    border-radius: 15px;
+
+`;
+
+
 export const DropDownContainer = styled.div`
     width: 95%;
     height: 200px;
@@ -48,6 +56,8 @@ export const Box = styled.div`
     margin: 20px;
 
 `;
+
+
 
 export const FieldContainer = styled.div`
     width: 96%;
@@ -183,15 +193,33 @@ export const MemberGender = styled(GenderField)`
 
 export const MemberListContainer = styled.div`
     width: 95%;
-    height: 70%;
+    height: 100%;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     overflow: auto;
+    gap: 20px;
     &::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
 `;
+
+
+export const MapBox = styled.div`
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+`;
+
+export const MapContainer = styled.div`
+    width: 100%;
+    height: 500px; /* 수정 가능: 지도의 높이를 조절할 수 있습니다. */
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+`;
+
 
 export const FirstRow = styled.div`
     width: 100%;
@@ -412,5 +440,18 @@ export const memberInput = styled.input`
     border: 1px solid #46AAEB;
 `;
 
+export const ReportItem = styled.div`
+  margin: 15px 0px 10px 30px;
+`;
 
+export const ReportItemTitle = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: #333; /* 적당한 색상으로 수정하세요. */
+`;
 
+export const ReportItemContent = styled.div`
+  font-size: 16px;
+  color: #666; /* 적당한 색상으로 수정하세요. */
+  margin-top: 5px;
+`;

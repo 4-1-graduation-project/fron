@@ -7,7 +7,7 @@ export default function MemberList() {
   const [reports, setReports] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchOption, setSearchOption] = useState('author'); // 기본적으로 이름으로 검색
+  const [searchOption, setSearchOption] = useState('reportPlaced'); // 기본적으로 이름으로 검색
 
   const postsPerPage = 10; // 페이지당 나타낼 게시물 수
 
@@ -63,15 +63,15 @@ export default function MemberList() {
   const filteredreports = reports.filter(report => {
     // 선택된 옵션에 따라 검색 조건 변경
     switch (searchOption) {
-      case 'placed':
-        return report.placed.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'reportPlaced':
+        return report.reportPlaced.toLowerCase().includes(searchTerm.toLowerCase());
       case 'userName':
         return report.userName.toLowerCase().includes(searchTerm.toLowerCase());
       case 'reportTime':
         // 수정된 부분: member.date 대신 member.date.toLowerCase() 호출
         return report.reportTime.toLowerCase().includes(searchTerm.toLowerCase());
-      case 'details':
-        return report.details.toLowerCase().includes(searchTerm.toLowerCase());
+      case 'reportDegree':
+        return report.reportDegree.toLowerCase().includes(searchTerm.toLowerCase());
       default:
         return true;
     }
@@ -92,10 +92,10 @@ export default function MemberList() {
             />
             {/* 검색 옵션 드롭다운 */}
             <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-              <option value="placed">장소</option>
+              <option value="reportPlaced">장소</option>
               <option value="userName">회원 이름</option>
               <option value="reportTime">날짜</option>
-              <option value="details">내용</option>
+              <option value="reportDegree">위험정도</option>
             </select>
             {/* 페이지네이션 */}
             <A.PaginationBox>
@@ -115,7 +115,7 @@ export default function MemberList() {
           <S.DateField>문의날짜</S.DateField>
           <S.UserNameField>회원 이름</S.UserNameField>
           <S.TitleField>장소</S.TitleField>
-          <S.ContentField>문의 내용</S.ContentField>
+          <S.ContentField>위험정도</S.ContentField>
 
         </A.FieldContainer>
         <A.MemberContainer>

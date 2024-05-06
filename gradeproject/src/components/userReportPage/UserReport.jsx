@@ -12,7 +12,7 @@ export default function UserReport() {
 
     };
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row' , height: '700px' }}>
             <A.LeftSection>
                 <SideMenu />
             </A.LeftSection>
