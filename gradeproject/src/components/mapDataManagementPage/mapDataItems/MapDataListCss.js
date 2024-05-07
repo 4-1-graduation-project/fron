@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AddBox = styled.div`
     width: 12%;
-    height: 110%;
+    height: 50px;
     border: none;
     text-align: center;
     display : flex;
@@ -14,7 +14,37 @@ export const AddBox = styled.div`
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
+    
 `;
+
+export const RegisterBox = styled.div`
+    width: 10%;
+    height: 40px;
+    border: none;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    border-radius: 5px;
+    color: white;
+    background-color: #dcdcdc;  
+    cursor: pointer;
+    font-size: 14px;
+    
+`;
+
+
+export const ButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    height: 100px;
+    gap: 50px;
+`;
+
 
 export const Popup = styled.div`
     width: 100%;
@@ -26,7 +56,6 @@ export const Popup = styled.div`
 export const PopupContent = styled.div`
     width: 100%;
     height: 30%;
-    border: 1px solid red;
 `;
 
 export const Title = styled.div`
@@ -42,6 +71,20 @@ export const Title = styled.div`
     font-weight: bold;
 
 `;
+
+export const RegisterTitle = styled.div`
+    height: 50px;
+    color: white;
+    background-color: black;
+    text-align: center;
+    display : flex;
+    justify-content: space-evenly;
+    align-items : center;
+    font-size: 20px;
+    font-weight: bold;
+
+`;
+
 
 
 export const flowTitle = styled.div`
@@ -93,6 +136,7 @@ export const ButtonBox = styled.div`
     margin-top: 30px;
     height: 10%;
 `;
+
 
 export const Button = styled.button`
     width: 20%;

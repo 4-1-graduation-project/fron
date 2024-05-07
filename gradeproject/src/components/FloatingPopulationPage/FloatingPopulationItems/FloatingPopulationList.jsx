@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import * as A from "../../userManagementPage/userManagementItems/MemberListCss";
@@ -10,6 +11,12 @@ import * as Z from "../../mapDataManagementPage/mapDataItems/MapDataListCss";
 Modal.setAppElement('#root');
 
 export default function FloatingPopulationList() {
+    const navigate = useNavigate();
+
+    const handleMenuClick = (url, menuName) => {
+        navigate(url);
+
+    };
     const [floatingPopulations, setFloatingPopulations] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
@@ -173,24 +180,39 @@ export default function FloatingPopulationList() {
     return (
         <A.Container>
             <A.Box>
-                <A.Title>
-                    <div>유동인구 데이터 관리</div>
+                <A.TitleBox>
                     {/* 검색 창 */}
-                    <A.SearchBox>
-                        <A.Input
-                            type="text"
-                            placeholder="검색어를 입력하세요"
-                            value={searchTerm}
-                            onChange={handleSearch}
-                        />
-                        {/* 검색 옵션 드롭다운 */}
-                        <select value={searchOption} onChange={handleOptionChange}>
-                            <option value="dataDate">측정시간</option>
-                            <option value="dataGu">자치구</option>
-                            <option value="dataDong">행정동</option>
-                        </select>
-                    </A.SearchBox>
-                </A.Title>
+                    <A.pageBox>
+                        <A.SearchMapBox>
+                            <A.ReviewInput
+                                type="text"
+                                placeholder="검색어를 입력하세요"
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                            {/* 검색 옵션 드롭다운 */}
+                            <select value={searchOption} onChange={handleOptionChange}>
+                                <option value="dataDate">측정시간</option>
+                                <option value="dataGu">자치구</option>
+                                <option value="dataDong">행정동</option>
+                            </select>
+                        </A.SearchMapBox>
+                        {/* 페이지네이션 */}
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                            <A.PaginationBox>
+                                {[...Array(Math.ceil(filteredfloatingPopulations.length / postsPerPage)).keys()].map((pageNumber) => (
+                                    <A.PageNumber
+                                        key={pageNumber}
+                                        onClick={() => paginate(pageNumber + 1)}
+                                    >
+                                        {pageNumber + 1}
+                                    </A.PageNumber>
+                                ))}
+                            </A.PaginationBox>
+                            {/* <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox> */}
+                        </div>
+                    </A.pageBox>
+                </A.TitleBox>
                 <A.FieldContainer>
                     <K.DateField>측정시간</K.DateField>
                     <K.UserNameField>자치구</K.UserNameField>
@@ -209,22 +231,12 @@ export default function FloatingPopulationList() {
                             <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
                         </A.MemberItem>
                     ))}
-                </A.MemberContainer>
-                {/* 페이지네이션 */}
-                <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                    <A.PaginationBox>
-                        {[...Array(Math.ceil(filteredfloatingPopulations.length / postsPerPage)).keys()].map((pageNumber) => (
-                            <A.PageNumber
-                                key={pageNumber}
-                                onClick={() => paginate(pageNumber + 1)}
-                            >
-                                {pageNumber + 1}
-                            </A.PageNumber>
-                        ))}
-                    </A.PaginationBox>
-                    <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
-                </div>
 
+                </A.MemberContainer>
+                <Z.ButtonContainer>
+                    <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
+                    <Z.AddBox onClick={() => handleMenuClick('/floatingPopulationManagement/register')}>파일 업로드하기</Z.AddBox>
+                </Z.ButtonContainer>
                 {/* CCTV 데이터 추가 팝업 */}
                 {isPopupOpen && (
                     <Modal
@@ -234,7 +246,7 @@ export default function FloatingPopulationList() {
                     >
                         <Z.Popup>
                             <Z.Title>유동인구 추가하기</Z.Title>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px', marginLeft: '50px', gap:'10px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px', marginLeft: '50px', gap: '10px' }}>
                                 <Z.InputBox>
                                     <Z.SubTitle>
                                         측정시간

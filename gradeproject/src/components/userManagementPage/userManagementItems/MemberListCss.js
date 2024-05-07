@@ -107,6 +107,22 @@ export const Title = styled.div`
     margin: 0 auto;
 `;
 
+
+export const TitleBox = styled.div`
+    width: 100%;
+    height: 7%;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid grey;
+`;
+
+
+
+
+
 //===================Field=======================
 
 export const NoField = styled.div`
@@ -438,6 +454,18 @@ export const SearchBox = styled.div`
     justify-content: space-evenly;
     margin-bottom: 20px;
 `;
+
+export const pageBox = styled.div`
+    width: 100%;
+    height: 50%;
+    color: black;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+`;
+
 
 export const ReviewSearchBox = styled.div`
     width: 100%;

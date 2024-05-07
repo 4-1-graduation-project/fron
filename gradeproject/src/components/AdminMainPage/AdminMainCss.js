@@ -21,6 +21,16 @@ export const Header = styled.div`
 
 `;
 
+export const FileHeader = styled.div`
+    width: 97%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 auto;
+
+`;
+
 export const ReportDetailHeader = styled.div`
     width: 95%;
     height: 10%;
@@ -99,6 +109,15 @@ export const MainContainer = styled.div`
     gap: 10px;
     margin: 10px;
 `;
+
+export const FileContainer = styled.div`
+    width: 98%;
+    height: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+`;
+
 
 export const GridItem = styled.div`
     background-color: ${({ color }) => color};
@@ -357,7 +376,6 @@ export const UserRateContainer = styled.div`
 export const ReportStars = styled.div`
   color: gold; /* Filled star color */
   font-size: 24px; /* Adjust star size as needed */
-  border: 1px solid red;
   width: 30%;
 `;
 
@@ -410,6 +428,33 @@ export const Title = styled.div`
     align-items : center;
     margin-left: 20px;
     cursor: pointer;
+`;
+
+export const Title2 = styled.div`
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    margin-left: 20px;
+    cursor: pointer;
+`;
+
+export const RegisterTitle = styled.div`
+    width: 100%;
+    height: 10%;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display : flex;
+    flex-direction: row;
+    justify-content:space-between;
 `;
 
 export const MenuBox = styled.div`
@@ -499,3 +544,49 @@ export const SlideTitle = styled.div`
     align-items : center;
     margin-top: 5px;
 `;
+
+export const FileBox = styled.div`
+    width: 95%;
+    height: 70%;
+    border-radius: 10px;
+    border: 1px solid #c8c8c8;
+    margin: 0 auto;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    .shadow-6 {
+        text-align: center;
+        display : flex;
+        justify-content: center;
+        align-items : center;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+              0 2px 2px rgba(0,0,0,0.11), 
+              0 4px 4px rgba(0,0,0,0.11), 
+              0 8px 8px rgba(0,0,0,0.11), 
+              0 16px 16px rgba(0,0,0,0.11), 
+              0 32px 32px rgba(0,0,0,0.11);
+}
+
+`;
+
+export const SendButtonBox = styled.div`
+    width: 10%;
+    height: 7%;
+    background-color: #3CA0E1;
+    margin: 0 auto;
+    margin-top: 30px;
+    border: none;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    border-radius: 10px;
+    color: white;
+`;
+
+
+
+
+
+

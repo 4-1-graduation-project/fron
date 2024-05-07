@@ -11,6 +11,8 @@ import FloatingPopulationPage from "./pages/FloatingPopulationPage";
 import PrecipitationPage from './pages/PrecipitationPage';
 import AiSettingPage from "./pages/AiSettingPage";
 import EvaluationIndicatorsPage from "./pages/EvaluationIndicatorsPage"; 
+import FloatingPopulationRegisterPage from "./pages/FloatingPopulationRegisterPage";
+
 function App() {
   return (
     <div className="App" style={{ overflow: 'hidden' }}>
@@ -25,6 +27,7 @@ function App() {
         <Route path="/adminReport/:id" element={<ReportDetailPage />} />
         <Route path="/mapDataManagement" element={<MapDataManagementPage />} />
         <Route path="/floatingPopulationManagement" element={<FloatingPopulationPage />} />
+        <Route path="/floatingPopulationManagement/register" element={<FloatingPopulationRegisterPage />} />
         <Route path="/precipitationManagement" element={<PrecipitationPage />} />
         <Route path="/aiSetting" element={<AiSettingPage />} />
         <Route path="/evaluationIndicators" element={<EvaluationIndicatorsPage />} />
