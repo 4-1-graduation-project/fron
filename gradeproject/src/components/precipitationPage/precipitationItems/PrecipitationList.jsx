@@ -4,6 +4,8 @@ import * as A from "../../userManagementPage/userManagementItems/MemberListCss";
 import * as K from "../../FloatingPopulationPage/FloatingPopulationItems/FloatingPopulationListcss";
 import * as Z from "../../mapDataManagementPage/mapDataItems/MapDataListCss";
 import * as D from "./PrecipitationListcss";
+import emptystar from "../../../assets/emptystar.png";
+import fillstar from "../../../assets/fillstar.png";
 
 export default function PrecipitationList() {
     const [precipitations, serPrecipitations] = useState([]);
@@ -22,7 +24,7 @@ export default function PrecipitationList() {
 
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchOption, setSearchOption] = useState('autonomousDistrict'); // 기본적으로 이름으로 검색
+    const [searchOption, setSearchOption] = useState('user'); // 기본적으로 이름으로 검색
 
     // 페이지 변경
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -38,27 +40,29 @@ export default function PrecipitationList() {
         setCurrentPage(1); // 검색어가 변경되면 currentPage를 1로 설정하여 첫 번째 페이지로 이동
     };
 
-    // 검색된 회원 필터링
-    const filteredPrecipitations = precipitations.filter(precipitation => {
-        // 선택된 옵션에 따라 검색 조건 변경
-        switch (searchOption) {
-            case 'date':
-                return precipitation.date.toLowerCase().includes(searchTerm.toLowerCase());
-            case 'rainfallAmount':
-                return precipitation.rainfallAmount.toLowerCase().includes(searchTerm.toLowerCase());
-            case 'region':
-                return precipitation.region.toLowerCase().includes(searchTerm.toLowerCase());
-            default:
-                return true;
-        }
-    });
-
     useEffect(() => {
         fetch('http://localhost:60004/precipitation/Data.json')
             .then(response => response.json())
             .then(data => serPrecipitations(data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
+
+    // 검색된 회원 필터링
+    const filteredPrecipitations = precipitations.filter(precipitation => {
+        // 선택된 옵션에 따라 검색 조건 변경
+        switch (searchOption) {
+            case 'user':
+                return precipitation.user.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'rate':
+                return precipitation.rate.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'content':
+                return precipitation.content.toLowerCase().includes(searchTerm.toLowerCase());
+            default:
+                return true;
+        }
+    });
+
+
 
 
     //강수량 데이터 삭제하는 로직
@@ -133,31 +137,32 @@ export default function PrecipitationList() {
             <A.Box>
                 <A.Title>
                     {/* 검색 창 */}
-                    <A.SearchBox>
-                        <div style={{ gap: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                    <A.ReviewSearchBox>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
                             <div>
-                                <A.Input
+                                <A.ReviewInput
                                     type="text"
                                     placeholder="검색어를 입력하세요"
                                     value={searchTerm}
                                     onChange={handleSearch}
                                 />
                             </div>
-                            {/* 검색 옵션 드롭다운 */}
-                            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center', marginTop: '15px' }}>
-                                <option value="date">날짜</option>
-                                <option value="rainfallAmount">강수량</option>
-                                <option value="region">지역</option>
-                            </select>
+                            <div>
+                                {/* 검색 옵션 드롭다운 */}
+                                <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', outline:'none' }}>
+                                    <option value="user">사용자</option>
+                                    <option value="rate">별점</option>
+                                    <option value="content">내용</option>
+                                </select>
+                            </div>
                         </div>
-                        <Z.AddBox onClick={togglePopup}>강수량 추가하기</Z.AddBox>
-                    </A.SearchBox>
+                    </A.ReviewSearchBox>
                 </A.Title>
                 <A.FieldContainer>
-                    <div  style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
-                        <D.DateField>날짜</D.DateField>
-                        <K.UserNameField>강수량(mm)</K.UserNameField>
-                        <K.TitleField>지역</K.TitleField>
+                    <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
+                        <D.DateField>사용자</D.DateField>
+                        <K.UserNameField>별점</K.UserNameField>
+                        <K.TitleField>리뷰내용</K.TitleField>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
                         <A.PaginationBox>
@@ -175,10 +180,17 @@ export default function PrecipitationList() {
                 <A.MemberContainer>
                     {filteredPrecipitations.slice(indexOfFirstPost, indexOfLastPost).map((precipitation, index) => (
                         <D.MemberItem>
-                            <K.ReportDate>{precipitation.date}</K.ReportDate>
-                            <K.ReportName>{precipitation.rainfallAmount}</K.ReportName>
-                            <D.ReportTitle>{precipitation.region}</D.ReportTitle>
-                            <button onClick={() => handleDelete(index)}>X</button>
+                            <K.ReportUser>{precipitation.user}</K.ReportUser>
+                            <K.ReportStar>
+                                {[...Array(parseInt(precipitation.rate)).keys()].map((_, index) => (
+                                    <img src={fillstar} alt="filled star" key={index} style={{ width: '20px', height: '20px' }} />
+                                ))}
+                                {[...Array(5 - parseInt(precipitation.rate)).keys()].map((_, index) => (
+                                    <img src={emptystar} alt="empty star" key={index} style={{ width: '20px', height: '20px' }} />
+                                ))}
+                            </K.ReportStar>
+                            <D.ReportTitle>{precipitation.content}</D.ReportTitle>
+                            {/* <button onClick={() => handleDelete(index)}>X</button> */}
                         </D.MemberItem>
                     ))}
                 </A.MemberContainer>

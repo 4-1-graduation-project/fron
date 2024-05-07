@@ -1,122 +1,77 @@
 [
     {
-        "date": "2024-04-17",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
+        "user": "홍길동",
+        "rate": "5",
+        "content": "서비스가 매우 만족스러웠습니다."
     },
     {
-        "date": "2024-04-19",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
+        "user": "이몽룡",
+        "rate": "4",
+        "content": "서비스가 만족스러웠지만 조금 더 개선이 필요합니다."
     },
     {
-        "date": "2024-04-15",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
+        "user": "성춘향",
+        "rate": "3",
+        "content": "보통입니다."
     },
     {
-        "date": "2024-04-16",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
+        "user": "변학도",
+        "rate": "2",
+        "content": "아쉽습니다."
     },
     {
-        "date": "2024-04-28",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
+        "user": "향단이",
+        "rate": "1",
+        "content": "매우 불만족스러웠습니다."
     },
     {
-        "date": "2024-04-13",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
+        "user": "강감찬",
+        "rate": "5",
+        "content": "서비스가 매우 만족스러웠습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
+        "user": "신사임당",
+        "rate": "3",
+        "content": "조금 아쉽지만 만족스러웠습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
+        "user": "이순신",
+        "rate": "4",
+        "content": "만족스러웠지만 더 발전될 여지가 있습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
+        "user": "유관순",
+        "rate": "2",
+        "content": "아쉽습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
+        "user": "김유신",
+        "rate": "1",
+        "content": "매우 불만족스러웠습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
+        "user": "안중근",
+        "rate": "5",
+        "content": "서비스가 매우 만족스러웠습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
+        "user": "윤봉길",
+        "rate": "4",
+        "content": "조금 아쉬웠지만 만족스러웠습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
+        "user": "박근혜",
+        "rate": "3",
+        "content": "보통입니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
+        "user": "노무현",
+        "rate": "2",
+        "content": "아쉽습니다."
     },
     {
-        "date": "2024-04-18",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "5mm",
-        "region": "서울특별시 강남구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "8mm",
-        "region": "서울특별시 서초구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "3mm",
-        "region": "서울특별시 송파구"
-    },
-    {
-        "date": "2024-04-18",
-        "rainfallAmount": "12mm",
-        "region": "서울특별시 영등포구"
+        "user": "이명박",
+        "rate": "1",
+        "content": "매우 불만족스러웠습니다."
     }
 ]

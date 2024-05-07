@@ -37,6 +37,16 @@ export const ReportName = styled(UserNameField)`
     font-size: 14px;
 `;
 
+export const ReportStar = styled(UserNameField)`
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    font-size: 14px;
+`;
+
 export const TitleField = styled.div`
     width: 23%;
     height: 50%;
@@ -48,3 +58,14 @@ export const TitleField = styled.div`
 export const ReportTitle = styled(TitleField)`
     width: 40%;
 `;
+
+export const ReportUser = styled(DateField)`
+    width: 14%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    font-size: 14px;
+`;
+

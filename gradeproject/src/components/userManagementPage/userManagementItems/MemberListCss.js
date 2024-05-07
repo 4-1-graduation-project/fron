@@ -412,6 +412,16 @@ export const SearchBox = styled.div`
     margin-bottom: 20px;
 `;
 
+export const ReviewSearchBox = styled.div`
+    width: 100%;
+    height: 50%;
+    color: black;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+`;
+
 export const SearchMapBox = styled.div`
     width: 20%;
     height: 80%;
@@ -430,6 +440,17 @@ export const Input = styled.input`
     outline: none;
     border: 1px solid #46AAEB;
 `;
+
+export const ReviewInput = styled.input`
+    width: 90%;
+    height: 90%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #46AAEB;
+`;
+
+
 
 export const memberInput = styled.input`
     width: 20%;

@@ -11,7 +11,7 @@ export default function Precipitation() {
 
     };
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', height: '700px' }}>
             <Z.LeftSection>
                 <SideMenu />
             </Z.LeftSection>
