@@ -40,6 +40,16 @@ export const AmdinHeader = styled.div`
     
 `;
 
+export const ReviewAmdinHeader = styled.div`
+    width: 97%;
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    
+`;
+
 export const LogoutButton = styled.div`
     width: 95%;
     height: 30px;

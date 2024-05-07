@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DateField = styled.div`
     margin-left: 5px;
-    width: 21%;
+    width: 20%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -10,7 +10,7 @@ export const DateField = styled.div`
 `;
 
 export const UserNameField = styled.div`
-    width: 23%;
+    width: 20%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -18,11 +18,23 @@ export const UserNameField = styled.div`
 `;
 
 export const TitleField = styled.div`
-    width: 36%;
+    width: 10%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
     color: black;
+`;
+
+export const PlaceField = styled.div`
+    width: 20%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
 
 export const sojeaField = styled.div`
@@ -43,7 +55,7 @@ export const TitleTwoField = styled.div`
 `;
 
 export const ContentField = styled.div`
-    width: 10%;
+    width: 30%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -71,18 +83,34 @@ export const MemberItem = styled.div`
 
 export const ReportDate = styled(DateField)`
     width: 20%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
 
 export const ReportName = styled(UserNameField)`
     width: 20%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
 
 export const ReportTitle = styled(TitleField)`
-    width: 40%;
+    width: 10%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
 
 export const PoliceTitle = styled(TitleField)`
     width: 67%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
 
 
@@ -105,7 +133,22 @@ export const emergencyBelladdress = styled(TitleField)`
 
 export const ReportContent = styled(ContentField)`
     width: 10%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
 `;
+
+export const ReportAddress = styled(ContentField)`
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+`;
+
 
 
 export const DateBox = styled.div`

@@ -21,6 +21,7 @@ export const Container = styled.div`
 
 `;
 
+
 export const NoScrollContainer = styled.div`
     width: 1250px;
     height: 600px;
@@ -57,6 +58,23 @@ export const Box = styled.div`
 
 `;
 
+export const ScrollBox = styled.div`
+    width: 1200px;
+    height: 100%;
+    margin: 20px;
+    /* 스크롤바 스타일 */
+    &::-webkit-scrollbar {
+        width: 10px; /* 세로 스크롤바 너비 */
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #888; /* 스크롤바 색상 */
+        border-radius: 5px; /* 스크롤바 모서리 둥글게 */
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #f1f1f1; /* 스크롤바 트랙 색상 */
+    }
+`;
+
 
 
 export const FieldContainer = styled.div`
@@ -67,6 +85,15 @@ export const FieldContainer = styled.div`
     margin: 0 auto;
     margin-top: 10px;
 `;
+
+export const MapFieldContainer = styled.div`
+    width: 100%;
+    height: 4%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+`;
+
 
 export const Title = styled.div`
     width: 95%;

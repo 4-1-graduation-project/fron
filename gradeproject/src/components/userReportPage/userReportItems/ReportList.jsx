@@ -76,7 +76,7 @@ export default function MemberList() {
         return true;
     }
   });
-  
+
 
   return (
     <A.Container>
@@ -91,7 +91,7 @@ export default function MemberList() {
               onChange={handleSearch}
             />
             {/* 검색 옵션 드롭다운 */}
-            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+            <select value={searchOption} onChange={handleOptionChange} style={{ borderRadius: '20px', borderColor: '#3296D7', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
               <option value="reportPlaced">장소</option>
               <option value="userName">회원 이름</option>
               <option value="reportTime">날짜</option>
@@ -132,8 +132,8 @@ export default function MemberList() {
                 <S.ReportContent>{report.details}</S.ReportContent> */}
                 <S.ReportDate>{report.reportTime}</S.ReportDate>
                 <S.ReportName>{report.userName}</S.ReportName>
-                <S.ReportTitle>{report.reportPlaced}</S.ReportTitle>
                 <S.ReportContent>{report.reportDegree}</S.ReportContent>
+                <S.PlaceField>{report.reportPlaced}</S.PlaceField>
               </A.MemberItem>
             </Link>
           ))}

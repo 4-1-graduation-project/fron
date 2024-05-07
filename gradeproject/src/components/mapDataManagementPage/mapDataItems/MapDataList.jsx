@@ -420,30 +420,41 @@ export default function MapDataList() {
             });
     };
     return (
-        <S.Container>
-            <S.Box>
+        <S.NoScrollContainer>
+            <S.ScrollBox>
                 <K.TitleBox>
-                    <div>
-                        지도 데이터 관리
-                    </div>
                     <K.TabBox>
                         {/* 각 탭을 클릭했을 때 changeTab 함수를 호출하여 해당 탭으로 변경 */}
                         <div onClick={() => changeTab('CCTV')} className={selectedTab === 'CCTV' ? 'activeTab' : ''}>CCTV</div>
                         <div onClick={() => changeTab('Police')} className={selectedTab === 'Police' ? 'activeTab' : ''}>경찰서</div>
                         <div onClick={() => changeTab('Emergency')} className={selectedTab === 'Emergency' ? 'activeTab' : ''}>비상벨</div>
                     </K.TabBox>
+                    {/* 페이지네이션 */}
+                    <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                        <S.PaginationBox>
+                            {[...Array(Math.ceil(filteredCctvs.length / postsPerPage)).keys()].map((pageNumber) => (
+                                <S.PageNumber
+                                    key={pageNumber}
+                                    onClick={() => paginate(pageNumber + 1)}
+                                >
+                                    {pageNumber + 1}
+                                </S.PageNumber>
+                            ))}
+                        </S.PaginationBox>
+                        {/* <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox> */}
+                    </div>
                 </K.TitleBox>
 
                 {/* CCTV 탭 화면 */}
                 {selectedTab === 'CCTV' && (
                     <>
-                        <S.FieldContainer>
+                        <S.MapFieldContainer>
                             <A.DateField>자치구</A.DateField>
                             <A.UserNameField>위도</A.UserNameField>
                             <A.TitleField>경도</A.TitleField>
                             <A.ContentField>안심 주소</A.ContentField>
                             <S.SearchMapBox>
-                                <S.Input
+                                <S.ReviewInput
                                     type="text"
                                     placeholder="검색어를 입력하세요"
                                     value={searchTerm}
@@ -455,44 +466,31 @@ export default function MapDataList() {
                                     <option value="gender">안심주소</option>
                                 </select>
                             </S.SearchMapBox>
-                        </S.FieldContainer>
+                        </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredCctvs.slice(indexOfFirstPost, indexOfLastPost).map((cctv, index) => (
                                 <A.MemberItem key={index}>
                                     <A.ReportDate>{cctv.borough}</A.ReportDate>
                                     <A.ReportName>{cctv.latitude}</A.ReportName>
                                     <A.ReportTitle>{cctv.longitude}</A.ReportTitle>
-                                    <A.ReportContent>{cctv.address}</A.ReportContent>
+                                    <A.ReportAddress>{cctv.address}</A.ReportAddress>
                                     <button onClick={() => handleDelete(index)}>X</button>
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
-                        {/* 페이지네이션 */}
-                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                            <S.PaginationBox>
-                                {[...Array(Math.ceil(filteredCctvs.length / postsPerPage)).keys()].map((pageNumber) => (
-                                    <S.PageNumber
-                                        key={pageNumber}
-                                        onClick={() => paginate(pageNumber + 1)}
-                                    >
-                                        {pageNumber + 1}
-                                    </S.PageNumber>
-                                ))}
-                            </S.PaginationBox>
-                            <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox>
-                        </div>
+
                     </>
                 )}
 
                 {/* 경찰서 탭 화면 */}
                 {selectedTab === 'Police' && (
                     <>
-                        <S.FieldContainer>
+                        <S.MapFieldContainer>
                             <A.DateField>경찰서</A.DateField>
                             <A.UserNameField>관서명</A.UserNameField>
                             <A.TitleTwoField>주소</A.TitleTwoField>
                             <S.SearchMapBox>
-                                <S.Input
+                                <S.ReviewInput
                                     type="text"
                                     placeholder="검색어를 입력하세요"
                                     value={searchTwoTerm}
@@ -505,7 +503,7 @@ export default function MapDataList() {
                                     <option value="policeaddress">주소</option>
                                 </select>
                             </S.SearchMapBox>
-                        </S.FieldContainer>
+                        </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredPoliceOffices.slice(indexOfFirstTwoPost, indexOfLastTwoPost).map((policeOffice, index) => (
                                 <A.MemberItem key={index}>
@@ -535,11 +533,11 @@ export default function MapDataList() {
                 {/* 비상벨 탭 화면 */}
                 {selectedTab === 'Emergency' && (
                     <>
-                        <S.FieldContainer>
+                        <S.MapFieldContainer>
                             <A.LocationField>설치위치</A.LocationField>
                             <A.sojeaField>소재지지지번주소</A.sojeaField>
                             <S.SearchMapBox>
-                                <S.Input
+                                <S.ReviewInput
                                     type="text"
                                     placeholder="검색어를 입력하세요"
                                     value={searchThreeTerm}
@@ -551,7 +549,7 @@ export default function MapDataList() {
                                     <option value="location_address">소재지지번주소</option>
                                 </select>
                             </S.SearchMapBox>
-                        </S.FieldContainer>
+                        </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredEmergencyBells.slice(indexOfFirstThreePost, indexOfLastThreePost).map((emergencyBell, index) => (
                                 <A.MemberItem key={index}>
@@ -576,7 +574,7 @@ export default function MapDataList() {
                         </div>
                     </>
                 )}
-            </S.Box>
+            </S.ScrollBox>
 
 
             {/* CCTV 데이터 추가 팝업 */}
@@ -678,7 +676,7 @@ export default function MapDataList() {
                     </K.Popup>
                 </Modal>
             )}
-        </S.Container >
+        </S.NoScrollContainer >
     );
 }
 
