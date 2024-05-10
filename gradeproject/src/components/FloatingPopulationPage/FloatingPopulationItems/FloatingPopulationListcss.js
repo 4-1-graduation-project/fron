@@ -10,7 +10,7 @@ export const DateField = styled.div`
 `;
 
 export const ReportDate = styled(DateField)`
-    width: 20%;
+    width: 18%;
     height: 100%;
     text-align: center;
     display : flex;
@@ -28,7 +28,7 @@ export const UserNameField = styled.div`
 `;
 
 export const ReportName = styled(UserNameField)`
-    width: 25%;
+    width: 15%;
     height: 100%;
     text-align: center;
     display : flex;
@@ -56,7 +56,12 @@ export const TitleField = styled.div`
 `;
 
 export const ReportTitle = styled(TitleField)`
-    width: 40%;
+    width: 20%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+    height: 100%;
 `;
 
 export const ReportUser = styled(DateField)`

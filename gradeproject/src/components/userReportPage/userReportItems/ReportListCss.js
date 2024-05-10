@@ -26,7 +26,7 @@ export const TitleField = styled.div`
 `;
 
 export const PlaceField = styled.div`
-    width: 20%;
+    width: 40%;
     height: 100%;
     font-size: 16px;
     font-weight: bold;
@@ -64,7 +64,7 @@ export const ContentField = styled.div`
 `;
 
 export const AreaField = styled.div`
-    width: 25%;
+    width: 23%;
     height: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -132,6 +132,16 @@ export const emergencyBelladdress = styled(TitleField)`
 `;
 
 export const ReportContent = styled(ContentField)`
+    width: 22%;
+    height: 100%;
+    text-align: center;
+    display : flex;
+    justify-content: left;
+    align-items : center;
+`;
+
+
+export const ReportDegree = styled(ContentField)`
     width: 10%;
     height: 100%;
     text-align: center;

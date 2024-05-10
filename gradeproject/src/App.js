@@ -10,8 +10,9 @@ import MapDataManagementPage from "./pages/MapDataManagementPage";
 import FloatingPopulationPage from "./pages/FloatingPopulationPage";
 import PrecipitationPage from './pages/PrecipitationPage';
 import AiSettingPage from "./pages/AiSettingPage";
-import EvaluationIndicatorsPage from "./pages/EvaluationIndicatorsPage"; 
+import EvaluationIndicatorsPage from "./pages/EvaluationIndicatorsPage";
 import FloatingPopulationRegisterPage from "./pages/FloatingPopulationRegisterPage";
+import NoticePage from './pages/NoticePage'
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/adminMain" element={<AdminMainPage />} />
-        <Route path="/adminUser" element={<AdminUserPage />}>
+        <Route path="/notice" element={<NoticePage />} />
+          <Route path="/adminUser" element={<AdminUserPage />} >
           <Route path="" element={<UserManagementPage />} />
           <Route path=":id" element={<MemberDetailPage />} />
         </Route>

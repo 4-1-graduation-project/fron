@@ -11,6 +11,8 @@ import SideAi from "../../assets/sidemenu/SideAi.png";
 import Sidelogout from "../../assets/sidemenu/Sidelogout.png";
 import Sidestar from "../../assets/sidemenu/Sidestar.png";
 import light from "../../assets/sidemenu/light.png";
+import notice from "../../assets/notice.png";
+
 
 export default function SideMenu() {
     const navigate = useNavigate();
@@ -24,6 +26,8 @@ export default function SideMenu() {
             setSelectedMenu('adminUser');
         } else if (pathname === '/adminReport' || pathname.includes('/adminReport/')) {
             setSelectedMenu('adminReport');
+        } else if (pathname === '/notice' || pathname.includes('/notice/')) {
+            setSelectedMenu('notice');
         } else if (pathname === '/mapDataManagement' || pathname.includes('/mapDataManagement/')) {
             setSelectedMenu('mapDataManagement');
         } else if (pathname === '/floatingPopulationManagement' || pathname.includes('/floatingPopulationManagement/')) {
@@ -79,6 +83,13 @@ export default function SideMenu() {
                 >
                     <img src={SideHome} alt="홈" style={{ width: '20px', height: '20px' }} />
                     회원 관리
+                </T.Menu>
+                <T.Menu
+                    as={selectedMenu === 'notice' ? T.SelectedMenu : 'div'}
+                    onClick={() => handleMenuClick('/notice', 'notice')}
+                >
+                    <img src={notice} alt="공지사항" style={{ width: '20px', height: '20px' }} />
+                    공지사항 관리
                 </T.Menu>
                 <T.Menu
                     as={selectedMenu === 'adminReport' ? T.SelectedMenu : 'div'}

@@ -15,8 +15,8 @@ export default function MemberList() {
     const fetchReports = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        //http://ceprj.gachon.ac.kr:60004/src/admins/reports
-        const response = await fetch('http://localhost:60004/userReport/Data.json', {
+        //
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/reports', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -114,8 +114,8 @@ export default function MemberList() {
         <A.FieldContainer>
           <S.DateField>문의날짜</S.DateField>
           <S.UserNameField>회원 이름</S.UserNameField>
-          <S.TitleField>장소</S.TitleField>
-          <S.ContentField>위험정도</S.ContentField>
+          <S.TitleField>위험정도</S.TitleField>
+          <S.ContentField>장소</S.ContentField>
 
         </A.FieldContainer>
         <A.MemberContainer>
@@ -132,7 +132,7 @@ export default function MemberList() {
                 <S.ReportContent>{report.details}</S.ReportContent> */}
                 <S.ReportDate>{report.reportTime}</S.ReportDate>
                 <S.ReportName>{report.userName}</S.ReportName>
-                <S.ReportContent>{report.reportDegree}</S.ReportContent>
+                <S.ReportDegree>{report.reportDegree}</S.ReportDegree>
                 <S.PlaceField>{report.reportPlaced}</S.PlaceField>
               </A.MemberItem>
             </Link>

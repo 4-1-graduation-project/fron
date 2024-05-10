@@ -189,6 +189,9 @@ export const MemberItem = styled.div`
     background-color: rgb(220, 220, 220, 0.2); 
     box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 7px;
     margin: 0 auto;
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
 export const MemberNo = styled(NoField)`

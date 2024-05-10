@@ -1,0 +1,135 @@
+[
+    {
+        "postNum": 1,
+        "postName": "첫번째 공지입니다.",
+        "postContent": "첫번째 공지사항 내용입니다.",
+        "postDate": "2024-05-08 23:45",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 2,
+        "postName": "두번째 공지입니다.",
+        "postContent": "두번째 공지사항 내용입니다.",
+        "postDate": "2024-05-08 23:46",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 4,
+        "postName": "네번째 공지입니다.",
+        "postContent": "네번째 공지사항 내용입니다.",
+        "postDate": "2024-05-08 23:47",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 5,
+        "postName": "다섯번째 공지입니다.",
+        "postContent": "다섯번째 공지사항 내용입니다.",
+        "postDate": "2024-05-08 23:50",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 6,
+        "postName": "여섯번째 공지입니다.",
+        "postContent": "여섯번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 10:15",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 7,
+        "postName": "일곱번째 공지입니다.",
+        "postContent": "일곱번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 11:30",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 8,
+        "postName": "여덟번째 공지입니다.",
+        "postContent": "여덟번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 12:45",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 9,
+        "postName": "아홉번째 공지입니다.",
+        "postContent": "아홉번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 14:00",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 10,
+        "postName": "열번째 공지입니다.",
+        "postContent": "열번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 15:15",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 11,
+        "postName": "열한번째 공지입니다.",
+        "postContent": "열한번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 16:30",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 12,
+        "postName": "열두번째 공지입니다.",
+        "postContent": "열두번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 17:45",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 13,
+        "postName": "열세번째 공지입니다.",
+        "postContent": "열세번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 19:00",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 14,
+        "postName": "열네번째 공지입니다.",
+        "postContent": "열네번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 20:15",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 15,
+        "postName": "열다섯번째 공지입니다.",
+        "postContent": "열다섯번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 21:30",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 16,
+        "postName": "열여섯번째 공지입니다.",
+        "postContent": "열여섯번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 22:45",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 17,
+        "postName": "열일곱번째 공지입니다.",
+        "postContent": "열일곱번째 공지사항 내용입니다.",
+        "postDate": "2024-05-09 23:50",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 18,
+        "postName": "열여덟번째 공지입니다.",
+        "postContent": "열여덟번째 공지사항 내용입니다.",
+        "postDate": "2024-05-10 10:00",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 19,
+        "postName": "열아홉번째 공지입니다.",
+        "postContent": "열아홉번째 공지사항 내용입니다.",
+        "postDate": "2024-05-10 11:15",
+        "adminName": "관리자"
+    },
+    {
+        "postNum": 20,
+        "postName": "스무번째 공지입니다.",
+        "postContent": "스무번째 공지사항 내용입니다.",
+        "postDate": "2024-05-10 12:30",
+        "adminName": "관리자"
+    }
+]
