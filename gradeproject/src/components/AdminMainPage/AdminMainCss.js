@@ -601,6 +601,7 @@ export const SendButtonBox = styled.div`
     align-items : center;
     border-radius: 10px;
     color: white;
+    cursor: pointer;
 `;
 
 

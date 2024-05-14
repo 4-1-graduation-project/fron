@@ -6,18 +6,23 @@ import backbutton from "../../assets/backbutton.png";
 import PrecipitationList from './precipitationItems/PrecipitationList';
 
 export default function Precipitation() {
-    const [precipitations, serPrecipitations] = useState([]);
+    const [precipitations, setPrecipitations] = useState([]);
     const navigate = useNavigate();
 
     const handleMenuClick = (url, menuName) => {
         navigate(url);
 
     };
-
     useEffect(() => {
-        fetch('http://localhost:60004/precipitation/Data.json')
+        const token = localStorage.getItem('accessToken');
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/feedbacks', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
             .then(response => response.json())
-            .then(data => serPrecipitations(data))
+            .then(data => setPrecipitations(data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 

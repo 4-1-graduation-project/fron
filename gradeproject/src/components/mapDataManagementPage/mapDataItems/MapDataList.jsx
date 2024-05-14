@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import * as S from "../../userManagementPage/userManagementItems/MemberListCss";
 import * as A from "../../userReportPage/userReportItems/ReportListCss";
 import * as K from "./MapDataListCss";
+import Pagination from 'react-js-pagination';
+import "./Paging.css";
 
 export default function MapDataList() {
     const [cctvs, setCctvs] = useState([]);
@@ -13,10 +15,10 @@ export default function MapDataList() {
     const [ispoliceOfficePopupOpen, setIspoliceOfficePopupOpen] = useState(false);
     const [isEmergencyBellPopupOpen, setIsEmergencyBellPopupOpen] = useState(false);
     const [newCctvData, setNewCctvData] = useState({
-        borough: '',
-        latitude: '',
-        longitude: '',
-        address: ''
+        safeNum: '',
+        safeY: '',
+        safeX: '',
+        safeAddress: ''
     });
 
     const [newpoliceOfficesData, setNewpoliceOfficesData] = useState({
@@ -39,7 +41,7 @@ export default function MapDataList() {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchOption, setSearchOption] = useState('borough'); // 기본적으로 이름으로 검색
+    const [searchOption, setSearchOption] = useState('safeAddress'); // 기본적으로 이름으로 검색
     // 검색 함수
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -56,16 +58,16 @@ export default function MapDataList() {
     const filteredCctvs = cctvs.filter(cctv => {
         // 선택된 옵션에 따라 검색 조건 변경
         switch (searchOption) {
-            case 'borough':
-                return cctv.borough.toLowerCase().includes(searchTerm.toLowerCase());
-            case 'latitude':
+            case 'safeNum':
+                return cctv.safeNum.toLowerCase().includes(searchTerm.toLowerCase());
+            case 'safeY':
                 // 숫자형 속성이므로 그대로 비교
-                return cctv.latitude.includes(searchTerm);
-            case 'longitude':
+                return cctv.safeY.includes(searchTerm);
+            case 'safeX':
                 // 숫자형 속성이므로 그대로 비교
-                return cctv.longitude.includes(searchTerm);
-            case 'address':
-                return cctv.address.toLowerCase().includes(searchTerm.toLowerCase());
+                return cctv.safeX.includes(searchTerm);
+            case 'safeAddress':
+                return cctv.safeAddress.toLowerCase().includes(searchTerm.toLowerCase());
             default:
                 return true;
         }
@@ -76,6 +78,7 @@ export default function MapDataList() {
         setCurrentPage(pageNumber);
         setSearchTerm(''); // 페이지 변경 시 검색어 초기화
     };
+
 
 
     //===============================================================================
@@ -90,7 +93,7 @@ export default function MapDataList() {
 
 
     const [searchTwoTerm, setSearchTwoTerm] = useState('');
-    const [searchTwoOption, setSearchTwoOption] = useState('policeOffice'); // 기본적으로 이름으로 검색
+    const [searchTwoOption, setSearchTwoOption] = useState('safeAddress'); // 기본적으로 이름으로 검색
     // 검색 함수
     const handleTwoSearch = (event) => {
         setSearchTwoTerm(event.target.value);
@@ -107,12 +110,16 @@ export default function MapDataList() {
     const filteredPoliceOffices = policeOffices.filter(policeOffice => {
         // 선택된 옵션에 따라 검색 조건 변경
         switch (searchTwoOption) {
-            case 'policeOffice':
-                return policeOffice.policeOffice.toLowerCase().includes(searchTwoTerm.toLowerCase());
-            case 'OfficialSignature':
-                return policeOffice.OfficialSignature.toLowerCase().includes(searchTwoTerm.toLowerCase());
-            case 'policeaddress':
-                return policeOffice.policeaddress.toLowerCase().includes(searchTwoTerm.toLowerCase());
+            case 'safeNum':
+                return policeOffice.safeNum.toLowerCase().includes(searchTwoTerm.toLowerCase());
+            case 'safeY':
+                // 숫자형 속성이므로 그대로 비교
+                return policeOffice.safeY.includes(searchTwoTerm);
+            case 'safeX':
+                // 숫자형 속성이므로 그대로 비교
+                return policeOffice.safeX.includes(searchTwoTerm);
+            case 'safeAddress':
+                return policeOffice.safeAddress.toLowerCase().includes(searchTwoTerm.toLowerCase());
             default:
                 return true;
         }
@@ -155,10 +162,16 @@ export default function MapDataList() {
     const filteredEmergencyBells = emergencyBells.filter(emergencyBell => {
         // 선택된 옵션에 따라 검색 조건 변경
         switch (searchThreeOption) {
-            case 'installation_location':
-                return emergencyBell.installation_location.toLowerCase().includes(searchThreeTerm.toLowerCase());
-            case 'location_address':
-                return emergencyBell.location_address.toLowerCase().includes(searchThreeTerm.toLowerCase());
+            case 'safeNum':
+                return emergencyBell.safeNum.toLowerCase().includes(searchThreeTerm.toLowerCase());
+            case 'safeY':
+                // 숫자형 속성이므로 그대로 비교
+                return emergencyBell.safeY.includes(searchTerm);
+            case 'safeX':
+                // 숫자형 속성이므로 그대로 비교
+                return emergencyBell.safeX.includes(searchTerm);
+            case 'safeAddress':
+                return emergencyBell.safeAddress.toLowerCase().includes(searchThreeTerm.toLowerCase());
             default:
                 return true;
         }
@@ -189,7 +202,13 @@ export default function MapDataList() {
 
     //CCTV 데이터 받아오고 업데이트하는 로직
     const fetchCctvData = () => {
-        fetch('http://localhost:60004/MapData/cctv/Data.json')
+        const token = localStorage.getItem('accessToken');
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/safeThing/cctv', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
             .then(response => response.json())
             .then(data => setCctvs(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -198,7 +217,13 @@ export default function MapDataList() {
 
     //경찰서 데이터 받아오고 업데이트하는 로직
     const fetchPoliceOfficeData = () => {
-        fetch('http://localhost:60004/MapData/policeoffice/Data.json')
+        const token = localStorage.getItem('accessToken');
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/safeThing/police', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
             .then(response => response.json())
             .then(data => setPoliceOffices(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -206,7 +231,13 @@ export default function MapDataList() {
 
     //비상벨 데이터 받아오고 업데이트하는 로직
     const fetchEmergencyBellData = () => {
-        fetch('http://localhost:60004/MapData/emergencybell/Data.json')
+        const token = localStorage.getItem('accessToken');
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/safeThing/bell', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
             .then(response => response.json())
             .then(data => setEmergencyBells(data))
             .catch(error => console.error('Error fetching emergency bell data:', error));
@@ -294,10 +325,10 @@ export default function MapDataList() {
         setIsPopupOpen(false);
         // 인풋창 리셋
         setNewCctvData({
-            borough: '',
-            latitude: '',
-            longitude: '',
-            address: ''
+            safeNum: '',
+            safeY: '',
+            safeX: '',
+            safeAddress: ''
         });
         // 결과보여주기
         alert('데이터가 추가되었습니다.');
@@ -419,6 +450,20 @@ export default function MapDataList() {
                 console.error('Error saving emergency bell data:', error);
             });
     };
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handleTwoPageChange = (TwoPageNumber) => {
+        setCurrentTwoPage(TwoPageNumber);
+    };
+
+    const handleThreePageChange = (ThreePageNumber) => {
+        setCurrentThreePage(ThreePageNumber);
+    };
+
+
     return (
         <S.NoScrollContainer>
             <S.ScrollBox>
@@ -430,26 +475,51 @@ export default function MapDataList() {
                         <div onClick={() => changeTab('Emergency')} className={selectedTab === 'Emergency' ? 'activeTab' : ''}>비상벨</div>
                     </K.TabBox>
                     {/* 페이지네이션 */}
-                    <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                        <S.PaginationBox>
-                            {[...Array(Math.ceil(filteredCctvs.length / postsPerPage)).keys()].map((pageNumber) => (
-                                <S.PageNumber
-                                    key={pageNumber}
-                                    onClick={() => paginate(pageNumber + 1)}
-                                >
-                                    {pageNumber + 1}
-                                </S.PageNumber>
-                            ))}
-                        </S.PaginationBox>
-                        {/* <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox> */}
-                    </div>
+                    {selectedTab === 'CCTV' && (
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+                            <S.PaginationBox>
+                                <Pagination
+                                    activePage={currentPage}
+                                    itemsCountPerPage={postsPerPage}
+                                    totalItemsCount={filteredCctvs.length}
+                                    pageRangeDisplayed={5}
+                                    onChange={handlePageChange}
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                />
+                            </S.PaginationBox>
+                            {/* <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox> */}
+                        </div>
+                    )}
+                    {selectedTab === 'Police' && (
+                        <Pagination
+                            activePage={currentTwoPage}
+                            itemsCountPerPage={postsPerTwoPage}
+                            totalItemsCount={filteredPoliceOffices.length}
+                            pageRangeDisplayed={5}
+                            onChange={handleTwoPageChange}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    )}
+                    {selectedTab === 'Emergency' && (
+                        <Pagination
+                            activePage={currentThreePage}
+                            itemsCountPerPage={postsPerThreePage}
+                            totalItemsCount={filteredEmergencyBells.length}
+                            pageRangeDisplayed={5}
+                            onChange={handleThreePageChange}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    )}
                 </K.TitleBox>
 
                 {/* CCTV 탭 화면 */}
                 {selectedTab === 'CCTV' && (
                     <>
                         <S.MapFieldContainer>
-                            <A.DateField>자치구</A.DateField>
+                            <A.DateField>데이터 번호</A.DateField>
                             <A.UserNameField>위도</A.UserNameField>
                             <A.TitleField>경도</A.TitleField>
                             <A.ContentField>안심 주소</A.ContentField>
@@ -462,18 +532,20 @@ export default function MapDataList() {
                                 />
                                 {/* 검색 옵션 드롭다운 */}
                                 <select value={searchOption} onChange={handleOptionChange}>
-                                    <option value="name">자치구</option>
-                                    <option value="gender">안심주소</option>
+                                    <option value="safeNum">데이터번호</option>
+                                    <option value="safeY">위도</option>
+                                    <option value="safeX">경도</option>
+                                    <option value="safeAddress">주소</option>
                                 </select>
                             </S.SearchMapBox>
                         </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredCctvs.slice(indexOfFirstPost, indexOfLastPost).map((cctv, index) => (
                                 <A.MemberItem key={index}>
-                                    <A.ReportDate>{cctv.borough}</A.ReportDate>
-                                    <A.ReportName>{cctv.latitude}</A.ReportName>
-                                    <A.ReportTitle>{cctv.longitude}</A.ReportTitle>
-                                    <A.ReportAddress>{cctv.address}</A.ReportAddress>
+                                    <A.ReportDate>{cctv.safeNum}</A.ReportDate>
+                                    <A.ReportName>{cctv.safeY}</A.ReportName>
+                                    <A.ReportTitle>{cctv.safeX}</A.ReportTitle>
+                                    <A.ReportAddress>{cctv.safeAddress}</A.ReportAddress>
                                     <button onClick={() => handleDelete(index)}>X</button>
                                 </A.MemberItem>
                             ))}
@@ -486,9 +558,10 @@ export default function MapDataList() {
                 {selectedTab === 'Police' && (
                     <>
                         <S.MapFieldContainer>
-                            <A.DateField>경찰서</A.DateField>
-                            <A.UserNameField>관서명</A.UserNameField>
-                            <A.TitleTwoField>주소</A.TitleTwoField>
+                            <A.DateField>데이터 번호</A.DateField>
+                            <A.UserNameField>위도</A.UserNameField>
+                            <A.TitleField>경도</A.TitleField>
+                            <A.ContentField>안심 주소</A.ContentField>
                             <S.SearchMapBox>
                                 <S.ReviewInput
                                     type="text"
@@ -498,33 +571,25 @@ export default function MapDataList() {
                                 />
                                 {/* 검색 옵션 드롭다운 */}
                                 <select value={searchTwoOption} onChange={handleTwoOptionChange}>
-                                    <option value="policeOffice">경찰서</option>
-                                    <option value="OfficialSignature">관서명</option>
-                                    <option value="policeaddress">주소</option>
+                                    <option value="safeNum">데이터번호</option>
+                                    <option value="safeY">위도</option>
+                                    <option value="safeX">경도</option>
+                                    <option value="safeAddress">주소</option>
                                 </select>
                             </S.SearchMapBox>
                         </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredPoliceOffices.slice(indexOfFirstTwoPost, indexOfLastTwoPost).map((policeOffice, index) => (
                                 <A.MemberItem key={index}>
-                                    <A.ReportDate>{policeOffice.policeOffice}</A.ReportDate>
-                                    <A.ReportName>{policeOffice.OfficialSignature}</A.ReportName>
-                                    <A.PoliceTitle>{policeOffice.policeaddress}</A.PoliceTitle>
+                                    <A.ReportDate>{policeOffice.safeNum}</A.ReportDate>
+                                    <A.ReportName>{policeOffice.safeY}</A.ReportName>
+                                    <A.ReportTitle>{policeOffice.safeX}</A.ReportTitle>
+                                    <A.ReportAddress>{policeOffice.safeAddress}</A.ReportAddress>
                                     <button onClick={() => handlePoliceOfficeDelete(index)}>X</button>
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
                         <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                            <S.PaginationBox>
-                                {[...Array(Math.ceil(filteredPoliceOffices.length / postsPerTwoPage)).keys()].map((TwoPageNumber) => (
-                                    <S.PageNumber
-                                        key={TwoPageNumber}
-                                        onClick={() => TwoPaginate(TwoPageNumber + 1)}
-                                    >
-                                        {TwoPageNumber + 1}
-                                    </S.PageNumber>
-                                ))}
-                            </S.PaginationBox>
                             <K.AddBox onClick={togglepoliceOfficePopup}>경찰서 추가하기</K.AddBox>
                         </div>
                     </>
@@ -534,8 +599,10 @@ export default function MapDataList() {
                 {selectedTab === 'Emergency' && (
                     <>
                         <S.MapFieldContainer>
-                            <A.LocationField>설치위치</A.LocationField>
-                            <A.sojeaField>소재지지지번주소</A.sojeaField>
+                            <A.DateField>데이터 번호</A.DateField>
+                            <A.UserNameField>위도</A.UserNameField>
+                            <A.TitleField>경도</A.TitleField>
+                            <A.ContentField>안심 주소</A.ContentField>
                             <S.SearchMapBox>
                                 <S.ReviewInput
                                     type="text"
@@ -545,31 +612,25 @@ export default function MapDataList() {
                                 />
                                 {/* 검색 옵션 드롭다운 */}
                                 <select value={searchThreeOption} onChange={handleThreeOptionChange}>
-                                    <option value="installation_location">설치위치</option>
-                                    <option value="location_address">소재지지번주소</option>
+                                    <option value="safeNum">데이터번호</option>
+                                    <option value="safeY">위도</option>
+                                    <option value="safeX">경도</option>
+                                    <option value="safeAddress">주소</option>
                                 </select>
                             </S.SearchMapBox>
                         </S.MapFieldContainer>
                         <S.MemberContainer>
                             {filteredEmergencyBells.slice(indexOfFirstThreePost, indexOfLastThreePost).map((emergencyBell, index) => (
                                 <A.MemberItem key={index}>
-                                    <A.emergencyBellLocation>{emergencyBell.installation_location}</A.emergencyBellLocation>
-                                    <A.emergencyBelladdress>{emergencyBell.location_address}</A.emergencyBelladdress>
+                                    <A.ReportDate>{emergencyBell.safeNum}</A.ReportDate>
+                                    <A.ReportName>{emergencyBell.safeY}</A.ReportName>
+                                    <A.ReportTitle>{emergencyBell.safeX}</A.ReportTitle>
+                                    <A.ReportAddress>{emergencyBell.safeAddress}</A.ReportAddress>
                                     <button onClick={() => handleDeleteEmergencyBell(index)}>X</button>
                                 </A.MemberItem>
                             ))}
                         </S.MemberContainer>
                         <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                            <S.PaginationBox>
-                                {[...Array(Math.ceil(filteredEmergencyBells.length / postsPerThreePage)).keys()].map((ThreePageNumber) => (
-                                    <S.PageNumber
-                                        key={ThreePageNumber}
-                                        onClick={() => ThreePaginate(ThreePageNumber + 1)}
-                                    >
-                                        {ThreePageNumber + 1}
-                                    </S.PageNumber>
-                                ))}
-                            </S.PaginationBox>
                             <K.AddBox onClick={toggleEmergencyBellPopup}>비상벨 추가하기</K.AddBox>
                         </div>
                     </>
@@ -591,21 +652,21 @@ export default function MapDataList() {
                                 <K.SubTitle>
                                     자치구
                                 </K.SubTitle>
-                                <K.Input type="text" name="borough" placeholder="자치구" value={newCctvData.borough} onChange={handleInputChange} />
+                                <K.Input type="text" name="safeNum" placeholder="자치구" value={newCctvData.safeNum} onChange={handleInputChange} />
                                 <K.SubTitle>
                                     위도
                                 </K.SubTitle>
-                                <K.Input type="text" name="latitude" placeholder="위도" value={newCctvData.latitude} onChange={handleInputChange} />
+                                <K.Input type="text" name="safeY" placeholder="위도" value={newCctvData.safeY} onChange={handleInputChange} />
                             </K.InputBox>
                             <K.InputBox>
                                 <K.SubTitle>
                                     안심 주소
                                 </K.SubTitle>
-                                <K.Input type="text" name="address" placeholder="안심 주소" value={newCctvData.address} onChange={handleInputChange} />
+                                <K.Input type="text" name="safeAddress" placeholder="안심 주소" value={newCctvData.safeAddress} onChange={handleInputChange} />
                                 <K.SubTitle>
                                     경도
                                 </K.SubTitle>
-                                <K.Input type="text" name="longitude" placeholder="경도" value={newCctvData.longitude} onChange={handleInputChange} />
+                                <K.Input type="text" name="safeX" placeholder="경도" value={newCctvData.safeX} onChange={handleInputChange} />
                             </K.InputBox>
                         </div>
                         <K.ButtonBox>

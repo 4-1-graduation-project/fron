@@ -29,6 +29,33 @@ export default function FloatingPopulationRegister() {
         setFileUploaded(true);
     };
 
+    const handleFileUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        // FormData 내용 확인
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        const token = localStorage.getItem('accessToken');
+        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/flowPop/uploadExcelFile', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('파일이 업로드되었습니다.');
+                    // 업로드 성공 시 추가 작업 수행
+                } else {
+                    throw new Error('파일 업로드 실패');
+                }
+            })
+            .catch(error => console.error('Error uploading file:', error));
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '700px' }}>
             <Z.LeftSection>
@@ -59,13 +86,13 @@ export default function FloatingPopulationRegister() {
                     {/* 업로드된 파일 정보 표시 */}
                     <Z.FileBox>
                         {fileUploaded && (
-                            <div class="square shadow-6" style={{display:'flex', flexDirection: 'column', height: '300px', width: '500px' }} >
-                                <img src={excel} alt='액셀' style={{width: '200px', height: '200px'}}/>
+                            <div className="square shadow-6" style={{ display: 'flex', flexDirection: 'column', height: '300px', width: '500px' }} >
+                                <img src={excel} alt='액셀' style={{ width: '200px', height: '200px' }} />
                                 <p>{uploadStatus}</p>
                             </div>
                         )}
                         {selectedFile && (
-                            <div style={{display:'flex', flexDirection: 'column'}}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <p>파일명: {selectedFile.name}</p>
                                 <p>파일 크기: {selectedFile.size} bytes</p>
                                 <p>파일 타입: {selectedFile.type}</p>
@@ -73,7 +100,7 @@ export default function FloatingPopulationRegister() {
                             </div>
                         )}
                     </Z.FileBox>
-                    <Z.SendButtonBox>
+                    <Z.SendButtonBox onClick={handleFileUpload}>
                         파일 전송
                     </Z.SendButtonBox>
                 </Z.FileContainer>
