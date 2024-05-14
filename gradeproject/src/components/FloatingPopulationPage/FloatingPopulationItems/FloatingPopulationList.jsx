@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import Pagination from 'react-js-pagination'; // react-js-pagination 추가
 import * as A from "../../userManagementPage/userManagementItems/MemberListCss";
 import * as S from "../../userReportPage/userReportItems/ReportListCss";
 import * as K from "./FloatingPopulationListcss";
 import * as Z from "../../mapDataManagementPage/mapDataItems/MapDataListCss";
+import Loading from '../../loading/Loading';
 
-// Set the app element for react-modal
 Modal.setAppElement('#root');
 
 export default function FloatingPopulationList() {
+    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     const handleMenuClick = (url, menuName) => {
         navigate(url);
-
     };
+
     const [floatingPopulations, setFloatingPopulations] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +40,7 @@ export default function FloatingPopulationList() {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
     // 페이지 변경
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const handlePageChange = (pageNumber) => setCurrentPage(pageNumber); // 페이지 변경 핸들러
 
     // 옵션 변경 함수
     const handleOptionChange = (event) => {
@@ -62,6 +65,7 @@ export default function FloatingPopulationList() {
             .then(response => response.json())
             .then(data => {
                 setFloatingPopulations(data);
+                setLoading(false);
             })
             .catch(error => console.error('Error fetching data:', error));
     }, []);
@@ -198,46 +202,48 @@ export default function FloatingPopulationList() {
                             </select>
                         </A.SearchMapBox>
                         {/* 페이지네이션 */}
-                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
-                            <A.PaginationBox>
-                                {[...Array(Math.ceil(filteredfloatingPopulations.length / postsPerPage)).keys()].map((pageNumber) => (
-                                    <A.PageNumber
-                                        key={pageNumber}
-                                        onClick={() => paginate(pageNumber + 1)}
-                                    >
-                                        {pageNumber + 1}
-                                    </A.PageNumber>
-                                ))}
-                            </A.PaginationBox>
-                            {/* <K.AddBox onClick={togglePopup}>CCTV 추가하기</K.AddBox> */}
+                        <div style={{ display: 'flex', flexDirection: 'row', height: '100%', alignItems: 'center' }}>
+                            <Pagination
+                                activePage={currentPage}
+                                itemsCountPerPage={postsPerPage}
+                                totalItemsCount={filteredfloatingPopulations.length}
+                                pageRangeDisplayed={5}
+                                onChange={handlePageChange}
+                                itemClass="page-item"
+                                linkClass="page-link"
+                            />
                         </div>
                     </A.pageBox>
                 </A.TitleBox>
-                <A.FieldContainer>
-                    <K.DateField>측정시간</K.DateField>
-                    <K.UserNameField>자치구</K.UserNameField>
-                    <K.TitleField>행정동</K.TitleField>
-                    <S.AreaField>지역</S.AreaField>
-                    <S.ContentField>방문자수</S.ContentField>
-                </A.FieldContainer>
-                <A.MemberContainer>
-                    {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
-                        <A.MemberItem key={index}>
-                            <K.ReportDate>{floatingPopulation.dataDate}</K.ReportDate>
-                            <K.ReportName>{floatingPopulation.dataGu}</K.ReportName>
-                            <K.ReportTitle>{floatingPopulation.dataDong}</K.ReportTitle>
-                            <S.ReportContent>{floatingPopulation.dataArea}</S.ReportContent>
-                            <S.ReportContent>{floatingPopulation.dataPeople}</S.ReportContent>
-                            <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
-                        </A.MemberItem>
-                    ))}
+                {loading ? <Loading /> :
+                    <>
+                        <A.FieldContainer>
+                            <K.DateField>측정시간</K.DateField>
+                            <K.UserNameField>자치구</K.UserNameField>
+                            <K.TitleField>행정동</K.TitleField>
+                            <S.AreaField>지역</S.AreaField>
+                            <S.ContentField>방문자수</S.ContentField>
+                        </A.FieldContainer>
+                        <A.MemberContainer>
+                            {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
+                                <A.MemberItem key={index}>
+                                    <K.ReportDate>{floatingPopulation.dataDate}</K.ReportDate>
+                                    <K.ReportName>{floatingPopulation.dataGu}</K.ReportName>
+                                    <K.ReportTitle>{floatingPopulation.dataDong}</K.ReportTitle>
+                                    <S.ReportContent>{floatingPopulation.dataArea}</S.ReportContent>
+                                    <S.ReportContent>{floatingPopulation.dataPeople}</S.ReportContent>
+                                    <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
+                                </A.MemberItem>
+                            ))}
 
-                </A.MemberContainer>
-                <Z.ButtonContainer>
-                    <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
-                    <Z.AddBox onClick={() => handleMenuClick('/floatingPopulationManagement/register')}>파일 업로드하기</Z.AddBox>
-                </Z.ButtonContainer>
-                {/* CCTV 데이터 추가 팝업 */}
+                        </A.MemberContainer>
+                        <Z.ButtonContainer>
+                            <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
+                            <Z.AddBox onClick={() => handleMenuClick('/floatingPopulationManagement/register')}>파일 업로드하기</Z.AddBox>
+                        </Z.ButtonContainer>
+                    </>
+                }
+                {/* 유동인구 데이터 추가 팝업 */}
                 {isPopupOpen && (
                     <Modal
                         isOpen={isPopupOpen}

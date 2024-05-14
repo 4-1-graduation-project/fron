@@ -7,6 +7,7 @@ import * as K from "./MapDataListCss";
 import Pagination from 'react-js-pagination';
 import "./Paging.css";
 
+
 export default function MapDataList() {
     const [cctvs, setCctvs] = useState([]);
     const [policeOffices, setPoliceOffices] = useState([]);
