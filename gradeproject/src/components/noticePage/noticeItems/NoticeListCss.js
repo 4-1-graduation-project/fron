@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
 export const MainContainer = styled.div`
@@ -128,6 +128,7 @@ export const MemberContainer = styled.div`
     border-bottom: 1px solid #1E90FF;
     margin: 0 auto;
     margin-top: 20px;
+    text-decoration: none;
     &::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
@@ -193,3 +194,30 @@ export const CreatePostButton = styled.div`
     font-weight: bold;
     cursor: pointer;
 `;
+
+
+export const ContextBox = styled.div`
+    width: 92%;
+    height: 50%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display : flex;
+    justify-content: space-between;
+    align-items : center;
+    padding: 0px 20px 0px 20px;
+
+`;
+
+export const DeleteButton = styled.button`
+  background-color: #ff6347; /* 버튼 배경색 */
+  color: #fff; /* 텍스트 색상 */
+  border: none; /* 테두리 없음 */
+  padding: 5px 10px; /* 내부 여백 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  cursor: pointer; /* 포인터 커서 설정 */
+
+  &:hover {
+    background-color: #ff3b20; /* 호버시 배경색 변경 */
+  }
+`;
+

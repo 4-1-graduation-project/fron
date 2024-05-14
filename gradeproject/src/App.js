@@ -13,6 +13,9 @@ import AiSettingPage from "./pages/AiSettingPage";
 import EvaluationIndicatorsPage from "./pages/EvaluationIndicatorsPage";
 import FloatingPopulationRegisterPage from "./pages/FloatingPopulationRegisterPage";
 import NoticePage from './pages/NoticePage'
+import NoticeCreatePage from './pages/NoticeCreatePage';
+import NoticeDetailPage from './pages/NoticeDetailPage';
+
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/adminMain" element={<AdminMainPage />} />
         <Route path="/notice" element={<NoticePage />} />
+        <Route path="/notice/:id" element={<NoticeDetailPage />} />
+        <Route path="/noticeCreate" element={<NoticeCreatePage />} />
           <Route path="/adminUser" element={<AdminUserPage />} >
           <Route path="" element={<UserManagementPage />} />
           <Route path=":id" element={<MemberDetailPage />} />

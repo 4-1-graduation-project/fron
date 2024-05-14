@@ -60,6 +60,17 @@ export const ReviewAmdinHeader = styled.div`
     
 `;
 
+export const NoticeAmdinHeader = styled.div`
+    width: 97%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    border-bottom: 1px solid grey;
+    
+`;
+
 export const LogoutButton = styled.div`
     width: 95%;
     height: 30px;
@@ -108,6 +119,13 @@ export const MainContainer = styled.div`
     grid-template-rows: 1fr 1fr;
     gap: 10px;
     margin: 10px;
+`;
+
+export const NoticeMainContainer = styled.div`
+    width: 98%;
+    height: 100%;
+    gap: 10px;
+    margin: 0 auto;
 `;
 
 export const FileContainer = styled.div`
