@@ -26,6 +26,22 @@ export default function ReportDetail() {
     navigate(url);
   };
 
+  // Nominatim을 사용하여 주소를 위도와 경도로 변환하는 함수
+  const geocodeAddress = async (address) => {
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`);
+      const data = await response.json();
+      if (data && data.length > 0) {
+        const { lat, lon } = data[0]; // 첫 번째 결과의 위도와 경도 사용
+        return [parseFloat(lat), parseFloat(lon)]; // 위도와 경도를 parseFloat로 변환하여 반환
+      }
+      return null; // 변환된 데이터가 없으면 null 반환
+    } catch (error) {
+      console.error('Error geocoding address:', error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => document.body.style = `overflow: auto`
@@ -47,12 +63,16 @@ export default function ReportDetail() {
         }
         const data = await response.json();
         setReport(data);
-        // API로부터 받아온 위치 정보를 기반으로 지도를 생성합니다.
+        
+        // 주소를 위도와 경도로 변환하여 지도에 표시
         if (data.reportPlaced) {
-          const map = L.map('map').setView([36.6272, 127.5152], 10); // Leaflet.js 지도 생성
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // 기본 타일 레이어 추가
-          L.marker([36.6272, 127.5152]).addTo(map); // 마커 추가 (임시 위치)
-          setMap(map); // 지도 객체 상태 업데이트
+          const coordinates = await geocodeAddress(data.reportPlaced);
+          if (coordinates) {
+            const map = L.map('map').setView(coordinates, 10); // Leaflet.js 지도 생성
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // 기본 타일 레이어 추가
+            L.marker(coordinates).addTo(map); // 주소에 해당하는 위치에 마커 추가
+            setMap(map); // 지도 객체 상태 업데이트
+          }
         }
       } catch (error) {
         console.error('Error fetching data:', error);

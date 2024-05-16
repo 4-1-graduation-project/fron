@@ -57,7 +57,6 @@ export const ButtonBox = styled.div`
     width: 50%;
     height: 20%;
     margin: 20px;
-
     display : flex;
     flex-direction: row;
     justify-content: center;
@@ -97,14 +96,14 @@ export const Button = styled.div`
 
 
 export const InputGrid = styled.div`
-    margin: 0 auto;
-    width: 80%;
+    margin-left: 10%;
+    width: 40%;
     height: 30%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
+
     grid-gap: 20px;
     margin-top: 20px;
-
 
     div {
         display: flex;
@@ -118,7 +117,11 @@ export const InputGrid = styled.div`
     }
 `;
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.div`
+    width: 70%;
+    display : flex;
+    text-align: left;
     font-weight: bold;
+    font-size: 20px;
     margin-bottom: 5px;
 `;
