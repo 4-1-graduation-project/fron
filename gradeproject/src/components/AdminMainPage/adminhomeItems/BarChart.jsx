@@ -1,9 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Chart, registerables } from "chart.js";
 
 const BarChart = () => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null); // useRef를 사용하여 chartInstance를 저장
+
+  const [reportData, setReportData] = useState([]);
+  const report = reportData[0] || {};
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        //
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/main', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reports');
+        }
+        const data = await response.json();
+        setReportData(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchReports();
+  }, []);
 
   useEffect(() => {
     const ctx = chartRef.current.getContext("2d");
@@ -17,7 +45,7 @@ const BarChart = () => {
           datasets: [
             {
               label: "신고 량",
-              data: [15, 20, 60, 10, 22, 30],
+              data: [report.oneToTwoReportCount || 0, report.threeToFourReportCount || 0, report.fiveToSixReportCount || 0, report.sevenToEightReportCount || 0, report.nineToTenReportCount || 0, report.elevenToTwelve || 0],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
@@ -62,7 +90,7 @@ const BarChart = () => {
     return () => {
       destroyChart(); // 컴포넌트가 unmount될 때 차트 파괴
     };
-  }, []);
+  }, [report.oneToTwoReportCount, report.threeToFourReportCount, report.fiveToSixReportCount, report.sevenToEightReportCount, report.nineToTenReportCount, report.elevenToTwelve]);
 
   return <canvas ref={chartRef} />;
 };

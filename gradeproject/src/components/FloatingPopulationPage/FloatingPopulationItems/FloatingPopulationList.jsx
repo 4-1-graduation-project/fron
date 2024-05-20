@@ -215,34 +215,32 @@ export default function FloatingPopulationList() {
                         </div>
                     </A.pageBox>
                 </A.TitleBox>
-                {loading ? <Loading /> :
-                    <>
-                        <A.FieldContainer>
-                            <K.DateField>측정시간</K.DateField>
-                            <K.UserNameField>자치구</K.UserNameField>
-                            <K.TitleField>행정동</K.TitleField>
-                            <S.AreaField>지역</S.AreaField>
-                            <S.ContentField>방문자수</S.ContentField>
-                        </A.FieldContainer>
-                        <A.MemberContainer>
-                            {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
-                                <A.MemberItem key={index}>
-                                    <K.ReportDate>{floatingPopulation.dataDate}</K.ReportDate>
-                                    <K.ReportName>{floatingPopulation.dataGu}</K.ReportName>
-                                    <K.ReportTitle>{floatingPopulation.dataDong}</K.ReportTitle>
-                                    <S.ReportContent>{floatingPopulation.dataArea}</S.ReportContent>
-                                    <S.ReportContent>{floatingPopulation.dataPeople}</S.ReportContent>
-                                    <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
-                                </A.MemberItem>
-                            ))}
+                <>
+                    <A.FieldContainer>
+                        <K.DateField>측정시간</K.DateField>
+                        <K.UserNameField>자치구</K.UserNameField>
+                        <K.TitleField>행정동</K.TitleField>
+                        <S.AreaField>지역</S.AreaField>
+                        <S.ContentField>방문자수</S.ContentField>
+                    </A.FieldContainer>
+                    <A.MemberContainer>
+                        {filteredfloatingPopulations.slice(indexOfFirstPost, indexOfLastPost).map((floatingPopulation, index) => (
+                            <A.MemberItem key={index}>
+                                <K.ReportDate>{floatingPopulation.dataDate}</K.ReportDate>
+                                <K.ReportName>{floatingPopulation.dataGu}</K.ReportName>
+                                <K.ReportTitle>{floatingPopulation.dataDong}</K.ReportTitle>
+                                <S.ReportContent>{floatingPopulation.dataArea}</S.ReportContent>
+                                <S.ReportContent>{floatingPopulation.dataPeople}</S.ReportContent>
+                                <button onClick={() => handleDelete(floatingPopulation.dataNum)}>X</button>
+                            </A.MemberItem>
+                        ))}
 
-                        </A.MemberContainer>
-                        <Z.ButtonContainer>
-                            <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
-                            <Z.AddBox onClick={() => handleMenuClick('/floatingPopulationManagement/register')}>파일 업로드하기</Z.AddBox>
-                        </Z.ButtonContainer>
-                    </>
-                }
+                    </A.MemberContainer>
+                    <Z.ButtonContainer>
+                        <Z.AddBox onClick={togglePopup}>유동인구 추가하기</Z.AddBox>
+                        <Z.AddBox onClick={() => handleMenuClick('/floatingPopulationManagement/register')}>파일 업로드하기</Z.AddBox>
+                    </Z.ButtonContainer>
+                </>
                 {/* 유동인구 데이터 추가 팝업 */}
                 {isPopupOpen && (
                     <Modal

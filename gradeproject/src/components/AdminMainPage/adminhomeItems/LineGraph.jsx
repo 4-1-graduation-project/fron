@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -41,31 +42,62 @@ const options = {
   },
 };
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "회원 수",
-      data: [32, 42, 51, 60, 51, 95, 97],
-      backgroundColor: "#0CD3FF",
-      borderColor: "#0CD3FF",
-    },
-    // {
-    //   label: "Angular",
-    //   data: [37, 42, 41, 37, 31, 44, 42],
-    //   backgroundColor: "#a6120d",
-    //   borderColor: "#a6120d",
-    // },
-    // {
-    //   label: "Vue",
-    //   data: [60, 54, 54, 28, 27, 49, 52],
-    //   backgroundColor: "#FFCA29",
-    //   borderColor: "#FFCA29",
-    // },
-  ],
-};
+
 
 const LineGraph = () => {
+  const [reportData, setReportData] = useState([]);
+  const report = reportData[0] || {};
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        //
+        const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/main', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reports');
+        }
+        const data = await response.json();
+        setReportData(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchReports();
+  }, []);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "회원 수",
+        data: [report.userNum || 0],
+        backgroundColor: "#0CD3FF",
+        borderColor: "#0CD3FF",
+      },
+      // {
+      //   label: "Angular",
+      //   data: [37, 42, 41, 37, 31, 44, 42],
+      //   backgroundColor: "#a6120d",
+      //   borderColor: "#a6120d",
+      // },
+      // {
+      //   label: "Vue",
+      //   data: [60, 54, 54, 28, 27, 49, 52],
+      //   backgroundColor: "#FFCA29",
+      //   borderColor: "#FFCA29",
+      // },
+    ],
+  };
+
   return (
     <div>
       <div style={{ width: 400, height: 300 }}>

@@ -12,16 +12,33 @@ export default function UserRate() {
 
     };
     const [reportData, setReportData] = useState([]);
-
-    {/* 
+    const report = reportData[0] || {};
     useEffect(() => {
-        fetch('http://localhost:3000/userRate/Data.json')
-            .then(response => response.json())
-            .then(data => setReportData(data))
-            .catch(error => console.error('Error fetching data:', error));
+        const fetchReports = async () => {
+            try {
+                const accessToken = localStorage.getItem('accessToken');
+                //
+                const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/main', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch reports');
+                }
+                const data = await response.json();
+                setReportData(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchReports();
     }, []);
-    */}
-    
+
     return (
         <X.UserRateContainer>
             <X.ReportBoxHeader>
@@ -31,7 +48,7 @@ export default function UserRate() {
             <X.ReportList>
                 <X.ReportItemSide>
                     <X.ReportNumber>
-                        1
+                        {report.grade5Count}
                     </X.ReportNumber>
                     <X.ReportText>
                         매우 좋음
@@ -46,7 +63,7 @@ export default function UserRate() {
                 </X.ReportItemSide>
                 <X.ReportItem>
                     <X.ReportNumber>
-                        3
+                        {report.grade4Count}
                     </X.ReportNumber>
                     <X.ReportText>
                         좋음
@@ -60,7 +77,7 @@ export default function UserRate() {
                 </X.ReportItem>
                 <X.ReportItemSide>
                     <X.ReportNumber>
-                        5
+                        {report.grade3Count}
                     </X.ReportNumber>
                     <X.ReportText>
                         보통
@@ -73,7 +90,7 @@ export default function UserRate() {
                 </X.ReportItemSide>
                 <X.ReportItem>
                     <X.ReportNumber>
-                        2
+                        {report.grade2Count}
                     </X.ReportNumber>
                     <X.ReportText>
                         나쁨
@@ -85,7 +102,7 @@ export default function UserRate() {
                 </X.ReportItem>
                 <X.ReportItemSide>
                     <X.ReportNumber>
-                        1
+                        {report.grade1Count}
                     </X.ReportNumber>
                     <X.ReportText>
                         매우 나쁨

@@ -65,6 +65,7 @@ export const ButtonBox = styled.div`
     margin: auto;
     margin-top: 50px;
     gap: 100px;
+    cursor: pointer;
 `;
 
 

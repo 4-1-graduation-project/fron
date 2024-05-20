@@ -19,6 +19,34 @@ export default function AiSettings() {
 
     };
 
+    const [reportData, setReportData] = useState([]);
+    const report = reportData[0] || {};
+    useEffect(() => {
+        const fetchReports = async () => {
+            try {
+                const accessToken = localStorage.getItem('accessToken');
+                //
+                const response = await fetch('http://ceprj.gachon.ac.kr:60004/src/admins/main', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch reports');
+                }
+                const data = await response.json();
+                setReportData(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchReports();
+    }, []);
+
     const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 인덱스
     const images = [Rate1, Rate2, Rate3]; // 이미지 배열
 
@@ -33,9 +61,9 @@ export default function AiSettings() {
     };
 
     const imagesData = [
-        { image: Rate1, title: "ROC_AUC" },
-        { image: Rate2, title: "Loss" },
-        { image: Rate3, title: "Accuracy" },
+        { image: Rate1, title: "MSE" },
+        { image: Rate2, title: "R-squared" },
+        { image: Rate3, title: "RMSE" },
     ];
 
     {/* 
@@ -58,13 +86,13 @@ export default function AiSettings() {
                 <J.SettingBoxSubTitle onClick={() => handleMenuClick('/aiSetting')}>더보기</J.SettingBoxSubTitle>
             </J.SettingBoxHeader>
             <J.TextBox>
-                 Model1
+                현재 사용중인 모델 : {report.modelName}
             </J.TextBox>
             <J.SlideBox>
                 <J.SlideButton onClick={prevSlide}>
                     <img src={left} alt='왼쪽' style={{ width: '10px', height: '18px' }} />
                 </J.SlideButton>
-                <div style={{display:'flex', flexDirection: 'column', width:  '100%'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <J.SlideImage src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
                     <J.SlideTitle>{imagesData[currentIndex].title}</J.SlideTitle>
                 </div>

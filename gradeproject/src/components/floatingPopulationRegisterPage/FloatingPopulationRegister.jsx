@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Z from "../adminMainPage/AdminMainCss";
 import SideMenu from "../../components/adminMainPage/SideMenu";
 import backbutton from "../../assets/backbutton.png";
 import * as A from "../../components/mapDataManagementPage/mapDataItems/MapDataListCss";
 import excel from "../../assets/excel.png";
+import excelfile from "../../assets/excelfile.png";
 
 export default function FloatingPopulationRegister() {
     const navigate = useNavigate();
+    const fileInputRef = useRef(null); // 파일 input 요소에 대한 ref 생성
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('파일을 업로드해주세요.');
     const [fileUploaded, setFileUploaded] = useState(true);
@@ -30,30 +32,28 @@ export default function FloatingPopulationRegister() {
     };
 
     const handleFileUpload = () => {
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        // FormData 내용 확인
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
 
-        const token = localStorage.getItem('accessToken');
-        fetch('http://ceprj.gachon.ac.kr:60004/src/admins/flowPop/uploadExcelFile', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: formData
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('파일이 업로드되었습니다.');
-                    // 업로드 성공 시 추가 작업 수행
-                } else {
-                    throw new Error('파일 업로드 실패');
-                }
+            const token = localStorage.getItem('accessToken');
+            fetch('http://ceprj.gachon.ac.kr:60004/src/admins/flowPop/uploadExcelFile', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: formData
             })
-            .catch(error => console.error('Error uploading file:', error));
+                .then(response => {
+                    if (response.ok) {
+                        alert('파일이 업로드되었습니다.');
+                        // 업로드 성공 시 추가 작업 수행
+                    } else {
+                        throw new Error('파일 업로드 실패');
+                    }
+                })
+                .catch(error => console.error('Error uploading file:', error));
+        }
     };
 
     return (
@@ -77,8 +77,8 @@ export default function FloatingPopulationRegister() {
                         </Z.Title2>
                         {/* 파일 선택 버튼 */}
                         <A.RegisterBox>
-                            <input type="file" onChange={handleFileChange} style={{ display: 'none' }} />
-                            <button onClick={() => document.querySelector('input[type="file"]').click()} style={{ backgroundColor: 'transparent', color: 'black', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
+                            <input ref={fileInputRef} type="file" onChange={handleFileChange} style={{ display: 'none' }} />
+                            <button onClick={() => fileInputRef.current.click()} style={{ backgroundColor: 'transparent', color: 'black', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
                                 파일 업로드
                             </button>
                         </A.RegisterBox>
@@ -93,10 +93,17 @@ export default function FloatingPopulationRegister() {
                         )}
                         {selectedFile && (
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <p>파일명: {selectedFile.name}</p>
-                                <p>파일 크기: {selectedFile.size} bytes</p>
-                                <p>파일 타입: {selectedFile.type}</p>
-                                <button onClick={handleFileCancel}>파일 취소</button>
+                                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <div>
+                                        <img src={excelfile} alt='액셀' style={{ width: '100px', height: '100px' }} />
+                                    </div>
+                                    <div style={{display: 'flex', flexDirection: 'column',  gap: '30px'}}>
+                                        <p>파일명: {selectedFile.name}</p>
+                                        <p>파일 크기: {selectedFile.size} bytes</p>
+                                        <p>파일 타입: {selectedFile.type}</p>
+                                    </div>
+                                </div>
+                                <Z.Cancelbutton onClick={handleFileCancel}>파일 취소</Z.Cancelbutton>
                             </div>
                         )}
                     </Z.FileBox>

@@ -165,7 +165,6 @@ export default function AiSettingList() {
                 </A.InputBox>
             </A.InputGrid>
             <A.ButtonBox>
-                <img src={HyperParameter} alt='수정' style={{ width: '180px', height: '140px' }} />
                 <img src={reLearning} alt='재학습' style={{ width: '180px', height: '140px' }} />
             </A.ButtonBox>
         </A.Container>

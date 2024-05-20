@@ -302,7 +302,7 @@ export const SettingBoxTitle = styled.div`
 `;
 
 export const SettingBoxSubTitle = styled.div`
-    width: 8%;
+    width: 10%;
     height: 50%;
     display: flex;
     justify-content: center;
@@ -604,7 +604,21 @@ export const SendButtonBox = styled.div`
     cursor: pointer;
 `;
 
-
+export const Cancelbutton = styled.div`
+    width: 35%;
+    height: 40px;
+    background-color: #FF5A5A;
+    margin: 0 auto;
+    margin-top: 30px;
+    border: none;
+    text-align: center;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+`;
 
 
 

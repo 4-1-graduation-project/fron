@@ -15,18 +15,19 @@ import FloatingPopulationRegisterPage from "./pages/FloatingPopulationRegisterPa
 import NoticePage from './pages/NoticePage'
 import NoticeCreatePage from './pages/NoticeCreatePage';
 import NoticeDetailPage from './pages/NoticeDetailPage';
-
+import LandingPage from './components/landingpage/LandingPage';
 
 function App() {
   return (
     <div className="App" style={{ overflow: 'hidden' }}>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/adminMain" element={<AdminMainPage />} />
         <Route path="/notice" element={<NoticePage />} />
         <Route path="/notice/:id" element={<NoticeDetailPage />} />
         <Route path="/noticeCreate" element={<NoticeCreatePage />} />
-          <Route path="/adminUser" element={<AdminUserPage />} >
+        <Route path="/adminUser" element={<AdminUserPage />} >
           <Route path="" element={<UserManagementPage />} />
           <Route path=":id" element={<MemberDetailPage />} />
         </Route>
